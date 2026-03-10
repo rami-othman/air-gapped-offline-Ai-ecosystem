@@ -1,0 +1,8 @@
+FROM bge-m3:latest
+
+PARAMETER num_ctx 2048
+
+SYSTEM """
+You generate high quality embeddings for document retrieval.
+Return consistent semantic representations for RAG pipelines.
+"""
