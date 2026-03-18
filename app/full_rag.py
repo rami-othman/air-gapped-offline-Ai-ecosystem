@@ -1,25 +1,32 @@
-import requests
+import sys
+
 import chromadb
+import requests
 
-# الاتصال بـ Chroma
-chroma_client = chromadb.HttpClient(host="localhost", port=8000)
+from config import (
+    CHROMA_COLLECTION,
+    CHROMA_HOST,
+    CHROMA_PORT,
+    EMBEDDING_MODEL,
+    GENERAL_GENERATION_MODEL,
+    OLLAMA_BASE_URL,
+    TOP_K,
+)
 
-collection = chroma_client.get_or_create_collection(name="documents")
+# Connect to Chroma
+chroma_client = chromadb.HttpClient(host=CHROMA_HOST, port=CHROMA_PORT)
+collection = chroma_client.get_or_create_collection(name=CHROMA_COLLECTION)
 
 
-# -----------------------------
-# Embedding generation
-# -----------------------------
 def generate_embedding(text):
-
     clean_text = text.replace("\n", " ").strip()
 
     response = requests.post(
-        "http://localhost:11434/api/embeddings",
+        f"{OLLAMA_BASE_URL}/api/embeddings",
         json={
-            "model": "nomic-embed-text",
-            "prompt": clean_text
-        }
+            "model": EMBEDDING_MODEL,
+            "prompt": clean_text,
+        },
     )
 
     data = response.json()
@@ -31,41 +38,41 @@ def generate_embedding(text):
     return data["embedding"]
 
 
-# -----------------------------
-# Add document to Vector DB
-# -----------------------------
-def add_document(doc_id, text):
-
+def add_document(doc_id, text, metadata=None):
     embedding = generate_embedding(text)
 
-    collection.add(
-        ids=[doc_id],
-        documents=[text],
-        embeddings=[embedding]
-    )
+    if metadata is not None:
+        collection.add(
+            ids=[doc_id],
+            documents=[text],
+            embeddings=[embedding],
+            metadatas=[metadata],
+        )
+    else:
+        collection.add(
+            ids=[doc_id],
+            documents=[text],
+            embeddings=[embedding],
+        )
 
 
-# -----------------------------
-# Retrieve relevant documents
-# -----------------------------
 def retrieve(query):
-
     query_embedding = generate_embedding(query)
 
     results = collection.query(
         query_embeddings=[query_embedding],
-        n_results=2
+        n_results=TOP_K,
     )
 
-    return results["documents"][0]
+    documents = results.get("documents", [])
+    if not documents:
+        return []
+
+    return documents[0]
 
 
-# -----------------------------
-# Ask LLM
-# -----------------------------
-def ask_llm(context, question):
-
-    prompt = f"""
+def build_prompt(context, question):
+    return f"""
 You are an AI assistant.
 
 Answer the question using ONLY the context below.
@@ -79,13 +86,17 @@ Question:
 Answer:
 """
 
+
+def ask_llm(context, question):
+    prompt = build_prompt(context, question)
+
     response = requests.post(
-        "http://localhost:11434/api/generate",
+        f"{OLLAMA_BASE_URL}/api/generate",
         json={
-            "model": "gemma-prod",
+            "model": GENERAL_GENERATION_MODEL,
             "prompt": prompt,
-            "stream": False
-        }
+            "stream": False,
+        },
     )
 
     data = response.json()
@@ -93,43 +104,30 @@ Answer:
     return data["response"]
 
 
-# -----------------------------
-# Full RAG pipeline
-# -----------------------------
 def rag_query(question):
-
     docs = retrieve(question)
+    if not docs:
+        return "No relevant context found in the vector database."
 
     context = "\n".join(docs)
-
     answer = ask_llm(context, question)
-
     return answer
 
 
-# -----------------------------
-# Example documents
-# -----------------------------
-doc1 = """
-Artificial Intelligence (AI) is a field of computer science focused on creating systems
-that can perform tasks requiring human intelligence such as learning, reasoning, and problem solving.
-"""
+def main():
+    if len(sys.argv) > 1:
+        question = " ".join(sys.argv[1:])
+    else:
+        question = input("Question: ").strip()
 
-doc2 = """
-Machine Learning is a subset of Artificial Intelligence that allows computers to learn
-from data without being explicitly programmed.
-"""
+    if not question:
+        print("Please provide a non-empty question.")
+        return
 
-add_document("doc1", doc1)
-add_document("doc2", doc2)
+    answer = rag_query(question)
+    print("\nAI Answer:\n")
+    print(answer)
 
 
-# -----------------------------
-# Ask question
-# -----------------------------
-question = "What is machine learning?"
-
-answer = rag_query(question)
-
-print("\nAI Answer:\n")
-print(answer)
+if __name__ == "__main__":
+    main()
