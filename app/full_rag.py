@@ -16,6 +16,9 @@ from config import (
 # Connect to Chroma
 chroma_client = chromadb.HttpClient(host=CHROMA_HOST, port=CHROMA_PORT)
 collection = chroma_client.get_or_create_collection(name=CHROMA_COLLECTION)
+# print("[Chroma][full_rag] collections:", chroma_client.list_collections())
+# print("[Chroma][full_rag] current count:", collection.count())
+# print("[Chroma][full_rag] sample:", collection.peek(limit=2))
 
 
 def generate_embedding(text):
@@ -42,18 +45,29 @@ def add_document(doc_id, text, metadata=None):
     embedding = generate_embedding(text)
 
     if metadata is not None:
-        collection.add(
+        collection.upsert(
             ids=[doc_id],
             documents=[text],
             embeddings=[embedding],
             metadatas=[metadata],
         )
     else:
-        collection.add(
+        collection.upsert(
             ids=[doc_id],
             documents=[text],
             embeddings=[embedding],
         )
+
+
+def delete_document_chunks(source_document):
+    existing = collection.get(where={"source_document": source_document}, include=[])
+    ids = existing.get("ids", [])
+
+    if not ids:
+        return 0
+
+    collection.delete(ids=ids)
+    return len(ids)
 
 
 def retrieve(query):
@@ -62,28 +76,52 @@ def retrieve(query):
     results = collection.query(
         query_embeddings=[query_embedding],
         n_results=TOP_K,
+        include=["documents", "metadatas"],
     )
 
     documents = results.get("documents", [])
+    metadatas = results.get("metadatas", [])
     if not documents:
-        return []
+        return [], []
 
-    return documents[0]
+    return documents[0], metadatas[0] if metadatas else []
 
 
 def build_prompt(context, question):
     return f"""
-You are an AI assistant.
+You are an AI assistant specialized in answering questions from documents.
 
-Answer the question using ONLY the context below.
+IMPORTANT RULES:
+- Use ONLY the provided context.
+- Do NOT use external knowledge.
+- Read ALL context chunks carefully before answering.
+- Combine information from ALL relevant chunks.
+- Do NOT give a partial answer if more details exist.
+- Extract ALL relevant points explicitly.
 
-Context:
+ANSWER STYLE:
+- Provide a COMPLETE and detailed answer.
+- Use bullet points when appropriate.
+- Include ALL key details found in the context.
+
+SOURCE REQUIREMENT:
+- After the answer, list the source_document names used.
+- Only include sources that contributed to the answer.
+- Format:
+  Sources:
+  - <file_name>
+
+If the context is insufficient, say what is missing.
+
+---------------------
+CONTEXT:
 {context}
+---------------------
 
-Question:
+QUESTION:
 {question}
 
-Answer:
+ANSWER:
 """
 
 
@@ -105,11 +143,17 @@ def ask_llm(context, question):
 
 
 def rag_query(question):
-    docs = retrieve(question)
+    docs, metas = retrieve(question)
     if not docs:
         return "No relevant context found in the vector database."
 
-    context = "\n".join(docs)
+    formatted_chunks = []
+    for i, doc in enumerate(docs):
+        meta = metas[i] if i < len(metas) else {}
+        source_document = (meta or {}).get("source_document", "unknown")
+        formatted_chunks.append(f"[Source: {source_document}]\n{doc}")
+
+    context = "\n\n".join(formatted_chunks)
     answer = ask_llm(context, question)
     return answer
 

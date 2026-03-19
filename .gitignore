@@ -9,6 +9,7 @@ env/
 
 # Vector DB
 chroma/
+chroma-data/
 
 # OS
 .DS_Store

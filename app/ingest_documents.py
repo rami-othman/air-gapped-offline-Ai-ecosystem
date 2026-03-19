@@ -3,16 +3,11 @@ from pathlib import Path
 from chunker import chunk_text
 from config import CHUNK_OVERLAP, CHUNK_SIZE, DOCS_DIR
 from document_loader import load_pdf
-from full_rag import add_document
+from full_rag import add_document, delete_document_chunks
 
-
-TOPIC_KEYWORDS = {
-    "employee": "employee handbook",
-    "cyber": "cyber security policy",
-    "incident": "incident response plan",
-    "gdpr": "gdpr",
-    "nist": "nist security framework",
-}
+# print("[Chroma][ingest_documents] collections:", chroma_client.list_collections())
+# print("[Chroma][ingest_documents] current count:", collection.count())
+# print("[Chroma][ingest_documents] sample:", collection.peek(limit=2))
 
 
 def slugify_filename(path):
@@ -26,27 +21,22 @@ def slugify_filename(path):
     return "".join(safe).strip("_")
 
 
-def infer_topic(path):
-    lower_name = Path(path).name.lower()
-    for key, topic in TOPIC_KEYWORDS.items():
-        if key in lower_name:
-            return topic
-    return "general policy"
-
-
 def ingest_pdf(path):
     text = load_pdf(path)
     chunks = chunk_text(text, chunk_size=CHUNK_SIZE, overlap=CHUNK_OVERLAP)
 
     doc_slug = slugify_filename(path)
-    source_document = Path(path).name
-    section_topic = infer_topic(path)
+    file_name = Path(path).name
+    source_document = file_name
+
+    # Keep ingestion idempotent for reruns and document edits.
+    delete_document_chunks(source_document)
 
     for i, chunk in enumerate(chunks):
         chunk_id = f"{doc_slug}_chunk_{i:04d}"
         metadata = {
             "source_document": source_document,
-            "section_topic": section_topic,
+            "file_name": file_name,
             "chunk_id": chunk_id,
         }
         add_document(chunk_id, chunk, metadata=metadata)

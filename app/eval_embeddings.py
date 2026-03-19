@@ -19,14 +19,6 @@ from config import (
 )
 from document_loader import load_pdf
 
-TOPIC_KEYWORDS = {
-    "employee": "employee handbook",
-    "cyber": "cyber security policy",
-    "incident": "incident response plan",
-    "gdpr": "gdpr",
-    "nist": "nist security framework",
-}
-
 
 def slugify(value):
     chars = []
@@ -36,14 +28,6 @@ def slugify(value):
         else:
             chars.append("_")
     return "".join(chars).strip("_")
-
-
-def infer_topic(path):
-    lower_name = Path(path).name.lower()
-    for key, topic in TOPIC_KEYWORDS.items():
-        if key in lower_name:
-            return topic
-    return "general policy"
 
 
 def embed_text(model, text):
@@ -93,8 +77,8 @@ def build_collection_for_model(client, model, docs_dir, max_chunks=None):
     for pdf_path in pdf_paths:
         text = load_pdf(str(pdf_path))
         chunks = chunk_text(text, chunk_size=CHUNK_SIZE, overlap=CHUNK_OVERLAP)
-        source_document = pdf_path.name
-        section_topic = infer_topic(pdf_path)
+        file_name = pdf_path.name
+        source_document = file_name
         doc_slug = slugify(pdf_path.stem)
 
         for i, chunk in enumerate(chunks):
@@ -110,7 +94,7 @@ def build_collection_for_model(client, model, docs_dir, max_chunks=None):
             metadatas.append(
                 {
                     "source_document": source_document,
-                    "section_topic": section_topic,
+                    "file_name": file_name,
                     "chunk_id": chunk_id,
                 }
             )
@@ -162,12 +146,8 @@ def evaluate_model(collection, model, eval_rows, top_k):
             doc_hits += 1
 
         topic_match = False
-        for meta, doc in zip(metas, docs):
-            meta_topic = (meta or {}).get("section_topic", "").lower()
+        for doc in docs:
             doc_text = (doc or "").lower()
-            if expected_topic and (expected_topic in meta_topic or meta_topic in expected_topic):
-                topic_match = True
-                break
             if expected_topic and expected_topic in doc_text:
                 topic_match = True
                 break
