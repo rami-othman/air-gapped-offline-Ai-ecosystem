@@ -3,3 +3,11 @@ rami-laptop-msi-baseline,gemma3:12b,Explain GDPR breach notification obligations
 rami-laptop-msi-baseline,gemma3:12b,What are the key steps in incident response?,64.5541,4.548,60.0061,1632,25.2811,5505,5505,0,NIST.CSWP.29.pdf; Incident-Response-Plan-Basics_508c.pdf,success
 rami-laptop-msi-baseline,gemma3:12b,What does the cybersecurity policy say about password requirements?,18.7251,4.4418,14.2833,222,11.8557,5505,5505,0,Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf,success
 rami-laptop-msi-baseline,gemma3:12b,Summarize the NIST cybersecurity framework,60.0253,4.4342,55.5911,1872,31.1868,5505,5503,-2,NIST.CSWP.29.pdf,success
+rami-pc-baseline,gemma3:12b,Explain GDPR breach notification obligations,11.1129,1.3629,9.75,1391,125.1699,1143,10927,9784,Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,success
+rami-pc-baseline,gemma3:12b,What are the key steps in incident response?,4.7444,0.0471,4.6973,1507,317.6346,10927,10924,-3,NIST.CSWP.29.pdf; Incident-Response-Plan-Basics_508c.pdf,success
+rami-pc-baseline,gemma3:12b,What does the cybersecurity policy say about password requirements?,1.0694,0.0853,0.9841,226,211.3379,10924,10925,1,Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf,success
+rami-pc-baseline,gemma3:12b,Summarize the NIST cybersecurity framework,4.5284,0.0855,4.4429,1669,368.5596,10925,10923,-2,NIST.CSWP.29.pdf,success
+rami-pc-baseline-2,gemma3:12b,Explain GDPR breach notification obligations,4.0795,0.0675,4.012,1381,338.5199,10933,10917,-16,Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,success
+rami-pc-baseline-2,gemma3:12b,What are the key steps in incident response?,4.5285,0.0647,4.4637,1394,307.8295,10917,10917,0,NIST.CSWP.29.pdf; Incident-Response-Plan-Basics_508c.pdf,success
+rami-pc-baseline-2,gemma3:12b,What does the cybersecurity policy say about password requirements?,1.0569,0.0679,0.989,216,204.3683,10917,10917,0,Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf,success
+rami-pc-baseline-2,gemma3:12b,Summarize the NIST cybersecurity framework,4.3276,0.0697,4.2579,1612,372.4931,10917,10917,0,NIST.CSWP.29.pdf,success
