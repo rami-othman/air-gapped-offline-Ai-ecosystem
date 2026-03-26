@@ -1,0 +1,18 @@
+timestamp,question,answer,retrieved_sources
+2026-03-26T19:28:55,Explain GDPR breach notification obligations,"Answer:
+When a data breach happens, the employee, data subject, data processors and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority and the data subjects whose data have been compromised. If the responsible authorities are not notified within 72 hours, the data controller needs to provide a reasonable justification for the delay.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf
+2026-03-26T19:29:40,What are the key steps in incident response?,"Answer:
+Here are the key steps in incident response:
+* Incident reports are triaged and validated.
+* Incidents are categorized and prioritized.
+* Incidents are escalated or elevated as needed.
+* The criteria for initiating incident recovery are applied.
+* Restoration activities are performed to ensure operational availability of systems and services.
+* Recovery actions are selected, scoped, prioritized, and performed.
+
+Sources:
+- NIST.CSWP.29.pdf
+- Incident-Response-Plan-Basics_508c.pdf",NIST.CSWP.29.pdf; Incident-Response-Plan-Basics_508c.pdf

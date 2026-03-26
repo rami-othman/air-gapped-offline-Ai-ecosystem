@@ -1,5 +1,8 @@
 import sys
 import time
+import json
+from datetime import datetime
+from pathlib import Path
 
 import chromadb
 import requests
@@ -20,6 +23,8 @@ collection = chroma_client.get_or_create_collection(name=CHROMA_COLLECTION)
 # print("[Chroma][full_rag] collections:", chroma_client.list_collections())
 # print("[Chroma][full_rag] current count:", collection.count())
 # print("[Chroma][full_rag] sample:", collection.peek(limit=2))
+
+CHAT_LOG_PATH = Path(__file__).resolve().parents[1] / "data" / "chat_logs.jsonl"
 
 
 def generate_embedding(text):
@@ -90,52 +95,62 @@ def retrieve(query):
 
 def build_prompt(context, question):
     return f"""
-You are an AI assistant specialized in answering questions from documents.
+You are an AI assistant answering questions using only the provided context.
 
-IMPORTANT RULES:
-- Use ONLY the provided context.
-- Do NOT use external knowledge.
-- Read ALL context chunks carefully before answering.
-- Combine information from ALL relevant chunks.
-- Do NOT give a partial answer if more details exist.
-- Extract ALL relevant points explicitly.
+Rules:
+- Use only the context below.
+- Do not use outside knowledge.
+- If the answer is not fully supported by the context, say what is missing.
+- Use only the relevant context parts.
+- Keep the answer clear, accurate, and concise.
+- Use bullet points only when they improve clarity.
 
-ANSWER STYLE:
-- Provide a COMPLETE and detailed answer.
-- Use bullet points when appropriate.
-- Include ALL key details found in the context.
+After the answer, list only the source document names that directly support the answer.
 
-SOURCE REQUIREMENT:
-- After the answer, list the source_document names used.
-- Only include sources that contributed to the answer.
-- Format:
-  Sources:
-  - <file_name>
+Format:
+Answer:
+<your answer>
 
-If the context is insufficient, say what is missing.
+Sources:
+- <file_name>
 
----------------------
-CONTEXT:
+Context:
 {context}
----------------------
 
-QUESTION:
+Question:
 {question}
-
-ANSWER:
 """
 
 
-def ask_llm(context, question):
+def ask_llm(context, question, model_name=None, model_options=None):
     prompt = build_prompt(context, question)
+
+    model_options = model_options or {}
+    effective_model_name = (
+        model_name
+        or model_options.get("model")
+        or GENERAL_GENERATION_MODEL
+    )
+
+    # Pass through runtime generation options (e.g., num_ctx, num_batch, num_thread)
+    # while reserving top-level keys for payload structure.
+    generation_options = {
+        key: value
+        for key, value in model_options.items()
+        if key not in {"model", "prompt", "stream"}
+    }
+
+    payload = {
+        "model": effective_model_name,
+        "prompt": prompt,
+        "stream": False,
+    }
+    if generation_options:
+        payload["options"] = generation_options
 
     response = requests.post(
         f"{OLLAMA_BASE_URL}/api/generate",
-        json={
-            "model": GENERAL_GENERATION_MODEL,
-            "prompt": prompt,
-            "stream": False,
-        },
+        json=payload,
     )
 
     data = response.json()
@@ -158,9 +173,16 @@ def _build_context_and_sources(docs, metas):
     return "\n\n".join(formatted_chunks), unique_sources
 
 
-def run_rag_query(question):
+def run_rag_query(question, model_name=None, model_options=None):
     """
     Execute the full RAG flow and return benchmark-friendly metrics.
+
+    model_name:
+    - optional model override, e.g. "gemma3:12b-q4"
+
+    model_options can include:
+    - Ollama generation options such as num_ctx, num_batch, num_thread
+    - optional "model" key (kept for backward compatibility)
     """
     retrieval_start = time.perf_counter()
     docs, metas = retrieve(question)
@@ -178,7 +200,12 @@ def run_rag_query(question):
     context, sources = _build_context_and_sources(docs, metas)
 
     generation_start = time.perf_counter()
-    answer = ask_llm(context, question)
+    answer = ask_llm(
+        context,
+        question,
+        model_name=model_name,
+        model_options=model_options,
+    )
     generation_time_sec = time.perf_counter() - generation_start
 
     return {
@@ -195,6 +222,22 @@ def rag_query(question):
     return result["answer"]
 
 
+def save_interaction(question: str, answer: str, sources: list[str]) -> None:
+    """
+    Append a successful CLI interaction to local JSONL chat history.
+    """
+    payload = {
+        "timestamp": datetime.now().isoformat(timespec="seconds"),
+        "question": question,
+        "answer": answer,
+        "retrieved_sources": sources,
+    }
+
+    CHAT_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with CHAT_LOG_PATH.open("a", encoding="utf-8") as log_file:
+        log_file.write(json.dumps(payload, ensure_ascii=False) + "\n")
+
+
 def main():
     if len(sys.argv) > 1:
         question = " ".join(sys.argv[1:])
@@ -205,7 +248,14 @@ def main():
         print("Please provide a non-empty question.")
         return
 
-    answer = rag_query(question)
+    result = run_rag_query(question)
+    answer = result.get("answer", "")
+    if result.get("status") == "success":
+        try:
+            save_interaction(question, answer, result.get("retrieved_sources", []))
+        except Exception as exc:
+            print(f"[Warning] Could not save interaction log: {exc}")
+
     print("\nAI Answer:\n")
     print(answer)
 
