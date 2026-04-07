@@ -3,9 +3,15 @@ from typing import Any
 from pydantic import BaseModel, Field
 
 
+class ServiceHealth(BaseModel):
+    status: str
+    error: str | None = None
+
+
 class HealthResponse(BaseModel):
     status: str
-    service: str
+    ollama: ServiceHealth
+    chroma: ServiceHealth
 
 
 class RagQueryRequest(BaseModel):
@@ -15,6 +21,7 @@ class RagQueryRequest(BaseModel):
 
 
 class RagQueryResponse(BaseModel):
+    status: str
     answer: str
     sources: list[str]
     retrieval_time_sec: float
@@ -24,7 +31,7 @@ class RagQueryResponse(BaseModel):
 
 
 class RagSearchRequest(BaseModel):
-    question: str = Field(..., min_length=1, description="User question")
+    query: str = Field(..., min_length=1, description="User retrieval query")
     top_k: int | None = Field(default=None, ge=1, le=50)
 
 
@@ -34,6 +41,7 @@ class RetrievedChunk(BaseModel):
 
 
 class RagSearchResponse(BaseModel):
+    status: str
     chunks: list[RetrievedChunk]
     retrieval_time_sec: float
     generation_time_sec: float = 0.0
@@ -45,6 +53,7 @@ class RagIngestRequest(BaseModel):
 
 
 class RagIngestResponse(BaseModel):
+    status: str
     docs_dir: str
     documents_ingested: int
     chunks_ingested: int

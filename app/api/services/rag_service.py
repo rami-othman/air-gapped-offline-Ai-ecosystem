@@ -1,10 +1,13 @@
 import time
 import uuid
+import logging
 
 import requests
 
 from ...config import DOCS_DIR
 from .logging_service import log_chat_interaction
+
+logger = logging.getLogger(__name__)
 
 
 class RAGServiceError(Exception):
@@ -58,19 +61,23 @@ def _raise_backend_error(exc: Exception, action: str) -> None:
 def run_query(question: str, top_k: int | None = None, session_id: str | None = None) -> dict:
     normalized_question = _normalize_question(question)
     active_session_id = _to_session_id(session_id)
+    endpoint = "/api/v1/rag/query"
+    start = time.perf_counter()
 
     try:
         from ...full_rag import run_rag_query
 
         result = run_rag_query(normalized_question, top_k=top_k)
     except Exception as exc:  # noqa: BLE001
+        logger.exception("RAG query failed. endpoint=%s session_id=%s", endpoint, active_session_id)
         _raise_backend_error(exc, action="query")
 
     sources = result.get("retrieved_sources", [])
     answer = result.get("answer", "")
     retrieval_time_sec = float(result.get("retrieval_time_sec", 0.0))
     generation_time_sec = float(result.get("generation_time_sec", 0.0))
-    total_time_sec = retrieval_time_sec + generation_time_sec
+    total_time_sec = float(result.get("total_time_sec", retrieval_time_sec + generation_time_sec))
+    status = "success"
 
     if result.get("status") == "success":
         log_chat_interaction(
@@ -79,7 +86,19 @@ def run_query(question: str, top_k: int | None = None, session_id: str | None = 
             sources=sources,
         )
 
+    rag_status = result.get("status", "unknown")
+    logger.info(
+        "RAG query completed. endpoint=%s session_id=%s rag_status=%s retrieval_time_sec=%.4f generation_time_sec=%.4f total_time_sec=%.4f",
+        endpoint,
+        active_session_id,
+        rag_status,
+        retrieval_time_sec,
+        generation_time_sec,
+        time.perf_counter() - start,
+    )
+
     return {
+        "status": status,
         "answer": answer,
         "sources": sources,
         "retrieval_time_sec": retrieval_time_sec,
@@ -89,15 +108,17 @@ def run_query(question: str, top_k: int | None = None, session_id: str | None = 
     }
 
 
-def run_search(question: str, top_k: int | None = None) -> dict:
-    normalized_question = _normalize_question(question)
+def run_search(query: str, top_k: int | None = None) -> dict:
+    normalized_query = _normalize_question(query)
+    endpoint = "/api/v1/rag/search"
     start = time.perf_counter()
 
     try:
         from ...full_rag import retrieve
 
-        docs, metadatas = retrieve(normalized_question, top_k=top_k)
+        docs, metadatas = retrieve(normalized_query, top_k=top_k)
     except Exception as exc:  # noqa: BLE001
+        logger.exception("RAG search failed. endpoint=%s", endpoint)
         _raise_backend_error(exc, action="search")
 
     retrieval_time_sec = time.perf_counter() - start
@@ -111,7 +132,15 @@ def run_search(question: str, top_k: int | None = None) -> dict:
             }
         )
 
+    logger.info(
+        "RAG search completed. endpoint=%s chunks=%d retrieval_time_sec=%.4f",
+        endpoint,
+        len(chunks),
+        retrieval_time_sec,
+    )
+
     return {
+        "status": "success",
         "chunks": chunks,
         "retrieval_time_sec": retrieval_time_sec,
         "generation_time_sec": 0.0,
@@ -121,6 +150,7 @@ def run_search(question: str, top_k: int | None = None) -> dict:
 
 def run_ingestion(docs_dir: str | None = None) -> dict:
     active_docs_dir = docs_dir or DOCS_DIR
+    endpoint = "/api/v1/rag/ingest"
     start = time.perf_counter()
 
     try:
@@ -128,11 +158,23 @@ def run_ingestion(docs_dir: str | None = None) -> dict:
 
         documents_ingested, chunks_ingested = ingest_directory(active_docs_dir)
     except Exception as exc:  # noqa: BLE001
+        logger.exception("RAG ingestion failed. endpoint=%s docs_dir=%s", endpoint, active_docs_dir)
         _raise_backend_error(exc, action="ingestion")
 
+    elapsed = time.perf_counter() - start
+    logger.info(
+        "RAG ingestion completed. endpoint=%s docs_dir=%s documents=%d chunks=%d total_time_sec=%.4f",
+        endpoint,
+        active_docs_dir,
+        documents_ingested,
+        chunks_ingested,
+        elapsed,
+    )
+
     return {
+        "status": "success",
         "docs_dir": active_docs_dir,
         "documents_ingested": documents_ingested,
         "chunks_ingested": chunks_ingested,
-        "total_time_sec": time.perf_counter() - start,
+        "total_time_sec": elapsed,
     }
