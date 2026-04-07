@@ -86,6 +86,68 @@ python app/eval_embeddings.py --models nomic-embed-text bge-m3 --top-k 3 --outpu
 python app/eval_embeddings.py --models nomic-embed-text bge-m3 --max-chunks 8 --top-k 3 --output data/eval/embedding_comparison_results_smoke.json
 ```
 
+## FastAPI Layer
+
+The existing RAG logic is now also exposed as an API (no duplicated core logic).
+
+### Run API
+
+```bash
+pip install -r requirements.txt
+uvicorn app.api.main:app --reload
+```
+
+API docs:
+- Swagger UI: `http://127.0.0.1:8000/docs`
+- ReDoc: `http://127.0.0.1:8000/redoc`
+
+### Endpoint Summary
+
+- `GET /health`
+  - Basic health status
+- `POST /api/v1/rag/query`
+  - Full RAG (retrieve + generate)
+  - Body: `question`, optional `top_k`, optional `session_id`
+  - Returns: `answer`, `sources`, timing metrics, `session_id`
+- `POST /api/v1/rag/search`
+  - Retrieval only (no generation)
+  - Body: `question`, optional `top_k`
+  - Returns: retrieved chunks + metadata + timing
+- `POST /api/v1/rag/ingest`
+  - Triggers ingestion from configured docs directory (`DOCS_DIR`) or optional `docs_dir` override
+
+### cURL Examples
+
+Health:
+
+```bash
+curl -X GET "http://127.0.0.1:8000/health"
+```
+
+Query:
+
+```bash
+curl -X POST "http://127.0.0.1:8000/api/v1/rag/query" \
+  -H "Content-Type: application/json" \
+  -d "{\"question\":\"What are breach notification obligations under GDPR?\",\"top_k\":5,\"session_id\":\"demo-session\"}"
+```
+
+Search only:
+
+```bash
+curl -X POST "http://127.0.0.1:8000/api/v1/rag/search" \
+  -H "Content-Type: application/json" \
+  -d "{\"question\":\"What are breach notification obligations under GDPR?\",\"top_k\":5}"
+```
+
+Ingest:
+
+```bash
+curl -X POST "http://127.0.0.1:8000/api/v1/rag/ingest" \
+  -H "Content-Type: application/json" \
+  -d "{}"
+```
+
 ## Notes
 
 - Use the `app/` scripts as the active workflow.

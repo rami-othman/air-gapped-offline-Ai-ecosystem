@@ -7,15 +7,26 @@ from pathlib import Path
 import chromadb
 import requests
 
-from config import (
-    CHROMA_COLLECTION,
-    CHROMA_HOST,
-    CHROMA_PORT,
-    EMBEDDING_MODEL,
-    GENERAL_GENERATION_MODEL,
-    OLLAMA_BASE_URL,
-    TOP_K,
-)
+try:
+    from .config import (
+        CHROMA_COLLECTION,
+        CHROMA_HOST,
+        CHROMA_PORT,
+        EMBEDDING_MODEL,
+        GENERAL_GENERATION_MODEL,
+        OLLAMA_BASE_URL,
+        TOP_K,
+    )
+except ImportError:  # pragma: no cover - script execution fallback
+    from config import (
+        CHROMA_COLLECTION,
+        CHROMA_HOST,
+        CHROMA_PORT,
+        EMBEDDING_MODEL,
+        GENERAL_GENERATION_MODEL,
+        OLLAMA_BASE_URL,
+        TOP_K,
+    )
 
 # Connect to Chroma
 chroma_client = chromadb.HttpClient(host=CHROMA_HOST, port=CHROMA_PORT)
@@ -36,7 +47,9 @@ def generate_embedding(text):
             "model": EMBEDDING_MODEL,
             "prompt": clean_text,
         },
+        timeout=120,
     )
+    response.raise_for_status()
 
     data = response.json()
 
@@ -76,12 +89,13 @@ def delete_document_chunks(source_document):
     return len(ids)
 
 
-def retrieve(query):
+def retrieve(query, top_k=None):
+    n_results = top_k if top_k is not None else TOP_K
     query_embedding = generate_embedding(query)
 
     results = collection.query(
         query_embeddings=[query_embedding],
-        n_results=TOP_K,
+        n_results=n_results,
         include=["documents", "metadatas"],
     )
 
@@ -151,7 +165,9 @@ def ask_llm(context, question, model_name=None, model_options=None):
     response = requests.post(
         f"{OLLAMA_BASE_URL}/api/generate",
         json=payload,
+        timeout=180,
     )
+    response.raise_for_status()
 
     data = response.json()
 
@@ -173,7 +189,7 @@ def _build_context_and_sources(docs, metas):
     return "\n\n".join(formatted_chunks), unique_sources
 
 
-def run_rag_query(question, model_name=None, model_options=None):
+def run_rag_query(question, model_name=None, model_options=None, top_k=None):
     """
     Execute the full RAG flow and return benchmark-friendly metrics.
 
@@ -185,7 +201,7 @@ def run_rag_query(question, model_name=None, model_options=None):
     - optional "model" key (kept for backward compatibility)
     """
     retrieval_start = time.perf_counter()
-    docs, metas = retrieve(question)
+    docs, metas = retrieve(question, top_k=top_k)
     retrieval_time_sec = time.perf_counter() - retrieval_start
 
     if not docs:
@@ -217,8 +233,8 @@ def run_rag_query(question, model_name=None, model_options=None):
     }
 
 
-def rag_query(question):
-    result = run_rag_query(question)
+def rag_query(question, top_k=None):
+    result = run_rag_query(question, top_k=top_k)
     return result["answer"]
 
 

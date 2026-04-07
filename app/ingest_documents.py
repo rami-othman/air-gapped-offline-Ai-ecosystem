@@ -1,9 +1,15 @@
 from pathlib import Path
 
-from chunker import chunk_text
-from config import CHUNK_OVERLAP, CHUNK_SIZE, DOCS_DIR
-from document_loader import load_pdf
-from full_rag import add_document, delete_document_chunks
+try:
+    from .chunker import chunk_text
+    from .config import CHUNK_OVERLAP, CHUNK_SIZE, DOCS_DIR
+    from .document_loader import load_pdf
+    from .full_rag import add_document, delete_document_chunks
+except ImportError:  # pragma: no cover - script execution fallback
+    from chunker import chunk_text
+    from config import CHUNK_OVERLAP, CHUNK_SIZE, DOCS_DIR
+    from document_loader import load_pdf
+    from full_rag import add_document, delete_document_chunks
 
 # print("[Chroma][ingest_documents] collections:", chroma_client.list_collections())
 # print("[Chroma][ingest_documents] current count:", collection.count())
