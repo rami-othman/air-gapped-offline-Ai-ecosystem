@@ -1,0 +1,41 @@
+services:
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: chromadb
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rag-api
+    env_file:
+      - .env
+    environment:
+      # Temporary integration mode:
+      # Keep ollama/chromadb manually managed outside compose and
+      # connect from the API container through the Docker host.
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      CHROMA_HOST: host.docker.internal
+      CHROMA_PORT: 8000
+      API_HOST: 0.0.0.0
+      API_PORT: 8001
+      API_DEV_MODE: "false"
+      API_RELOAD: "false"
+    ports:
+      - "8001:8001"
+
+volumes:
+  chroma_data:
+  ollama_data:

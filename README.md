@@ -24,9 +24,9 @@ Week 2 blockers are resolved in the main `app/` flow:
 
 ## Prerequisites
 
-- Ollama running on `http://localhost:11434`
-- ChromaDB running on `localhost:8000`
-- Python packages installed: `chromadb`, `requests`, `pypdf`
+- Python 3.10+ (for local CLI / host-run API)
+- Docker Desktop (for Ollama and ChromaDB containers)
+- Optional: Docker Compose (included with modern Docker Desktop)
 
 ## Ingestion Behavior (Important)
 
@@ -94,7 +94,99 @@ python app/eval_embeddings.py --models nomic-embed-text bge-m3 --max-chunks 8 --
 
 The existing RAG logic is exposed as an API without duplicating the core RAG pipeline.
 
-### Run API
+Default FastAPI port is `8001` so it does not conflict with Chroma (`8000`).
+
+### Environment Configuration
+
+Service connections and API behavior are env-driven:
+
+- `OLLAMA_BASE_URL`
+- `CHROMA_HOST`
+- `CHROMA_PORT`
+- `API_HOST`
+- `API_PORT`
+- `API_DEV_MODE`
+- `API_RELOAD`
+- `HEALTH_INCLUDE_ERROR_DETAILS`
+- `INGEST_PROTECTION_ENABLED`
+- `INGEST_API_KEY`
+- `INGEST_API_KEY_HEADER`
+
+`mode 1` (`FastAPI on host, Ollama + Chroma in Docker`) `.env` example:
+
+```env
+OLLAMA_BASE_URL=http://localhost:11434
+CHROMA_HOST=localhost
+CHROMA_PORT=8000
+API_HOST=127.0.0.1
+API_PORT=8001
+API_DEV_MODE=true
+API_RELOAD=true
+HEALTH_INCLUDE_ERROR_DETAILS=true
+INGEST_PROTECTION_ENABLED=true
+INGEST_API_KEY=dev-ingest-key
+INGEST_API_KEY_HEADER=X-API-Key
+```
+
+`mode 2` (`FastAPI in Docker, Ollama + Chroma manually managed in Docker Desktop`) `.env` example:
+
+```env
+OLLAMA_BASE_URL=http://host.docker.internal:11434
+CHROMA_HOST=host.docker.internal
+CHROMA_PORT=8000
+API_HOST=0.0.0.0
+API_PORT=8001
+API_DEV_MODE=false
+API_RELOAD=false
+HEALTH_INCLUDE_ERROR_DETAILS=false
+INGEST_PROTECTION_ENABLED=true
+INGEST_API_KEY=dev-ingest-key
+INGEST_API_KEY_HEADER=X-API-Key
+```
+
+`future clean mode` (`FastAPI + Ollama + Chroma all managed by compose`) `.env` example:
+
+```env
+OLLAMA_BASE_URL=http://ollama:11434
+CHROMA_HOST=chromadb
+CHROMA_PORT=8000
+API_HOST=0.0.0.0
+API_PORT=8001
+API_DEV_MODE=false
+API_RELOAD=false
+HEALTH_INCLUDE_ERROR_DETAILS=false
+INGEST_PROTECTION_ENABLED=true
+INGEST_API_KEY=dev-ingest-key
+INGEST_API_KEY_HEADER=X-API-Key
+```
+
+Note: current `docker-compose.yml` is intentionally set to temporary integration mode for `api` (`host.docker.internal`) so it can connect to your existing manually managed `ollama` and `chromadb` containers.
+
+### Docker Setup
+
+`Dockerfile`:
+
+- Builds a minimal Python image for this project
+- Reuses current app code (`python -m app.api.run`)
+- Exposes FastAPI on `8001`
+
+`docker-compose.yml` services:
+
+- `chromadb` -> `8000:8000`
+- `ollama` -> `11434:11434`
+- `api` -> `8001:8001`
+
+### Run Mode 1: FastAPI on Host, Ollama + Chroma in Docker
+
+If your containers are already running in Docker Desktop, keep them as-is and run API locally.
+
+Or start them from compose:
+
+```bash
+docker compose up -d chromadb ollama
+```
+
+Run FastAPI on host:
 
 ```bash
 pip install -r requirements.txt
@@ -106,47 +198,39 @@ API docs:
 - Swagger UI: `http://127.0.0.1:8001/docs`
 - ReDoc: `http://127.0.0.1:8001/redoc`
 
-Default FastAPI port is `8001` so it does not conflict with Chroma (`8000`).
+### Run Mode 2 (Temporary): API in Docker, Ollama + Chroma Manually Managed
 
-### Environment Configuration
+This mode is for your current setup. It does not require recreating your existing Ollama and Chroma containers.
 
-Service connections and API behavior are env-driven:
-
-- `OLLAMA_BASE_URL`
-- `CHROMA_HOST`
-- `CHROMA_PORT`
-- `API_PORT`
-
-Host-based API `.env` example:
-
-```env
-OLLAMA_BASE_URL=http://localhost:11434
-CHROMA_HOST=localhost
-CHROMA_PORT=8000
-API_HOST=0.0.0.0
-API_PORT=8001
-API_DEV_MODE=true
-API_RELOAD=true
-HEALTH_INCLUDE_ERROR_DETAILS=true
-INGEST_PROTECTION_ENABLED=true
-INGEST_API_KEY=dev-ingest-key
-INGEST_API_KEY_HEADER=X-API-Key
+```bash
+docker compose up --build -d api
 ```
 
-Docker-based API `.env` example:
+Useful checks:
 
-```env
-OLLAMA_BASE_URL=http://ollama:11434
-CHROMA_HOST=chromadb
-CHROMA_PORT=8000
-API_HOST=0.0.0.0
-API_PORT=8001
-API_DEV_MODE=true
-API_RELOAD=true
-HEALTH_INCLUDE_ERROR_DETAILS=true
-INGEST_PROTECTION_ENABLED=true
-INGEST_API_KEY=dev-ingest-key
-INGEST_API_KEY_HEADER=X-API-Key
+```bash
+docker compose ps
+docker compose logs -f api
+```
+
+### Future Clean Mode: All Services Managed by Compose
+
+After you safely migrate Ollama models and are ready to let compose manage all services:
+
+1. Update `api` environment in `docker-compose.yml` to use:
+   - `OLLAMA_BASE_URL=http://ollama:11434`
+   - `CHROMA_HOST=chromadb`
+2. Re-add `depends_on` for `api` on `ollama` and `chromadb`.
+3. Run:
+
+```bash
+docker compose up --build -d
+```
+
+Stop stack:
+
+```bash
+docker compose down
 ```
 
 Ingest protection:
