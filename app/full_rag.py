@@ -138,8 +138,16 @@ Question:
 
 def ask_llm(context, question, model_name=None, model_options=None):
     prompt = build_prompt(context, question)
+    
+    default_options = {
+    "num_ctx": 4096,
+    "num_batch": 64,
+    "num_thread": 8,
+    "temperature": 0.2,
+    }
+    model_options = {**default_options, **(model_options or {})}
 
-    model_options = model_options or {}
+    # model_options = model_options or {}
     effective_model_name = (
         model_name
         or model_options.get("model")

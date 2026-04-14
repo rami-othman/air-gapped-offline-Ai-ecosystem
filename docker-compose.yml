@@ -22,6 +22,8 @@ services:
     container_name: rag-api
     env_file:
       - .env
+    # volumes:
+    # - .:/app
     environment:
       # Temporary integration mode:
       # Keep ollama/chromadb manually managed outside compose and
@@ -32,7 +34,8 @@ services:
       API_HOST: 0.0.0.0
       API_PORT: 8001
       API_DEV_MODE: "false"
-      API_RELOAD: "false"
+      # "false"
+      API_RELOAD: "true"
     ports:
       - "8001:8001"
 
