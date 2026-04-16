@@ -35,7 +35,7 @@ services:
       API_PORT: 8001
       API_DEV_MODE: "false"
       # "false"
-      API_RELOAD: "true"
+      API_RELOAD: "false"
     ports:
       - "8001:8001"
 
