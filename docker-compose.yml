@@ -20,6 +20,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: rag-api
+    volumes:
+      - .:/app
     env_file:
       - .env
     # volumes:
@@ -35,7 +37,7 @@ services:
       API_PORT: 8001
       API_DEV_MODE: "false"
       # "false"
-      API_RELOAD: "false"
+      API_RELOAD: "true"
     ports:
       - "8001:8001"
 

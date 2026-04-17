@@ -147,7 +147,6 @@ def ask_llm(context, question, model_name=None, model_options=None):
     }
     model_options = {**default_options, **(model_options or {})}
 
-    # model_options = model_options or {}
     effective_model_name = (
         model_name
         or model_options.get("model")
