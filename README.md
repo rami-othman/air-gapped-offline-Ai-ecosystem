@@ -90,6 +90,31 @@ python app/eval_embeddings.py --models nomic-embed-text bge-m3 --top-k 3 --outpu
 python app/eval_embeddings.py --models nomic-embed-text bge-m3 --max-chunks 8 --top-k 3 --output data/eval/embedding_comparison_results_smoke.json
 ```
 
+6. Run prompt variant evaluation for Week 3:
+
+```bash
+python scripts/evaluate_prompts.py --top-k 3
+```
+
+Use `--top-k 5` to rerun the same dataset with a larger retrieval set:
+
+```bash
+python scripts/evaluate_prompts.py --top-k 5
+```
+
+Prompt evaluation notes:
+
+- Dataset: `scripts/eval_dataset.json`
+- Results folder: `scripts/results/`
+- Detailed outputs:
+  - `scripts/results/prompt_eval_results.csv`
+  - `scripts/results/prompt_eval_results.json`
+  - `scripts/results/prompt_eval_summary.csv`
+- Prompt variants:
+  - `baseline`: current production prompt from `app/full_rag.py`
+  - `quality_focused`: longer prompt emphasizing completeness and grounded detail
+  - `short_optimized`: shorter prompt intended to reduce prompt overhead while preserving grounding rules
+
 ## FastAPI Layer
 
 The existing RAG logic is exposed as an API without duplicating the core RAG pipeline.
