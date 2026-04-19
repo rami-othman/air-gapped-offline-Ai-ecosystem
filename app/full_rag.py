@@ -1,6 +1,7 @@
 import sys
 import time
-from typing import Callable
+from collections.abc import Mapping, Sequence
+from typing import Any, Callable
 
 import chromadb
 import requests
@@ -98,6 +99,86 @@ def delete_document_chunks(source_document):
     return len(ids)
 
 
+def _is_chat_history_candidate(meta: Mapping[str, Any] | None) -> bool:
+    return str((meta or {}).get("source_document", "")).strip().lower() == "chat_history"
+
+
+def _normalize_helpful_value(value: Any) -> bool | None:
+    if value in {True, False}:
+        return value
+    if value is None:
+        return None
+    if isinstance(value, str):
+        normalized = value.strip().lower()
+        if normalized in {"true", "1", "yes"}:
+            return True
+        if normalized in {"false", "0", "no"}:
+            return False
+        if normalized in {"null", "none", ""}:
+            return None
+    return None
+
+
+def _chat_reuse_weight(meta: Mapping[str, Any] | None) -> float:
+    """
+    Parse reuse_weight safely from metadata.
+    Falls back to helpful->weight mapping for backward compatibility.
+    """
+    raw_weight = (meta or {}).get("reuse_weight")
+    try:
+        if raw_weight is not None:
+            return float(raw_weight)
+    except (TypeError, ValueError):
+        pass
+
+    helpful = _normalize_helpful_value((meta or {}).get("helpful"))
+    if helpful is True:
+        return 1.0
+    if helpful is False:
+        return 0.2
+    return 0.5
+
+
+def _rerank_chat_history_candidates(
+    docs: Sequence[str],
+    metas: Sequence[Mapping[str, Any] | None],
+) -> tuple[list[str], list[dict[str, Any]]]:
+    """
+    Keep normal retrieval order, but reorder chat_history candidates among themselves
+    so higher reuse_weight appears earlier than lower reuse_weight.
+    """
+    if not docs:
+        return [], []
+
+    aligned_metas: list[dict[str, Any]] = []
+    for i in range(len(docs)):
+        meta = metas[i] if i < len(metas) else None
+        aligned_metas.append(dict(meta) if isinstance(meta, Mapping) else {})
+
+    chat_positions: list[int] = []
+    chat_items: list[tuple[int, str, dict[str, Any], float]] = []
+
+    for idx, doc in enumerate(docs):
+        meta = aligned_metas[idx]
+        if _is_chat_history_candidate(meta):
+            chat_positions.append(idx)
+            chat_items.append((idx, doc, meta, _chat_reuse_weight(meta)))
+
+    if len(chat_items) <= 1:
+        return list(docs), aligned_metas
+
+    # Deterministic rerank: higher weight first, then original retrieval order.
+    sorted_chat_items = sorted(chat_items, key=lambda item: (-item[3], item[0]))
+    reranked_docs = list(docs)
+    reranked_metas = list(aligned_metas)
+
+    for slot, (_, doc, meta, _) in zip(chat_positions, sorted_chat_items):
+        reranked_docs[slot] = doc
+        reranked_metas[slot] = meta
+
+    return reranked_docs, reranked_metas
+
+
 def retrieve(query, top_k=None):
     n_results = top_k if top_k is not None else TOP_K
     query_embedding = generate_embedding(query)
@@ -113,7 +194,9 @@ def retrieve(query, top_k=None):
     if not documents:
         return [], []
 
-    return documents[0], metadatas[0] if metadatas else []
+    retrieved_docs = documents[0]
+    retrieved_metas = metadatas[0] if metadatas else []
+    return _rerank_chat_history_candidates(retrieved_docs, retrieved_metas)
 
 
 # def build_prompt(context, question):
