@@ -1,8 +1,5 @@
 import sys
 import time
-import json
-from datetime import datetime
-from pathlib import Path
 from typing import Callable
 
 import chromadb
@@ -29,20 +26,23 @@ except ImportError:  # pragma: no cover - script execution fallback
         TOP_K,
     )
 
+try:
+    from .chat_log_store import save_interaction as persist_chat_interaction
+except ImportError:  # pragma: no cover - script execution fallback
+    from chat_log_store import save_interaction as persist_chat_interaction
+
 # Connect to Chroma
 chroma_client = chromadb.HttpClient(host=CHROMA_HOST, port=CHROMA_PORT)
 collection = chroma_client.get_or_create_collection(name=CHROMA_COLLECTION)
 # print("[Chroma][full_rag] collections:", chroma_client.list_collections())
 # print("[Chroma][full_rag] current count:", collection.count())
 # print("[Chroma][full_rag] sample:", collection.peek(limit=2))
-
-CHAT_LOG_PATH = Path(__file__).resolve().parents[1] / "data" / "chat_logs.jsonl"
 PromptBuilder = Callable[[str, str], str]
 
 DEFAULT_MODEL_OPTIONS = {
     "num_ctx": 4096,
     "num_batch": 64,
-    "num_thread": 16,
+    "num_thread": 8,
     "temperature": 0.2,
 }
 
@@ -340,16 +340,7 @@ def save_interaction(question: str, answer: str, sources: list[str]) -> None:
     """
     Append a successful CLI interaction to local JSONL chat history.
     """
-    payload = {
-        "timestamp": datetime.now().isoformat(timespec="seconds"),
-        "question": question,
-        "answer": answer,
-        "retrieved_sources": sources,
-    }
-
-    CHAT_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with CHAT_LOG_PATH.open("a", encoding="utf-8") as log_file:
-        log_file.write(json.dumps(payload, ensure_ascii=False) + "\n")
+    persist_chat_interaction(question=question, answer=answer, sources=sources)
 
 
 def main():
