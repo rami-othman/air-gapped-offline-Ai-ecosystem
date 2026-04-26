@@ -87,8 +87,12 @@ def _normalize_record(record: dict) -> tuple[str | None, str | None, dict[str, A
     return doc_id, text, normalized_metadata
 
 
-def ingest_migrated_items(items: list[dict], add_document_fn=None) -> tuple[int, int]:
-    active_add_document = add_document_fn or _get_add_document()
+def ingest_migrated_items(
+    items: list[dict],
+    add_document_fn=None,
+    dry_run: bool = False,
+) -> tuple[int, int]:
+    active_add_document = None if dry_run else (add_document_fn or _get_add_document())
     upserted = 0
     skipped = 0
     seen_ids: set[str] = set()
@@ -106,6 +110,9 @@ def ingest_migrated_items(items: list[dict], add_document_fn=None) -> tuple[int,
             continue
         seen_ids.add(doc_id)
 
+        if dry_run:
+            continue
+
         try:
             active_add_document(doc_id=doc_id, text=text, metadata=metadata)
             upserted += 1
@@ -114,6 +121,32 @@ def ingest_migrated_items(items: list[dict], add_document_fn=None) -> tuple[int,
             print(f"[Error] Failed to ingest row {index} ({doc_id}): {exc}")
 
     return upserted, skipped
+
+
+def run_ingestion(
+    input_file: str | None = None,
+    dry_run: bool = False,
+    add_document_fn=None,
+) -> dict:
+    input_path = _resolve_input_path(input_file)
+    items = _load_migrated_items(input_path)
+    loaded = len(items)
+    upserted, skipped = ingest_migrated_items(
+        items,
+        add_document_fn=add_document_fn,
+        dry_run=dry_run,
+    )
+
+    return {
+        "status": "success",
+        "operation": "ingest_chat_history",
+        "input_file": str(input_path),
+        "records_loaded": loaded,
+        "records_upserted": upserted,
+        "records_skipped": skipped,
+        "collection": CHROMA_COLLECTION,
+        "dry_run": dry_run,
+    }
 
 
 def main() -> None:
@@ -125,20 +158,23 @@ def main() -> None:
         default=None,
         help="Path to migrated chat history JSON. Defaults to latest migration output.",
     )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Validate migrated records without writing to ChromaDB.",
+    )
     args = parser.parse_args()
 
-    input_path = _resolve_input_path(args.input_file)
-    items = _load_migrated_items(input_path)
-    loaded = len(items)
-    upserted, skipped = ingest_migrated_items(items)
+    result = run_ingestion(input_file=args.input_file, dry_run=args.dry_run)
 
     print("")
     print("Chat history ingestion summary")
-    print(f"Input file: {input_path}")
-    print(f"Target collection: {CHROMA_COLLECTION}")
-    print(f"Records loaded: {loaded}")
-    print(f"Records ingested/upserted: {upserted}")
-    print(f"Records skipped: {skipped}")
+    print(f"Input file: {result['input_file']}")
+    print(f"Target collection: {result['collection']}")
+    print(f"Dry run: {result['dry_run']}")
+    print(f"Records loaded: {result['records_loaded']}")
+    print(f"Records ingested/upserted: {result['records_upserted']}")
+    print(f"Records skipped: {result['records_skipped']}")
 
 
 if __name__ == "__main__":

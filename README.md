@@ -136,6 +136,9 @@ Service connections and API behavior are env-driven:
 - `INGEST_PROTECTION_ENABLED`
 - `INGEST_API_KEY`
 - `INGEST_API_KEY_HEADER`
+- `ADMIN_PROTECTION_ENABLED`
+- `ADMIN_API_KEY`
+- `ADMIN_API_KEY_HEADER`
 
 `mode 1` (`FastAPI on host, Ollama + Chroma in Docker`) `.env` example:
 
@@ -151,6 +154,9 @@ HEALTH_INCLUDE_ERROR_DETAILS=true
 INGEST_PROTECTION_ENABLED=true
 INGEST_API_KEY=dev-ingest-key
 INGEST_API_KEY_HEADER=X-API-Key
+ADMIN_PROTECTION_ENABLED=true
+ADMIN_API_KEY=dev-ingest-key
+ADMIN_API_KEY_HEADER=X-API-Key
 ```
 
 `mode 2` (`FastAPI in Docker, Ollama + Chroma manually managed in Docker Desktop`) `.env` example:
@@ -167,6 +173,9 @@ HEALTH_INCLUDE_ERROR_DETAILS=false
 INGEST_PROTECTION_ENABLED=true
 INGEST_API_KEY=dev-ingest-key
 INGEST_API_KEY_HEADER=X-API-Key
+ADMIN_PROTECTION_ENABLED=true
+ADMIN_API_KEY=dev-ingest-key
+ADMIN_API_KEY_HEADER=X-API-Key
 ```
 
 `future clean mode` (`FastAPI + Ollama + Chroma all managed by compose`) `.env` example:
@@ -183,6 +192,9 @@ HEALTH_INCLUDE_ERROR_DETAILS=false
 INGEST_PROTECTION_ENABLED=true
 INGEST_API_KEY=dev-ingest-key
 INGEST_API_KEY_HEADER=X-API-Key
+ADMIN_PROTECTION_ENABLED=true
+ADMIN_API_KEY=dev-ingest-key
+ADMIN_API_KEY_HEADER=X-API-Key
 ```
 
 Note: current `docker-compose.yml` is intentionally set to temporary integration mode for `api` (`host.docker.internal`) so it can connect to your existing manually managed `ollama` and `chromadb` containers.
@@ -264,6 +276,13 @@ Ingest protection:
 - Requires `INGEST_API_KEY` in request header `X-API-Key` (or custom `INGEST_API_KEY_HEADER`)
 - To disable protection for local-only testing, set `INGEST_PROTECTION_ENABLED=false`
 
+Admin protection:
+
+- Enabled by default (`ADMIN_PROTECTION_ENABLED=true`)
+- Requires `ADMIN_API_KEY` in request header `X-API-Key` (or custom `ADMIN_API_KEY_HEADER`)
+- If `ADMIN_API_KEY` is not set, it falls back to `INGEST_API_KEY`
+- The admin endpoints trigger Week 4 maintenance operations and should not be exposed without this header
+
 ### Endpoint Summary
 
 - `GET /health`
@@ -278,6 +297,15 @@ Ingest protection:
   - Returns: `status`, retrieved chunks + metadata + timing
 - `POST /api/v1/rag/ingest`
   - Triggers ingestion from configured docs directory (`DOCS_DIR`) or optional `docs_dir` override
+  - Protected by API key header by default
+- `POST /api/v1/admin/migrate-chat-history`
+  - Migrates `data/chat_logs.jsonl` to timestamped Week 4 migration JSON
+  - Body: optional `output_dir`, optional `write_latest`
+  - Protected by API key header by default
+- `POST /api/v1/admin/ingest-chat-history`
+  - Ingests migrated chat history into ChromaDB using the existing RAG upsert path
+  - Body: optional `input_file`, optional `dry_run`
+  - Defaults to `scripts/results/migrations/chat_history_migrated_latest.json`
   - Protected by API key header by default
 
 ### cURL Examples
@@ -312,6 +340,63 @@ curl -X POST "http://127.0.0.1:8001/api/v1/rag/ingest" \
   -H "X-API-Key: dev-ingest-key" \
   -d "{}"
 ```
+
+Admin migrate chat history:
+
+```bash
+curl -X POST "http://127.0.0.1:8001/api/v1/admin/migrate-chat-history" \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: dev-ingest-key" \
+  -d "{\"write_latest\":true}"
+```
+
+Example response:
+
+```json
+{
+  "status": "success",
+  "operation": "migrate_chat_history",
+  "items_migrated": 10,
+  "output_file": "scripts/results/migrations/chat_history_migrated_20260424_181234.json",
+  "latest_file": "scripts/results/migrations/chat_history_migrated_latest.json"
+}
+```
+
+Admin ingest migrated chat history:
+
+```bash
+curl -X POST "http://127.0.0.1:8001/api/v1/admin/ingest-chat-history" \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: dev-ingest-key" \
+  -d "{}"
+```
+
+Optional dry run:
+
+```bash
+curl -X POST "http://127.0.0.1:8001/api/v1/admin/ingest-chat-history" \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: dev-ingest-key" \
+  -d "{\"dry_run\":true}"
+```
+
+Example response:
+
+```json
+{
+  "status": "success",
+  "operation": "ingest_chat_history",
+  "records_loaded": 10,
+  "records_upserted": 10,
+  "records_skipped": 0,
+  "collection": "documents"
+}
+```
+
+Swagger/Postman testing:
+
+- Swagger UI: open `http://127.0.0.1:8001/docs`, expand the `admin` tag, choose an endpoint, click "Try it out", add the JSON body, and add the `X-API-Key` header.
+- Postman: use `POST`, set `Content-Type: application/json`, add header `X-API-Key: dev-ingest-key`, and send `{}` or the optional fields shown above.
 
 ## Notes
 

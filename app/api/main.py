@@ -6,6 +6,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
 from .config import API_DEV_MODE
+from .routes.admin import router as admin_router
 from .routes.feedback import router as feedback_router
 from .routes.health import router as health_router
 from .routes.rag import router as rag_router
@@ -27,6 +28,7 @@ app = FastAPI(
 app.include_router(health_router)
 app.include_router(rag_router)
 app.include_router(feedback_router)
+app.include_router(admin_router)
 
 
 @app.middleware("http")

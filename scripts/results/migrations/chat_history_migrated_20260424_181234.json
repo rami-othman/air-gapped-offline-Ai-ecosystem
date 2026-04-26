@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-04-24T16:02:08+00:00",
+  "generated_at": "2026-04-24T15:12:34+00:00",
   "input_log_path": "C:\\Users\\omarch\\Desktop\\Rami\\projects\\air-gapped-ai\\air-gapped-offline-Ai-ecosystem\\data\\chat_logs.jsonl",
   "stats": {
-    "total_loaded": 88,
-    "migrated": 88,
+    "total_loaded": 81,
+    "migrated": 81,
     "skipped_missing_content": 0,
     "skipped_malformed_lines": 0
   },
@@ -1336,8 +1336,8 @@
         "source": "chat_history",
         "source_document": "chat_history",
         "interaction_id": "chat_95bf55ffb5a840759c06301455a173fb",
-        "helpful": true,
-        "reuse_weight": 1.0,
+        "helpful": null,
+        "reuse_weight": 0.5,
         "timestamp": "2026-04-24T13:14:47",
         "retrieved_sources": [
           "Cyber-Security-Policy-Template-2021.docx.pdf",
@@ -1345,123 +1345,6 @@
           "Sample Employee Handbook - National Council of Nonprofits.pdf",
           "GDPR_FINAL_EPSU.pdf",
           "Incident-Response-Plan-Basics_508c.pdf"
-        ]
-      }
-    },
-    {
-      "doc_id": "chat_history_chat_7c689a56f0844e3bbbce788ec48230ea",
-      "text": "Question:\nWhat is the purpose of an Incident Response Plan according to the CISA document?\n\nAnswer:\nAccording to the provided documents, the purpose of an Incident Response Plan, as described by the CISA, is:\n\n**To help manage and reduce risks.** The NIST CSF (Cybersecurity Framework), which CISA utilizes, \"prompts its users to consider their cybersecurity posture in context and then adapt the CSF to their specific needs.\" It's not a checklist but a framework for organizations to tailor their approach to cybersecurity risk management.\n\n\n\nIt's important to note that the documents don't provide a direct quote from a CISA document defining the purpose. They reference the NIST CSF, which CISA uses, and explain its function in cybersecurity.",
-      "metadata": {
-        "source": "chat_history",
-        "source_document": "chat_history",
-        "interaction_id": "chat_7c689a56f0844e3bbbce788ec48230ea",
-        "helpful": null,
-        "reuse_weight": 0.5,
-        "timestamp": "2026-04-24T15:17:18",
-        "retrieved_sources": [
-          "chat_history",
-          "Cyber-Security-Policy-Template-2021.docx.pdf",
-          "NIST.CSWP.29.pdf",
-          "Sample Employee Handbook - National Council of Nonprofits.pdf",
-          "GDPR_FINAL_EPSU.pdf"
-        ]
-      }
-    },
-    {
-      "doc_id": "chat_history_chat_9382b56723b047f3b83dd14f005c2223",
-      "text": "Question:\nWhat is the purpose of an Incident Response Plan according to the CISA document?\n\nAnswer:\nAccording to the provided documents, the purpose of an Incident Response Plan, as described by the CISA, is:\n\n**To help organizations manage and reduce risks.** The NIST Cybersecurity Framework (CSF), which CISA utilizes, \"prompts its users to consider their cybersecurity posture in context and then adapt the CSF to their specific needs.\" It's not a checklist but a framework to be tailored. Organizational Profiles, a part of this framework, help prioritize actions and communicate those actions to stakeholders.\n\n\n\nEssentially, an Incident Response Plan, guided by CISA's framework, is about understanding an organization's cybersecurity posture, prioritizing actions, and adapting the plan to specific needs.",
-      "metadata": {
-        "source": "chat_history",
-        "source_document": "chat_history",
-        "interaction_id": "chat_9382b56723b047f3b83dd14f005c2223",
-        "helpful": true,
-        "reuse_weight": 1.0,
-        "timestamp": "2026-04-24T15:17:39",
-        "retrieved_sources": [
-          "chat_history",
-          "Cyber-Security-Policy-Template-2021.docx.pdf",
-          "NIST.CSWP.29.pdf",
-          "Sample Employee Handbook - National Council of Nonprofits.pdf",
-          "GDPR_FINAL_EPSU.pdf"
-        ]
-      }
-    },
-    {
-      "doc_id": "chat_history_chat_67cfffe877754b0993654372e2d489c2",
-      "text": "Question:\nWhat is the purpose of an Incident Response Plan according to the CISA document?\n\nAnswer:\nThe provided documents do not contain information about the purpose of an Incident Response Plan according to the CISA document.",
-      "metadata": {
-        "source": "chat_history",
-        "source_document": "chat_history",
-        "interaction_id": "chat_67cfffe877754b0993654372e2d489c2",
-        "helpful": null,
-        "reuse_weight": 0.5,
-        "timestamp": "2026-04-24T15:17:47",
-        "retrieved_sources": [
-          "chat_history"
-        ]
-      }
-    },
-    {
-      "doc_id": "chat_history_chat_7fec288849ef41529cbe1240f9651ba4",
-      "text": "Question:\nWhat is the purpose of an Incident Response Plan according to the CISA document?\n\nAnswer:\nThe provided documents do not contain information about the purpose of an Incident Response Plan according to the CISA document.",
-      "metadata": {
-        "source": "chat_history",
-        "source_document": "chat_history",
-        "interaction_id": "chat_7fec288849ef41529cbe1240f9651ba4",
-        "helpful": null,
-        "reuse_weight": 0.5,
-        "timestamp": "2026-04-24T15:53:35",
-        "retrieved_sources": [
-          "chat_history"
-        ]
-      }
-    },
-    {
-      "doc_id": "chat_history_chat_e3e70766c70744a299775427496563be",
-      "text": "Question:\nWhat is the purpose of an Incident Response Plan according to the CISA document?\n\nAnswer:\nThe provided documents do not contain information about the purpose of an Incident Response Plan according to the CISA document.",
-      "metadata": {
-        "source": "chat_history",
-        "source_document": "chat_history",
-        "interaction_id": "chat_e3e70766c70744a299775427496563be",
-        "helpful": null,
-        "reuse_weight": 0.5,
-        "timestamp": "2026-04-24T15:53:41",
-        "retrieved_sources": [
-          "chat_history"
-        ]
-      }
-    },
-    {
-      "doc_id": "chat_history_chat_c3b6820b2a304b508d021a7ae3986bce",
-      "text": "Question:\nWhat is the purpose of an Incident Response Plan according to the CISA document?\n\nAnswer:\nAccording to the provided documents, the purpose of an Incident Response Plan, as described by the CISA, is:\n\n**To help organizations manage and reduce risks by:**\n\n*   **Specifying the Core outcomes that an organization is currently achieving (or attempting to achieve)** and characterizing how or to what extent each outcome is being achieved.\n*   **Specifying the desired outcomes that an organization has selected and prioritized for achieving its cybersecurity risk management goals.**\n\nEssentially, it's a framework for continuous improvement of cybersecurity posture, tailored to an organization's specific needs.",
-      "metadata": {
-        "source": "chat_history",
-        "source_document": "chat_history",
-        "interaction_id": "chat_c3b6820b2a304b508d021a7ae3986bce",
-        "helpful": true,
-        "reuse_weight": 1.0,
-        "timestamp": "2026-04-24T15:53:55",
-        "retrieved_sources": [
-          "chat_history",
-          "Cyber-Security-Policy-Template-2021.docx.pdf",
-          "NIST.CSWP.29.pdf",
-          "Sample Employee Handbook - National Council of Nonprofits.pdf",
-          "GDPR_FINAL_EPSU.pdf"
-        ]
-      }
-    },
-    {
-      "doc_id": "chat_history_chat_c373a22186ba4783a403f8c31b7bc354",
-      "text": "Question:\nWhat is the purpose of an Incident Response Plan according to the CISA document?\n\nAnswer:\nThe provided documents do not contain information about the purpose of an Incident Response Plan according to the CISA document.",
-      "metadata": {
-        "source": "chat_history",
-        "source_document": "chat_history",
-        "interaction_id": "chat_c373a22186ba4783a403f8c31b7bc354",
-        "helpful": null,
-        "reuse_weight": 0.5,
-        "timestamp": "2026-04-24T15:54:45",
-        "retrieved_sources": [
-          "chat_history"
         ]
       }
     }

@@ -277,7 +277,7 @@ When supported by the context, include:
 - definitions if the question asks for them
 
 [OUTPUT RULES]
-- Output in English.
+
 - Start directly with the answer.
 - Do not add introductions like “Sure” or “Here is the answer.”
 - Do not add conclusions unless needed.
@@ -291,7 +291,7 @@ When supported by the context, include:
 
 [TASK]
 Answer the following user request using the rules above.
-After the answer, list only the source document names that directly support the answer.
+
 
 Context:
 {context}
