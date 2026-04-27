@@ -18,3 +18,9 @@ Thumbs.db
 
 # Large models
 *.gguf
+
+# Runtime/generated data
+data/exports/
+scripts/results/finetune/
+scripts/results/migrations/
+scripts/results/validation/

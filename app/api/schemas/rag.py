@@ -28,6 +28,7 @@ class RagQueryResponse(BaseModel):
     generation_time_sec: float
     total_time_sec: float
     session_id: str
+    interaction_id: str | None = None
 
 
 class RagSearchRequest(BaseModel):

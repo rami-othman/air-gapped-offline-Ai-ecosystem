@@ -277,7 +277,10 @@ When supported by the context, include:
 - definitions if the question asks for them
 
 [OUTPUT RULES]
-
+- Answer in the same language as the user question.
+- If the user question is Arabic, answer in Arabic.
+- If the user question is English, answer in English.
+- If the user mixes Arabic and English, use the dominant language of the question.
 - Start directly with the answer.
 - Do not add introductions like “Sure” or “Here is the answer.”
 - Do not add conclusions unless needed.
@@ -419,11 +422,11 @@ def rag_query(question, top_k=None):
     return result["answer"]
 
 
-def save_interaction(question: str, answer: str, sources: list[str]) -> None:
+def save_interaction(question: str, answer: str, sources: list[str]) -> dict:
     """
     Append a successful CLI interaction to local JSONL chat history.
     """
-    persist_chat_interaction(question=question, answer=answer, sources=sources)
+    return persist_chat_interaction(question=question, answer=answer, sources=sources)
 
 
 def main():

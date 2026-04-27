@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-04-24T16:02:08+00:00",
-  "input_log_path": "C:\\Users\\omarch\\Desktop\\Rami\\projects\\air-gapped-ai\\air-gapped-offline-Ai-ecosystem\\data\\chat_logs.jsonl",
+  "generated_at": "2026-04-27T12:33:30+00:00",
+  "input_log_path": "/app/data/chat_logs.jsonl",
   "stats": {
-    "total_loaded": 88,
-    "migrated": 88,
+    "total_loaded": 118,
+    "migrated": 118,
     "skipped_missing_content": 0,
     "skipped_malformed_lines": 0
   },
@@ -1460,6 +1460,473 @@
         "helpful": null,
         "reuse_weight": 0.5,
         "timestamp": "2026-04-24T15:54:45",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_e73b13ba160b42d69984714cfceb75c6",
+      "text": "Question:\nWhat is the purpose of an Incident Response Plan according to the CISA document?\n\nAnswer:\nThe provided documents do not contain information about the purpose of an Incident Response Plan according to the CISA document.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_e73b13ba160b42d69984714cfceb75c6",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-24T16:02:43",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_fcccad9162f44918b86b5ccd740107ef",
+      "text": "Question:\nWhat is the purpose of an Incident Response Plan according to the CISA document?\n\nAnswer:\nThe provided documents do not contain information about the purpose of an Incident Response Plan according to the CISA document.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_fcccad9162f44918b86b5ccd740107ef",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-24T16:02:47",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_0b6542b1a26841309f6187cd97e892c0",
+      "text": "Question:\nWhat is the purpose of an Incident Response Plan according to the CISA document?\n\nAnswer:\nAccording to the CISA document \"Incident Response Plan Basics,\" the purpose of an Incident Response Plan (IRP) is to **provide a structured approach to effectively detect, contain, eradicate, and recover from cybersecurity incidents.**\n\nHere’s a breakdown of what that means:\n\n*   **Structured Approach:** It’s a pre-defined set of procedures to follow when an incident occurs, rather than reacting haphazardly.\n*   **Detect, Contain, Eradicate, and Recover:** These are the core phases the plan guides organizations through.\n*   **Effectively:** The plan aims to minimize damage, disruption, and recovery time.\n\n\n\nEssentially, it’s about being prepared so you can respond quickly and efficiently when something goes wrong.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_0b6542b1a26841309f6187cd97e892c0",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-24T16:03:12",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_e57b484185524a2ea2588ee8c8d37402",
+      "text": "Question:\nWhat is the purpose of an Incident Response Plan according to the CISA document?\n\nAnswer:\nThe provided context does not contain information about the purpose of an Incident Response Plan according to the CISA document.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_e57b484185524a2ea2588ee8c8d37402",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-24T16:03:23",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_557356962bfb4c36b791983c032b337f",
+      "text": "Question:\nWhat is the purpose of an Incident Response Plan according to the CISA document?\n\nAnswer:\nThe provided context does not contain information about an Incident Response Plan or a CISA document. Therefore, I cannot answer your question.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_557356962bfb4c36b791983c032b337f",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-24T16:03:33",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_7dfebb841b5c4b3395237b1013ada570",
+      "text": "Question:\nWhat is the purpose of an Incident Response Plan according to the CISA document?\n\nAnswer:\nThe provided context does not contain information about an Incident Response Plan or a CISA document. Therefore, I cannot answer your question.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_7dfebb841b5c4b3395237b1013ada570",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-24T16:03:41",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_ff35d8ce67b349509e8e1786343e01e8",
+      "text": "Question:\nWhat is the purpose of an Incident Response Plan according to the CISA document?\n\nAnswer:\nAccording to the CISA document \"Incident Response Plan Basics,\" the purpose of an Incident Response Plan is to **provide a structured approach to effectively identify, contain, eradicate, and recover from cybersecurity incidents.**\n\nEssentially, it’s a roadmap for how an organization should react when a security incident occurs, minimizing damage and ensuring a swift return to normal operations.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_ff35d8ce67b349509e8e1786343e01e8",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-24T16:04:00",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_21fa433443bf485c8bf51dad59e51a3a",
+      "text": "Question:\ngdbr?\n\nAnswer:\nEPSU is the European Federation of Public Service Unions. If you have questions or are looking for guidance in dealing with the GDPR, you can write to gdpr@epsu.org.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_21fa433443bf485c8bf51dad59e51a3a",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-24T16:04:18",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_599d5d6454ba430988d8f2cea708cfbe",
+      "text": "Question:\ngdbr?\n\nAnswer:\nEPSU is the European Federation of Public Service Unions. If you have questions or are looking for guidance in dealing with the GDPR, you can write to gdpr@epsu.org.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_599d5d6454ba430988d8f2cea708cfbe",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-24T16:04:31",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_5606c68f048e434ab71ed96bb96b5623",
+      "text": "Question:\nما هي التزامات الإبلاغ عن خرق البيانات حسب GDPR?\n\nAnswer:\nThe provided context does not contain information about data breach reporting obligations under GDPR.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_5606c68f048e434ab71ed96bb96b5623",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-24T17:15:45",
+        "retrieved_sources": [
+          "Sample Employee Handbook - National Council of Nonprofits.pdf",
+          "Cyber-Security-Policy-Template-2021.docx.pdf",
+          "NIST.CSWP.29.pdf"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_2fad3cd4df134dd4b190de53bbb9ff1a",
+      "text": "Question:\nما هي التزامات الإبلاغ عن خرق البيانات حسب gdbr?\n\nAnswer:\nI am sorry, but the provided context does not contain information about data breach reporting obligations according to gdbr. It mentions GDPR, which stands for the General Data Protection Regulation.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_2fad3cd4df134dd4b190de53bbb9ff1a",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-24T17:21:18",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_88ebe680773847bb91addcbfa5ae43bf",
+      "text": "Question:\nstring\n\nAnswer:\nThis question cannot be answered as the provided context is incomplete.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_88ebe680773847bb91addcbfa5ae43bf",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-24T18:35:23",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_42336b28b593422ca027d1f4b334dbda",
+      "text": "Question:\nstring\n\nAnswer:\nThis question cannot be answered as the provided context is incomplete.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_42336b28b593422ca027d1f4b334dbda",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-24T18:35:29",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_88483adb4f944d1e8c1f7c38b4fb3db2",
+      "text": "Question:\nWhat is the purpose of an Incident Response Plan according to the CISA document?\n\nAnswer:\nThe provided documents do not contain information about the purpose of an Incident Response Plan according to the CISA document.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_88483adb4f944d1e8c1f7c38b4fb3db2",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-24T18:49:15",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_8465344972a84c53963db516fa40258a",
+      "text": "Question:\nWhat is the purpose of an Incident Response Plan according to the CISA document?\n\nAnswer:\nOkay, let's break down the responses and find the best answer to your question. Based on the provided text snippets, here's a summary of what they say about Incident Response Plans and related topics, followed by a synthesized answer:\n\n**What the Text Snippets Say (Relevant Sections):**\n\n*   **GDPR_FINAL_EPSU.pdf:** Mentions \"processing is necessary for the performance of a task in the public interest or in the exercise of official authority vested in the controller.\" This hints at a need for structured responses to data-related issues.\n*   **Sample Employee Handbook - National Council of Nonprofits.pdf:** Discusses acceptable use policies for the internet, including reporting suspicious emails and potential hacking attempts. This suggests a need for a plan to address security incidents.\n*   **Cyber-Security-Policy-Template-2021.docx.pdf:**  Emphasizes data security and vigilance against hacking attempts, requiring reporting of suspicious activity.\n*   **NIST.CSWP.29.pdf:** Talks about Organizational Profiles and continuous improvement of cybersecurity risk management. This implies a structured approach to handling security issues.\n\n**Synthesized Answer:**\n\nWhile the provided text doesn't explicitly define the \"purpose of an Incident Response Plan\" *as a formal document*, it strongly suggests that such a plan is necessary due to the following reasons:\n\n*   **Data Security & Protection:** Organizations have a responsibility to protect data and systems from security breaches.\n*   **Reporting & Response:** There's a need to report suspicious activity (like phishing attempts or hacking attempts) and have a process to investigate and resolve those issues.\n*   **Continuous Improvement:**  A structured approach to cybersecurity risk management, including responding to incidents, is essential for ongoing improvement and maintaining trust.\n*   **Legal & Ethical Obligations:**  Compliance with regulations like GDPR requires a framework for handling data-related incidents.\n\n\n\n**In essence, an Incident Response Plan, as implied by these documents, serves to provide a structured and proactive approach to identifying, containing, and recovering from security incidents, ensuring data protection, and maintaining operational integrity.**",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_8465344972a84c53963db516fa40258a",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-24T18:49:40",
+        "retrieved_sources": [
+          "chat_history",
+          "Cyber-Security-Policy-Template-2021.docx.pdf",
+          "NIST.CSWP.29.pdf",
+          "Sample Employee Handbook - National Council of Nonprofits.pdf",
+          "GDPR_FINAL_EPSU.pdf"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_3639e2bc946c4b1ea8655989615510fe",
+      "text": "Question:\nstring\n\nAnswer:\nThis question cannot be answered as the provided context is incomplete.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_3639e2bc946c4b1ea8655989615510fe",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-26T17:44:05",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_3bf98ad69b4c42dcbaf9f631e6d09bce",
+      "text": "Question:\nWhat are breach notification obligations under GDPR\n\nAnswer:\nWhen a data breach happens, the employee, data subject, data processors, and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_3bf98ad69b4c42dcbaf9f631e6d09bce",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-26T18:14:20",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_a7e5ec8cda3640a8b3c2ec388975f97d",
+      "text": "Question:\nWhat are breach notification obligations under GDPR\n\nAnswer:\nWhen a data breach happens, the employee, data subject, data processors, and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_a7e5ec8cda3640a8b3c2ec388975f97d",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-26T18:20:49",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_3f5b1120ceeb48f1be683f708a416881",
+      "text": "Question:\nمرحباً\n\nAnswer:\nI am sorry, but I cannot fulfill this request. The provided context does not contain information about \"مرحباً.\" It appears to be an Arabic greeting (\"Hello\").",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_3f5b1120ceeb48f1be683f708a416881",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-26T18:40:01",
+        "retrieved_sources": [
+          "chat_history",
+          "Sample Employee Handbook - National Council of Nonprofits.pdf"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_817b2fd0988e4867aa47dee55f3814f0",
+      "text": "Question:\nHello\n\nAnswer:\nI am sorry, but the provided context does not contain information about GDBR. It mentions GDPR, stating that it is a useful introduction to the issues raised by it, but provides no further details.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_817b2fd0988e4867aa47dee55f3814f0",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-26T18:40:21",
+        "retrieved_sources": [
+          "chat_history",
+          "Sample Employee Handbook - National Council of Nonprofits.pdf"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_6aa332fee91440d0be6559d3e8a20e9d",
+      "text": "Question:\nHow can help me\n\nAnswer:\nQuick Start Guides (QSGs) can help you implement the Cybersecurity Framework (CSF) because they distill specific portions of the CSF into actionable “first steps” that an organization can consider on the path to improving their cybersecurity posture and management of associated risks. The guides are revised in their own time frames, and new guides are added as needed.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_6aa332fee91440d0be6559d3e8a20e9d",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-26T18:40:51",
+        "retrieved_sources": [
+          "NIST.CSWP.29.pdf",
+          "GDPR_FINAL_EPSU.pdf",
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_7d7e6bd1177945489e60ea9aa3fbd67d",
+      "text": "Question:\nDo you speak arabic\n\nAnswer:\nI am an AI assistant answering questions using only the provided context. The provided context does not contain information about Arabic.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_7d7e6bd1177945489e60ea9aa3fbd67d",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-26T18:41:17",
+        "retrieved_sources": [
+          "Sample Employee Handbook - National Council of Nonprofits.pdf",
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_3b872d77f016408d9f48bdf6ab9bdbe3",
+      "text": "Question:\nstring\n\nAnswer:\nThis question cannot be answered as the provided context is incomplete.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_3b872d77f016408d9f48bdf6ab9bdbe3",
+        "helpful": false,
+        "reuse_weight": 0.2,
+        "timestamp": "2026-04-27T10:26:39",
+        "retrieved_sources": [
+          "chat_history",
+          "Sample Employee Handbook - National Council of Nonprofits.pdf",
+          "GDPR_FINAL_EPSU.pdf"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_f677a79db99141368051b950992c8d8f",
+      "text": "Question:\nhi\n\nAnswer:\nI am an AI assistant answering questions using only the provided context.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_f677a79db99141368051b950992c8d8f",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-27T11:43:58",
+        "retrieved_sources": [
+          "chat_history",
+          "GDPR_FINAL_EPSU.pdf"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_c95cf63ecee144809c9869c859675049",
+      "text": "Question:\nما هي سياسة استخدام الإنترنت حسب دليل الموظف؟\n\nAnswer:\nThe provided context does not contain information about internet usage policy as stated in the employee handbook.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_c95cf63ecee144809c9869c859675049",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-27T12:07:06",
+        "retrieved_sources": [
+          "chat_history",
+          "NIST.CSWP.29.pdf"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_1c287f1e5a2c41f68fdb87f31a473a7c",
+      "text": "Question:\nwhat is the Internet Acceptable Use Policy?\n\nAnswer:\nThe provided context does not contain information about the Internet Acceptable Use Policy. Therefore, I cannot answer your question.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_1c287f1e5a2c41f68fdb87f31a473a7c",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-27T12:13:50",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_86defc14260842fdb076bee4a4f77da7",
+      "text": "Question:\nwhat is the Internet Acceptable Use Policy?\n\nAnswer:\nThe provided documents do not contain information about the Internet Acceptable Use Policy. Therefore, I cannot answer your question.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_86defc14260842fdb076bee4a4f77da7",
+        "helpful": false,
+        "reuse_weight": 0.2,
+        "timestamp": "2026-04-27T12:19:19",
+        "retrieved_sources": [
+          "chat_history"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_da279d8ee57b4715b1ec69e5db340bca",
+      "text": "Question:\nما هي سياسة استخدام الإنترنت حسب دليل الموظف؟\n\nAnswer:\nThe provided context does not contain information about the Internet usage policy according to the employee handbook.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_da279d8ee57b4715b1ec69e5db340bca",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-27T12:26:19",
+        "retrieved_sources": [
+          "chat_history",
+          "NIST.CSWP.29.pdf"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_f865e907322a4b72a3aa77099ff2442a",
+      "text": "Question:\nما هي سياسة استخدام الإنترنت حسب دليل الموظف؟\n\nAnswer:\nلا يتضمن السياق المقدم معلومات حول سياسة استخدام الإنترنت وفقًا لدليل الموظف.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_f865e907322a4b72a3aa77099ff2442a",
+        "helpful": null,
+        "reuse_weight": 0.5,
+        "timestamp": "2026-04-27T12:27:48",
+        "retrieved_sources": [
+          "chat_history",
+          "NIST.CSWP.29.pdf"
+        ]
+      }
+    },
+    {
+      "doc_id": "chat_history_chat_16d39b9f8b1543c2810219070ba2a5f3",
+      "text": "Question:\nWhat are breach notification obligations under GDBR?\n\nAnswer:\nعندما يحدث خرق للبيانات، يجب على الموظف، حامل البيانات، معالجو البيانات، وضابط حماية البيانات إبلاغ المسؤول (Controller) على الفور (في غضون 72 ساعة) بمجرد اكتشاف الخرق. يجب على المسؤول بعد ذلك تقييم خطورة الخرق وقد يحتاج إلى إبلاغ السلطة الإشرافية. يجب أن يتضمن الإشعار البيانات التي تم الوصول إليها، وعدد الأشخاص المعنيين بالخرق، واسم ضابط حماية البيانات، والنتائج المحتملة، وما سيتم فعله للتخفيف من الخرق.",
+      "metadata": {
+        "source": "chat_history",
+        "source_document": "chat_history",
+        "interaction_id": "chat_16d39b9f8b1543c2810219070ba2a5f3",
+        "helpful": false,
+        "reuse_weight": 0.2,
+        "timestamp": "2026-04-27T12:31:41",
         "retrieved_sources": [
           "chat_history"
         ]

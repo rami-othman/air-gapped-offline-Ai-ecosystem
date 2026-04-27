@@ -78,13 +78,16 @@ def run_query(question: str, top_k: int | None = None, session_id: str | None = 
     generation_time_sec = float(result.get("generation_time_sec", 0.0))
     total_time_sec = float(result.get("total_time_sec", retrieval_time_sec + generation_time_sec))
     status = "success"
+    interaction_id = None
 
     if result.get("status") == "success":
-        log_chat_interaction(
+        interaction = log_chat_interaction(
             question=normalized_question,
             answer=answer,
             sources=sources,
         )
+        if interaction:
+            interaction_id = interaction.get("id")
 
     rag_status = result.get("status", "unknown")
     logger.info(
@@ -105,6 +108,7 @@ def run_query(question: str, top_k: int | None = None, session_id: str | None = 
         "generation_time_sec": generation_time_sec,
         "total_time_sec": total_time_sec,
         "session_id": active_session_id,
+        "interaction_id": interaction_id,
     }
 
 
