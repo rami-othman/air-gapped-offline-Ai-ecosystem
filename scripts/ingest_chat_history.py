@@ -6,10 +6,17 @@ from typing import Any
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 APP_DIR = PROJECT_ROOT / "app"
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 if str(APP_DIR) not in sys.path:
     sys.path.insert(0, str(APP_DIR))
 
-from config import CHROMA_COLLECTION
+try:
+    from app.cache_store import response_cache, retrieval_cache
+    from app.config import CHROMA_COLLECTION
+except ImportError:  # pragma: no cover - script execution fallback
+    from cache_store import response_cache, retrieval_cache
+    from config import CHROMA_COLLECTION
 
 DEFAULT_MIGRATED_PATH = (
     PROJECT_ROOT / "scripts" / "results" / "migrations" / "chat_history_migrated_latest.json"
@@ -136,6 +143,9 @@ def run_ingestion(
         add_document_fn=add_document_fn,
         dry_run=dry_run,
     )
+    if not dry_run and upserted:
+        retrieval_cache.clear()
+        response_cache.clear()
 
     return {
         "status": "success",

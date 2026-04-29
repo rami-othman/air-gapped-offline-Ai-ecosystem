@@ -5,6 +5,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
+from ..config import WARMUP_ON_STARTUP
 from .config import API_DEV_MODE
 from .routes.admin import router as admin_router
 from .routes.feedback import router as feedback_router
@@ -31,6 +32,22 @@ app.include_router(feedback_router)
 app.include_router(admin_router)
 
 
+@app.on_event("startup")
+def warmup_ollama_on_startup() -> None:
+    if not WARMUP_ON_STARTUP:
+        logger.info("Ollama startup warm-up skipped; WARMUP_ON_STARTUP=false.")
+        return
+
+    try:
+        from ..ollama_warmup import warmup_all_models
+
+        logger.info("Starting Ollama startup warm-up.")
+        results = warmup_all_models()
+        logger.info("Ollama startup warm-up completed. models_warmed=%d", len(results))
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("Ollama startup warm-up failed; API startup will continue. error=%s", exc)
+
+
 @app.middleware("http")
 async def request_logging_middleware(request: Request, call_next):
     start = time.perf_counter()
@@ -53,12 +70,17 @@ async def request_logging_middleware(request: Request, call_next):
 @app.exception_handler(RAGServiceError)
 async def rag_service_error_handler(_: Request, exc: RAGServiceError) -> JSONResponse:
     logger.warning("RAG service error. code=%s status_code=%d", exc.error_code, exc.status_code)
+    content = {
+        "status": "error",
+        "error": exc.error_code,
+        "message": exc.message,
+    }
+    if exc.details is not None:
+        content["details"] = exc.details
+
     return JSONResponse(
         status_code=exc.status_code,
-        content={
-            "error": exc.error_code,
-            "message": exc.message,
-        },
+        content=content,
     )
 
 

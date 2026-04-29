@@ -1,3 +1,5 @@
+from typing import Any
+
 from pydantic import BaseModel, StrictBool
 
 
@@ -26,3 +28,40 @@ class ChatHistoryIngestResponse(BaseModel):
     records_upserted: int
     records_skipped: int
     collection: str
+
+
+class JobCreateResponse(BaseModel):
+    status: str
+    job_id: str
+    job_status: str
+    message: str
+
+
+class JobSummary(BaseModel):
+    job_id: str
+    name: str
+    job_status: str
+    created_at: str
+    started_at: str | None = None
+    finished_at: str | None = None
+    duration_sec: float | None = None
+    result: Any | None = None
+    error: str | None = None
+    progress_message: str | None = None
+    metadata: dict[str, Any] | None = None
+
+
+class JobStatusResponse(BaseModel):
+    status: str
+    job: JobSummary
+
+
+class JobListResponse(BaseModel):
+    status: str
+    count: int
+    jobs: list[JobSummary]
+
+
+class JobStatsResponse(BaseModel):
+    status: str
+    stats: dict[str, Any]

@@ -1,0 +1,5 @@
+timestamp,concurrency_level,request_index,question,status_code,success,error,message,client_elapsed_time_sec,api_total_time_sec,retrieval_time_sec,generation_time_sec,queue_wait_time_sec,active_llm_requests,waiting_rag_requests,cache_hit,cache_type,model_name,top_k,prompt_version,index_version,answer_length,sources_count,session_id
+2026-04-29T16:22:48,1,1,What are breach notification obligations under GDPR?,200,True,,,162.5314,161.9753,29.1042,132.8711,0.0,1,0,False,,gemma3:12b,5,v1,dev,542,1,load-test-20260429_162248-c1-r1
+2026-04-29T16:25:30,1,2,What is the incident response process?,200,True,,,91.8825,91.6997,10.4004,81.2994,0.0001,1,0,False,,gemma3:12b,5,v1,dev,425,2,load-test-20260429_162248-c1-r2
+2026-04-29T16:27:02,2,1,What are breach notification obligations under GDPR?,200,True,,,0.0946,0.0003,0.0,0.0,0.0,1,0,True,response,gemma3:12b,5,v1,dev,542,1,load-test-20260429_162248-c2-r1
+2026-04-29T16:27:02,2,2,What is the incident response process?,200,True,,,0.0933,0.0196,0.0,0.0,0.0001,1,0,True,response,gemma3:12b,5,v1,dev,425,2,load-test-20260429_162248-c2-r2

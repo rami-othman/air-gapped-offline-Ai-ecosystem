@@ -1,11 +1,13 @@
 from pathlib import Path
 
 try:
+    from .cache_store import response_cache, retrieval_cache
     from .chunker import chunk_text
     from .config import CHUNK_OVERLAP, CHUNK_SIZE, DOCS_DIR
     from .document_loader import load_pdf
     from .full_rag import add_document, delete_document_chunks
 except ImportError:  # pragma: no cover - script execution fallback
+    from cache_store import response_cache, retrieval_cache
     from chunker import chunk_text
     from config import CHUNK_OVERLAP, CHUNK_SIZE, DOCS_DIR
     from document_loader import load_pdf
@@ -66,6 +68,9 @@ def ingest_directory(dir_path=DOCS_DIR):
         chunk_count = ingest_pdf(pdf_path)
         total_chunks += chunk_count
         print(f"Ingested {pdf_path.name}: {chunk_count} chunks")
+
+    retrieval_cache.clear()
+    response_cache.clear()
 
     return len(pdf_paths), total_chunks
 

@@ -140,6 +140,259 @@ Service connections and API behavior are env-driven:
 - `ADMIN_API_KEY`
 - `ADMIN_API_KEY_HEADER`
 
+### Performance Architecture
+
+The API uses a process-local limiter for `/api/v1/rag/query`. Retrieval caching, response caching, Ollama warm-up, and in-process background jobs are available; vLLM production migration is not implemented.
+
+User RAG request flow:
+
+```text
+User Request
+-> FastAPI
+-> Concurrency limiter
+-> Response cache check
+-> Retrieval cache / ChromaDB
+-> Ollama generation
+-> Chat logging
+-> Response metrics
+```
+
+Admin maintenance flow:
+
+```text
+Admin Request
+-> FastAPI
+-> Background job queue
+-> Heavy operation
+-> Job status endpoint
+```
+
+Related final docs:
+
+- [Performance report template](docs/performance_report_template.md)
+- [AI performance tasks summary](docs/ai_performance_tasks_summary.md)
+
+#### Configuration Reference
+
+| Variable | Default | Purpose | When to change |
+| --- | --- | --- | --- |
+| `MAX_CONCURRENT_LLM_REQUESTS` | `2` | Caps simultaneous API-level RAG generations. | Increase on stronger hardware; reduce if Ollama becomes unstable. |
+| `MAX_WAITING_RAG_REQUESTS` | `20` | Bounds the number of queued RAG requests. | Tune for expected user burst size. |
+| `MAX_QUEUE_WAIT_SECONDS` | `45` | Max time a request waits for a generation slot. | Increase for patient internal users; reduce for faster overload feedback. |
+| `OLLAMA_KEEP_ALIVE` | `30m` | Keeps Ollama models resident after use. | Increase to avoid cold starts; reduce to save RAM/VRAM. |
+| `WARMUP_ON_STARTUP` | `false` | Runs Ollama warm-up during API startup. | Enable on a dedicated server where slower startup is acceptable. |
+| `MODEL_NUM_CTX` | `4096` | Ollama context window option. | Increase for larger prompts if hardware supports it. |
+| `MODEL_NUM_PREDICT` | `512` | Max generated tokens for Ollama generation. | Increase for longer answers; reduce for speed. |
+| `RAG_RETRIEVAL_CACHE_ENABLED` | `false` | Enables in-memory Chroma retrieval result cache. | Enable for repeated document questions. |
+| `RAG_RESPONSE_CACHE_ENABLED` | `false` | Enables exact repeated final-answer cache. | Enable for demos or repeated workloads; disable for raw generation benchmarks. |
+| `RAG_CACHE_TTL_SECONDS` | `600` | TTL for retrieval and response cache entries. | Increase for stable corpora; reduce when documents change often. |
+| `RAG_INDEX_VERSION` | `dev` | Version label included in cache keys and responses. | Change after re-indexing or changing document corpus. |
+| `RAG_PROMPT_VERSION` | `v1` | Version label included in response metadata and response cache keys. | Change after prompt edits. |
+| `BACKGROUND_JOBS_ENABLED` | `true` | Enables async heavy admin job endpoints. | Disable if all maintenance should be synchronous. |
+| `BACKGROUND_JOB_WORKERS` | `1` | Number of in-process background worker threads. | Increase cautiously for independent admin jobs. |
+| `BACKGROUND_JOB_MAX_QUEUE` | `20` | Max queued/running background jobs per process. | Tune for admin workload size. |
+| `LLM_BACKEND` | `ollama` | Configures LLM client factory default. Production RAG still uses Ollama path. | Set only for explicit backend experiments. |
+| `VLLM_BASE_URL` | `http://127.0.0.1:8002/v1` | OpenAI-compatible vLLM endpoint base URL. | Set to the PC/GPU vLLM server URL. |
+| `VLLM_MODEL` | empty | Model name served by vLLM. | Required before running vLLM benchmark requests. |
+
+#### Concurrency Limiter
+
+The limiter protects `/api/v1/rag/query` with a process-local semaphore and bounded waiting queue. Successful responses include `queue_wait_time_sec`, `active_llm_requests`, and `waiting_rag_requests`.
+
+Clean overload errors:
+
+- `server_busy` (`503`): active slots are full and the waiting queue is full.
+- `queue_timeout` (`503`): the request waited longer than `MAX_QUEUE_WAIT_SECONDS`.
+
+Validation helper:
+
+```bash
+python scripts/validate_rag_concurrency.py --requests 3
+```
+
+- `MAX_CONCURRENT_LLM_REQUESTS`: cap for simultaneous API-level RAG generations.
+- `MAX_WAITING_RAG_REQUESTS`: cap for queued RAG requests when all execution slots are busy.
+- `MAX_QUEUE_WAIT_SECONDS`: maximum time a queued request may wait for an execution slot.
+- `OLLAMA_KEEP_ALIVE`: Ollama model keep-alive value sent with generation requests.
+- `MODEL_NUM_CTX`: Ollama context window option.
+- `MODEL_NUM_PREDICT`: Ollama maximum generated tokens option.
+- `RAG_RETRIEVAL_CACHE_ENABLED`: enables in-memory caching for ChromaDB retrieval results.
+- `RAG_RESPONSE_CACHE_ENABLED`: enables in-memory caching for exact repeated RAG answers.
+- `RAG_INDEX_VERSION`: index version label returned in RAG query metadata.
+- `RAG_PROMPT_VERSION`: prompt version label returned in RAG query metadata.
+
+#### Ollama Warm-up
+
+Warm-up preloads the configured Ollama generation and embedding models with tiny requests so the first real RAG query avoids model cold-start delay. It does not write chat logs, call ChromaDB, or run retrieval.
+
+Run manually:
+
+```bash
+python scripts/warmup_ollama.py
+```
+
+Enable warm-up during API startup:
+
+```env
+WARMUP_ON_STARTUP=true
+```
+
+Warm-up keeps models loaded according to `OLLAMA_KEEP_ALIVE` and may use RAM/VRAM while the models stay resident.
+
+#### Retrieval Cache
+
+The retrieval cache stores ChromaDB retrieval results only. It does not cache generated answers, full RAG responses, chat logs, or errors.
+
+Enable it with:
+
+```env
+RAG_RETRIEVAL_CACHE_ENABLED=true
+```
+
+The cache is in-memory and process-local, uses `RAG_CACHE_TTL_SECONDS` and `RAG_CACHE_MAX_ITEMS`, and is cleared after document or chat-history ingestion. Repeated matching RAG questions can return `cache_hit=true` and `cache_type="retrieval"` while the answer is still generated normally.
+
+#### Response Cache
+
+The response cache stores final successful answers for exact repeated RAG questions. It is separate from the retrieval cache: a response cache hit skips retrieval and Ollama generation, while a retrieval cache hit only skips ChromaDB retrieval.
+
+Enable it with:
+
+```env
+RAG_RESPONSE_CACHE_ENABLED=true
+```
+
+The cache is in-memory and process-local, uses `RAG_CACHE_TTL_SECONDS` and `RAG_CACHE_MAX_ITEMS`, and is cleared after document or chat-history ingestion. Use it carefully because document changes can make old answers outdated until ingestion clears the cache or `RAG_INDEX_VERSION` changes.
+
+#### Background Jobs
+
+Background jobs are for heavy admin or maintenance operations. They run in-process and are process-local; Redis/Celery is not used yet.
+
+Config:
+
+- `BACKGROUND_JOBS_ENABLED`: enable async job endpoints.
+- `BACKGROUND_JOB_WORKERS`: worker threads for background jobs.
+- `BACKGROUND_JOB_MAX_QUEUE`: maximum queued/running jobs in this process.
+- `BACKGROUND_JOB_RETENTION_SECONDS`: how long completed jobs stay queryable.
+
+Async endpoints:
+
+- `POST /api/v1/rag/ingest/async`
+- `POST /api/v1/admin/migrate-chat-history/async`
+- `POST /api/v1/admin/ingest-chat-history/async`
+
+Example async chat-history ingestion:
+
+```bash
+curl -X POST "http://127.0.0.1:8001/api/v1/admin/ingest-chat-history/async" \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: dev-ingest-key" \
+  -d "{}"
+```
+
+Check status:
+
+```bash
+curl -X GET "http://127.0.0.1:8001/api/v1/admin/jobs/<job_id>" \
+  -H "X-API-Key: dev-ingest-key"
+```
+
+List recent jobs:
+
+```bash
+curl -X GET "http://127.0.0.1:8001/api/v1/admin/jobs" \
+  -H "X-API-Key: dev-ingest-key"
+```
+
+#### vLLM Benchmark Layer
+
+Ollama remains the default production backend. vLLM is optional and should be used for benchmark comparison only unless `LLM_BACKEND=vllm` is explicitly configured. Test vLLM on the PC/GPU machine; actual vLLM server and model setup is separate and should follow official vLLM documentation.
+
+Config:
+
+- `LLM_BACKEND`: `ollama` by default.
+- `VLLM_BASE_URL`: OpenAI-compatible vLLM base URL.
+- `VLLM_API_KEY`: bearer token for the vLLM-compatible endpoint.
+- `VLLM_MODEL`: vLLM-served model name; required for vLLM requests.
+- `VLLM_TIMEOUT_SECONDS`: vLLM HTTP timeout.
+
+Ollama-only benchmark:
+
+```bash
+python scripts/benchmark_llm_backends.py --backends ollama --requests-per-backend 2
+```
+
+Later, when vLLM is running:
+
+```bash
+python scripts/benchmark_llm_backends.py --backends ollama vllm --requests-per-backend 5 --skip-unavailable
+```
+
+Reports are written to `results/performance/` as `llm_backend_benchmark_*` raw and summary JSON/CSV files.
+
+#### Recommended Benchmark Workflow
+
+A. Laptop smoke test:
+
+```bash
+python scripts/load_test_rag_api.py --preset smoke
+```
+
+B. PC raw performance test:
+
+Disable caches:
+
+```env
+RAG_RETRIEVAL_CACHE_ENABLED=false
+RAG_RESPONSE_CACHE_ENABLED=false
+```
+
+Then run:
+
+```bash
+python scripts/warmup_ollama.py
+python scripts/load_test_rag_api.py --preset full --warmup
+```
+
+C. PC optimized performance test:
+
+Enable caches:
+
+```env
+RAG_RETRIEVAL_CACHE_ENABLED=true
+RAG_RESPONSE_CACHE_ENABLED=true
+```
+
+Then run:
+
+```bash
+python scripts/load_test_rag_api.py --preset full --warmup
+```
+
+D. Ollama-only backend benchmark:
+
+```bash
+python scripts/benchmark_llm_backends.py --backends ollama --requests-per-backend 2 --skip-unavailable
+```
+
+E. Future Ollama vs vLLM benchmark:
+
+```bash
+python scripts/benchmark_llm_backends.py --backends ollama vllm --requests-per-backend 5 --skip-unavailable
+```
+
+Use [docs/performance_report_template.md](docs/performance_report_template.md) to capture the final numbers.
+
+#### Quick Validation Checklist
+
+- [ ] API starts with `python -m app.api.run`.
+- [ ] `GET /health` returns healthy Ollama and Chroma status.
+- [ ] `POST /api/v1/rag/query` returns an answer.
+- [ ] Repeated query shows `cache_hit=true` and `cache_type="response"` when response cache is enabled.
+- [ ] `GET /api/v1/admin/jobs` returns job history.
+- [ ] `POST /api/v1/admin/migrate-chat-history/async` queues a job.
+- [ ] `python scripts/load_test_rag_api.py --preset smoke` generates reports under `results/performance/`.
+- [ ] `python scripts/benchmark_llm_backends.py --backends ollama --requests-per-backend 1 --skip-unavailable` runs and writes benchmark reports.
+
 `mode 1` (`FastAPI on host, Ollama + Chroma in Docker`) `.env` example:
 
 ```env
@@ -298,15 +551,33 @@ Admin protection:
 - `POST /api/v1/rag/ingest`
   - Triggers ingestion from configured docs directory (`DOCS_DIR`) or optional `docs_dir` override
   - Protected by API key header by default
+- `POST /api/v1/rag/ingest/async`
+  - Queues document ingestion as a background job
+  - Protected by API key header by default
+- `GET /api/v1/admin/jobs`
+  - Lists recent background jobs
+  - Protected by admin API key header by default
+- `GET /api/v1/admin/jobs/{job_id}`
+  - Returns background job status/result/error
+  - Protected by admin API key header by default
+- `GET /api/v1/admin/jobs-stats`
+  - Returns background job queue stats
+  - Protected by admin API key header by default
 - `POST /api/v1/admin/migrate-chat-history`
   - Migrates `data/chat_logs.jsonl` to timestamped Week 4 migration JSON
   - Body: optional `output_dir`, optional `write_latest`
   - Protected by API key header by default
+- `POST /api/v1/admin/migrate-chat-history/async`
+  - Queues chat history migration as a background job
+  - Protected by admin API key header by default
 - `POST /api/v1/admin/ingest-chat-history`
   - Ingests migrated chat history into ChromaDB using the existing RAG upsert path
   - Body: optional `input_file`, optional `dry_run`
   - Defaults to `scripts/results/migrations/chat_history_migrated_latest.json`
   - Protected by API key header by default
+- `POST /api/v1/admin/ingest-chat-history/async`
+  - Queues migrated chat history ingestion as a background job
+  - Protected by admin API key header by default
 
 ### cURL Examples
 
@@ -323,6 +594,54 @@ curl -X POST "http://127.0.0.1:8001/api/v1/rag/query" \
   -H "Content-Type: application/json" \
   -d "{\"question\":\"What are breach notification obligations under GDPR?\",\"top_k\":5,\"session_id\":\"demo-session\"}"
 ```
+
+Concurrency limiter validation:
+
+Set these values, restart the API, then run the helper:
+
+```env
+MAX_CONCURRENT_LLM_REQUESTS=1
+MAX_WAITING_RAG_REQUESTS=1
+MAX_QUEUE_WAIT_SECONDS=3
+```
+
+```bash
+python scripts/validate_rag_concurrency.py --requests 3
+```
+
+Expected behavior: one request runs, one waits, and extra simultaneous requests return a clean `503` with `server_busy` or `queue_timeout`. Successful responses include `queue_wait_time_sec`, `active_llm_requests`, and `waiting_rag_requests`.
+
+Limiter error meanings:
+
+- `server_busy` (`503`): all active slots are full and the bounded waiting queue is already full.
+- `queue_timeout` (`503`): the request entered the waiting queue but no slot opened before `MAX_QUEUE_WAIT_SECONDS`.
+
+The validation helper prints per-request JSON plus totals for successes, `server_busy`, `queue_timeout`, other errors, and average successful queue wait time.
+
+### Load Testing
+
+Laptop smoke test:
+
+```bash
+python scripts/load_test_rag_api.py --preset smoke
+```
+
+Full PC test:
+
+```bash
+python scripts/load_test_rag_api.py --preset full --warmup
+```
+
+Reports are written to `results/performance/` as timestamped raw JSON/CSV and summary JSON/CSV files, plus `load_test_latest_summary.json` and `load_test_latest_summary.csv`.
+
+Key metrics:
+
+- `queue_wait_time_sec`: time spent waiting for a RAG execution slot.
+- `generation_time_sec`: server-side Ollama generation time.
+- `retrieval_time_sec`: server-side retrieval time.
+- `cache_hit` / `cache_type`: whether retrieval or response cache helped.
+- `server_busy`: bounded waiting queue was full.
+- `queue_timeout`: request waited longer than `MAX_QUEUE_WAIT_SECONDS`.
 
 Search only:
 

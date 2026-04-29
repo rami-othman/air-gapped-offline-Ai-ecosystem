@@ -1,3 +1,6 @@
+import hashlib
+import logging
+import re
 import sys
 import time
 from collections.abc import Mapping, Sequence
@@ -13,7 +16,15 @@ try:
         CHROMA_PORT,
         EMBEDDING_MODEL,
         GENERAL_GENERATION_MODEL,
+        MODEL_NUM_BATCH,
+        MODEL_NUM_CTX,
+        MODEL_NUM_PREDICT,
+        MODEL_NUM_THREAD,
+        MODEL_TEMPERATURE,
+        OLLAMA_KEEP_ALIVE,
         OLLAMA_BASE_URL,
+        RAG_INDEX_VERSION,
+        RAG_RETRIEVAL_CACHE_ENABLED,
         TOP_K,
     )
 except ImportError:  # pragma: no cover - script execution fallback
@@ -23,14 +34,29 @@ except ImportError:  # pragma: no cover - script execution fallback
         CHROMA_PORT,
         EMBEDDING_MODEL,
         GENERAL_GENERATION_MODEL,
+        MODEL_NUM_BATCH,
+        MODEL_NUM_CTX,
+        MODEL_NUM_PREDICT,
+        MODEL_NUM_THREAD,
+        MODEL_TEMPERATURE,
+        OLLAMA_KEEP_ALIVE,
         OLLAMA_BASE_URL,
+        RAG_INDEX_VERSION,
+        RAG_RETRIEVAL_CACHE_ENABLED,
         TOP_K,
     )
+
+try:
+    from .cache_store import retrieval_cache
+except ImportError:  # pragma: no cover - script execution fallback
+    from cache_store import retrieval_cache
 
 try:
     from .chat_log_store import save_interaction as persist_chat_interaction
 except ImportError:  # pragma: no cover - script execution fallback
     from chat_log_store import save_interaction as persist_chat_interaction
+
+logger = logging.getLogger(__name__)
 
 # Connect to Chroma
 chroma_client = chromadb.HttpClient(host=CHROMA_HOST, port=CHROMA_PORT)
@@ -41,10 +67,11 @@ collection = chroma_client.get_or_create_collection(name=CHROMA_COLLECTION)
 PromptBuilder = Callable[[str, str], str]
 
 DEFAULT_MODEL_OPTIONS = {
-    "num_ctx": 4096,
-    "num_batch": 64,
-    "num_thread": 8,
-    "temperature": 0.2,
+    "num_ctx": MODEL_NUM_CTX,
+    "num_batch": MODEL_NUM_BATCH,
+    "num_thread": MODEL_NUM_THREAD,
+    "temperature": MODEL_TEMPERATURE,
+    "num_predict": MODEL_NUM_PREDICT,
 }
 
 
@@ -179,7 +206,23 @@ def _rerank_chat_history_candidates(
     return reranked_docs, reranked_metas
 
 
-def retrieve(query, top_k=None):
+def _normalize_retrieval_cache_query(query: str) -> str:
+    return re.sub(r"\s+", " ", (query or "").strip().lower())
+
+
+def _build_retrieval_cache_key(query: str, top_k: int) -> str:
+    key_parts = [
+        _normalize_retrieval_cache_query(query),
+        str(top_k),
+        CHROMA_COLLECTION,
+        EMBEDDING_MODEL,
+        RAG_INDEX_VERSION,
+    ]
+    raw_key = "\n".join(key_parts)
+    return hashlib.sha256(raw_key.encode("utf-8")).hexdigest()
+
+
+def _retrieve_from_chroma(query, top_k=None):
     n_results = top_k if top_k is not None else TOP_K
     query_embedding = generate_embedding(query)
 
@@ -197,6 +240,41 @@ def retrieve(query, top_k=None):
     retrieved_docs = documents[0]
     retrieved_metas = metadatas[0] if metadatas else []
     return _rerank_chat_history_candidates(retrieved_docs, retrieved_metas)
+
+
+def retrieve_with_cache_info(query, top_k=None):
+    n_results = top_k if top_k is not None else TOP_K
+
+    if not RAG_RETRIEVAL_CACHE_ENABLED:
+        logger.debug("Retrieval cache disabled.")
+        docs, metas = _retrieve_from_chroma(query, top_k=n_results)
+        return docs, metas, {"cache_hit": False, "cache_type": None}
+
+    cache_key = _build_retrieval_cache_key(query, n_results)
+    cached_result = retrieval_cache.get(cache_key)
+    if cached_result is not None:
+        logger.info("Retrieval cache hit. top_k=%d index_version=%s", n_results, RAG_INDEX_VERSION)
+        return (
+            cached_result.get("documents", []),
+            cached_result.get("metadatas", []),
+            {"cache_hit": True, "cache_type": "retrieval"},
+        )
+
+    logger.info("Retrieval cache miss. top_k=%d index_version=%s", n_results, RAG_INDEX_VERSION)
+    docs, metas = _retrieve_from_chroma(query, top_k=n_results)
+    retrieval_cache.set(
+        cache_key,
+        {
+            "documents": docs,
+            "metadatas": metas,
+        },
+    )
+    return docs, metas, {"cache_hit": False, "cache_type": None}
+
+
+def retrieve(query, top_k=None):
+    docs, metas, _ = retrieve_with_cache_info(query, top_k=top_k)
+    return docs, metas
 
 
 # def build_prompt(context, question):
@@ -334,6 +412,8 @@ def ask_llm(
         "prompt": prompt,
         "stream": False,
     }
+    if OLLAMA_KEEP_ALIVE:
+        payload["keep_alive"] = OLLAMA_KEEP_ALIVE
     if generation_options:
         payload["options"] = generation_options
 
@@ -382,7 +462,7 @@ def run_rag_query(
     - optional "model" key (kept for backward compatibility)
     """
     retrieval_start = time.perf_counter()
-    docs, metas = retrieve(question, top_k=top_k)
+    docs, metas, cache_info = retrieve_with_cache_info(question, top_k=top_k)
     retrieval_time_sec = time.perf_counter() - retrieval_start
 
     if not docs:
@@ -392,6 +472,8 @@ def run_rag_query(
             "generation_time_sec": 0.0,
             "retrieved_sources": [],
             "status": "fail",
+            "cache_hit": cache_info["cache_hit"],
+            "cache_type": cache_info["cache_type"],
         }
 
     context, sources = _build_context_and_sources(docs, metas)
@@ -414,6 +496,8 @@ def run_rag_query(
         "total_time_sec": total_time_sec,
         "retrieved_sources": sources,
         "status": "success",
+        "cache_hit": cache_info["cache_hit"],
+        "cache_type": cache_info["cache_type"],
     }
 
 

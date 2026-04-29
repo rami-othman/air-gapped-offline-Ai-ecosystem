@@ -1,0 +1,2 @@
+timestamp,backend,request_index,question,success,model_name,generation_time_sec,client_elapsed_time_sec,answer_length,error
+20260429_172403,ollama,1,What are breach notification obligations under GDPR?,False,,,300.0152,0,"Ollama generation failed: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"

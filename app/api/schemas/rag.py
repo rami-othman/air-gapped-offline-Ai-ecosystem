@@ -29,6 +29,15 @@ class RagQueryResponse(BaseModel):
     total_time_sec: float
     session_id: str
     interaction_id: str | None = None
+    queue_wait_time_sec: float | None = None
+    active_llm_requests: int | None = None
+    waiting_rag_requests: int | None = None
+    cache_hit: bool | None = None
+    cache_type: str | None = None
+    model_name: str | None = None
+    top_k: int | None = None
+    prompt_version: str | None = None
+    index_version: str | None = None
 
 
 class RagSearchRequest(BaseModel):
@@ -62,5 +71,7 @@ class RagIngestResponse(BaseModel):
 
 
 class ErrorResponse(BaseModel):
+    status: str = "error"
     error: str
     message: str
+    details: dict[str, Any] | None = None

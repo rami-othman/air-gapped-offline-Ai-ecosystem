@@ -1,0 +1,15 @@
+[
+  {
+    "timestamp": "20260429_172403",
+    "backend": "ollama",
+    "total_requests": 1,
+    "success_count": 0,
+    "failed_count": 1,
+    "success_rate": 0.0,
+    "avg_generation_time_sec": "",
+    "max_generation_time_sec": "",
+    "min_generation_time_sec": "",
+    "avg_answer_length": "",
+    "errors_by_type": "{\"unavailable\": 1}"
+  }
+]
