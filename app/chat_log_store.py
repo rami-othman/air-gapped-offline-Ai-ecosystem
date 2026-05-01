@@ -1,11 +1,24 @@
 import json
 import hashlib
+import os
 import uuid
 from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-CHAT_LOG_PATH = Path(__file__).resolve().parents[1] / "data" / "chat_logs.jsonl"
+from dotenv import load_dotenv
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+load_dotenv(PROJECT_ROOT / ".env")
+
+_chat_log_path = Path(
+    os.getenv("CHAT_LOG_PATH", str(PROJECT_ROOT / "data" / "chat_logs.jsonl"))
+).expanduser()
+CHAT_LOG_PATH = (
+    _chat_log_path
+    if _chat_log_path.is_absolute()
+    else PROJECT_ROOT / _chat_log_path
+)
 CHAT_LOG_FIELDS = (
     "id",
     "timestamp",
