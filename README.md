@@ -36,7 +36,15 @@ Ingestion is intentionally simple and generic:
   - `source_document`: original filename
   - `file_name`: original filename
   - `chunk_id`: stable chunk id (`<slug>_chunk_<index>`)
+  - `chunk_index`: zero-based chunk index within the document
+  - `page_start` / `page_end`: PDF page range covered by the chunk
+  - `source_type`: `document`
 - No hardcoded topic keywords or filename-topic inference
+
+PDFs are loaded page by page. Chunking is paragraph-aware and prefers natural
+boundaries in this order: double newlines, single newlines, then Arabic/English
+sentence endings (`.`, `?`, `!`, `؛`, `؟`). The default target size is
+`CHUNK_SIZE=900` with `CHUNK_OVERLAP=180`.
 
 Ingestion is idempotent:
 
@@ -44,10 +52,14 @@ Ingestion is idempotent:
 - New chunks are then written
 - `upsert` is used for document writes in `full_rag.py`
 - Re-running ingestion is safe and refreshes changed content
+- After changing `CHUNK_SIZE`, `CHUNK_OVERLAP`, or chunking code, re-ingest PDFs
+  so Chroma does not keep old chunk boundaries.
 
 ## Retrieval + Prompt Behavior
 
 - Retrieval uses `TOP_K` from `app/config.py` (currently `5`)
+- Default retrieval is limited to chunks with `source_type=document`; chat-history
+  chunks are excluded unless an internal caller explicitly enables them.
 - Context sent to the LLM includes all retrieved chunks
 - Each chunk is formatted with source:
 
@@ -64,6 +76,12 @@ Ingestion is idempotent:
 
 ```bash
 python app/ingest_documents.py
+```
+
+PowerShell equivalent:
+
+```powershell
+python .\app\ingest_documents.py
 ```
 
 2. Ask a question (one-shot):
@@ -186,7 +204,7 @@ Related final docs:
 | `RAG_RETRIEVAL_CACHE_ENABLED` | `false` | Enables in-memory Chroma retrieval result cache. | Enable for repeated document questions. |
 | `RAG_RESPONSE_CACHE_ENABLED` | `false` | Enables exact repeated final-answer cache. | Enable for demos or repeated workloads; disable for raw generation benchmarks. |
 | `RAG_CACHE_TTL_SECONDS` | `600` | TTL for retrieval and response cache entries. | Increase for stable corpora; reduce when documents change often. |
-| `RAG_INDEX_VERSION` | `dev` | Version label included in cache keys and responses. | Change after re-indexing or changing document corpus. |
+| `RAG_INDEX_VERSION` | `dev` | Version label included in cache keys and responses. | Change after re-indexing, changing chunking settings, or changing document corpus. |
 | `RAG_PROMPT_VERSION` | `v1` | Version label included in response metadata and response cache keys. | Change after prompt edits. |
 | `BACKGROUND_JOBS_ENABLED` | `true` | Enables async heavy admin job endpoints. | Disable if all maintenance should be synchronous. |
 | `BACKGROUND_JOB_WORKERS` | `1` | Number of in-process background worker threads. | Increase cautiously for independent admin jobs. |

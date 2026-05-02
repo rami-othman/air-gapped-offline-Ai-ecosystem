@@ -75,27 +75,33 @@ def build_collection_for_model(client, model, docs_dir, max_chunks=None):
     metadatas = []
 
     for pdf_path in pdf_paths:
-        text = load_pdf(str(pdf_path))
-        chunks = chunk_text(text, chunk_size=CHUNK_SIZE, overlap=CHUNK_OVERLAP)
+        pages = load_pdf(str(pdf_path))
+        chunks = chunk_text(pages, chunk_size=CHUNK_SIZE, overlap=CHUNK_OVERLAP)
         file_name = pdf_path.name
         source_document = file_name
         doc_slug = slugify(pdf_path.stem)
 
-        for i, chunk in enumerate(chunks):
+        for chunk in chunks:
             if max_chunks is not None and chunk_counter >= max_chunks:
                 break
 
-            chunk_id = f"{model_slug}_{doc_slug}_{i:04d}"
-            embedding = embed_text(model, chunk)
+            chunk_text_value = chunk["text"]
+            chunk_index = chunk["chunk_index"]
+            chunk_id = f"{model_slug}_{doc_slug}_{chunk_index:04d}"
+            embedding = embed_text(model, chunk_text_value)
 
             ids.append(chunk_id)
-            documents.append(chunk)
+            documents.append(chunk_text_value)
             embeddings.append(embedding)
             metadatas.append(
                 {
                     "source_document": source_document,
                     "file_name": file_name,
                     "chunk_id": chunk_id,
+                    "chunk_index": chunk_index,
+                    "page_start": chunk["page_start"],
+                    "page_end": chunk["page_end"],
+                    "source_type": "document",
                 }
             )
 

@@ -87,6 +87,7 @@ def import_interactions(interactions: list[dict]) -> tuple[int, int]:
         metadata = {
             "source": "chat_history",
             "source_document": "chat_history",
+            "source_type": "chat",
             "timestamp": timestamp,
             "question": question,
         }

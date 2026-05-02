@@ -99,7 +99,7 @@ def _chat_history_metadata_details(metadatas: list[dict[str, Any]]) -> list[dict
 
 def validate_question(question: str, top_k: int | None = None) -> dict[str, Any]:
     retrieval_start = time.perf_counter()
-    docs, metadatas = retrieve(question, top_k=top_k)
+    docs, metadatas = retrieve(question, top_k=top_k, include_chat_history=True)
     retrieval_time_sec = time.perf_counter() - retrieval_start
 
     retrieved_sources = [_source_document(metadata) for metadata in metadatas]

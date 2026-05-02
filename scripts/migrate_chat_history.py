@@ -43,6 +43,7 @@ def migrate_interactions(interactions: list[dict]) -> tuple[list[dict], int]:
                 "metadata": {
                     "source": "chat_history",
                     "source_document": "chat_history",
+                    "source_type": "chat",
                     "interaction_id": interaction_id,
                     "helpful": helpful,
                     "reuse_weight": compute_reuse_weight(helpful),

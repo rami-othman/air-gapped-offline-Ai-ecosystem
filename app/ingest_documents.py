@@ -29,9 +29,14 @@ def slugify_filename(path):
     return "".join(safe).strip("_")
 
 
-def ingest_pdf(path):
-    text = load_pdf(path)
-    chunks = chunk_text(text, chunk_size=CHUNK_SIZE, overlap=CHUNK_OVERLAP)
+def _clear_rag_caches():
+    retrieval_cache.clear()
+    response_cache.clear()
+
+
+def ingest_pdf(path, clear_caches=True):
+    pages = load_pdf(path)
+    chunks = chunk_text(pages, chunk_size=CHUNK_SIZE, overlap=CHUNK_OVERLAP)
 
     doc_slug = slugify_filename(path)
     file_name = Path(path).name
@@ -40,14 +45,22 @@ def ingest_pdf(path):
     # Keep ingestion idempotent for reruns and document edits.
     delete_document_chunks(source_document)
 
-    for i, chunk in enumerate(chunks):
-        chunk_id = f"{doc_slug}_chunk_{i:04d}"
+    for chunk in chunks:
+        chunk_index = chunk["chunk_index"]
+        chunk_id = f"{doc_slug}_chunk_{chunk_index:04d}"
         metadata = {
             "source_document": source_document,
             "file_name": file_name,
             "chunk_id": chunk_id,
+            "chunk_index": chunk_index,
+            "page_start": chunk["page_start"],
+            "page_end": chunk["page_end"],
+            "source_type": "document",
         }
-        add_document(chunk_id, chunk, metadata=metadata)
+        add_document(chunk_id, chunk["text"], metadata=metadata)
+
+    if clear_caches:
+        _clear_rag_caches()
 
     return len(chunks)
 
@@ -65,12 +78,11 @@ def ingest_directory(dir_path=DOCS_DIR):
 
     total_chunks = 0
     for pdf_path in pdf_paths:
-        chunk_count = ingest_pdf(pdf_path)
+        chunk_count = ingest_pdf(pdf_path, clear_caches=False)
         total_chunks += chunk_count
         print(f"Ingested {pdf_path.name}: {chunk_count} chunks")
 
-    retrieval_cache.clear()
-    response_cache.clear()
+    _clear_rag_caches()
 
     return len(pdf_paths), total_chunks
 

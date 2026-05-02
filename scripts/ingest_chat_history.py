@@ -2,7 +2,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Any
+from typing import Any, Protocol
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 APP_DIR = PROJECT_ROOT / "app"
@@ -22,6 +22,16 @@ DEFAULT_MIGRATED_PATH = (
     PROJECT_ROOT / "scripts" / "results" / "migrations" / "chat_history_migrated_latest.json"
 )
 LEGACY_MIGRATED_PATH = PROJECT_ROOT / "scripts" / "results" / "chat_history_migrated.json"
+
+
+class AddDocumentFn(Protocol):
+    def __call__(
+        self,
+        doc_id: str,
+        text: str,
+        metadata: dict[str, str | int | float | bool],
+    ) -> None:
+        ...
 
 
 def _resolve_input_path(input_file: str | None) -> Path:
@@ -51,7 +61,7 @@ def _load_migrated_items(path: Path) -> list[dict]:
     return []
 
 
-def _get_add_document():
+def _get_add_document() -> AddDocumentFn:
     from full_rag import add_document
 
     return add_document
@@ -90,16 +100,17 @@ def _normalize_record(record: dict) -> tuple[str | None, str | None, dict[str, A
         normalized_metadata["source_document"] = "chat_history"
     if "source" not in normalized_metadata:
         normalized_metadata["source"] = "chat_history"
+    normalized_metadata["source_type"] = "chat"
 
     return doc_id, text, normalized_metadata
 
 
 def ingest_migrated_items(
     items: list[dict],
-    add_document_fn=None,
+    add_document_fn: AddDocumentFn | None = None,
     dry_run: bool = False,
 ) -> tuple[int, int]:
-    active_add_document = None if dry_run else (add_document_fn or _get_add_document())
+    active_add_document = (add_document_fn or _get_add_document()) if not dry_run else None
     upserted = 0
     skipped = 0
     seen_ids: set[str] = set()
@@ -120,6 +131,9 @@ def ingest_migrated_items(
         if dry_run:
             continue
 
+        if active_add_document is None:
+            raise RuntimeError("add_document function is required when dry_run is false.")
+
         try:
             active_add_document(doc_id=doc_id, text=text, metadata=metadata)
             upserted += 1
@@ -133,7 +147,7 @@ def ingest_migrated_items(
 def run_ingestion(
     input_file: str | None = None,
     dry_run: bool = False,
-    add_document_fn=None,
+    add_document_fn: AddDocumentFn | None = None,
 ) -> dict:
     input_path = _resolve_input_path(input_file)
     items = _load_migrated_items(input_path)

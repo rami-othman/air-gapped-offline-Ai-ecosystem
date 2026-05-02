@@ -166,6 +166,10 @@ def _chat_reuse_weight(meta: Mapping[str, Any] | None) -> float:
     return 0.5
 
 
+def _is_document_candidate(meta: Mapping[str, Any] | None) -> bool:
+    return str((meta or {}).get("source_type", "")).strip().lower() == "document"
+
+
 def _rerank_chat_history_candidates(
     docs: Sequence[str],
     metas: Sequence[Mapping[str, Any] | None],
@@ -206,31 +210,78 @@ def _rerank_chat_history_candidates(
     return reranked_docs, reranked_metas
 
 
+def _filter_document_results(
+    docs: Sequence[str],
+    metas: Sequence[Mapping[str, Any] | None],
+    limit: int,
+) -> tuple[list[str], list[dict[str, Any]]]:
+    filtered_docs = []
+    filtered_metas = []
+
+    for index, doc in enumerate(docs):
+        meta = metas[index] if index < len(metas) else None
+        if not _is_document_candidate(meta):
+            continue
+
+        filtered_docs.append(doc)
+        filtered_metas.append(dict(meta) if isinstance(meta, Mapping) else {})
+
+        if len(filtered_docs) >= limit:
+            break
+
+    return filtered_docs, filtered_metas
+
+
 def _normalize_retrieval_cache_query(query: str) -> str:
     return re.sub(r"\s+", " ", (query or "").strip().lower())
 
 
-def _build_retrieval_cache_key(query: str, top_k: int) -> str:
+def _build_retrieval_cache_key(query: str, top_k: int, include_chat_history: bool) -> str:
     key_parts = [
         _normalize_retrieval_cache_query(query),
         str(top_k),
         CHROMA_COLLECTION,
         EMBEDDING_MODEL,
         RAG_INDEX_VERSION,
+        "with_chat" if include_chat_history else "documents_only",
     ]
     raw_key = "\n".join(key_parts)
     return hashlib.sha256(raw_key.encode("utf-8")).hexdigest()
 
 
-def _retrieve_from_chroma(query, top_k=None):
+def _retrieve_from_chroma(query, top_k=None, include_chat_history=False):
     n_results = top_k if top_k is not None else TOP_K
     query_embedding = generate_embedding(query)
 
-    results = collection.query(
-        query_embeddings=[query_embedding],
-        n_results=n_results,
-        include=["documents", "metadatas"],
-    )
+    query_kwargs = {
+        "query_embeddings": [query_embedding],
+        "n_results": n_results,
+        "include": ["documents", "metadatas"],
+    }
+    if not include_chat_history:
+        query_kwargs["where"] = {"source_type": "document"}
+
+    try:
+        results = collection.query(**query_kwargs)
+    except Exception:
+        if include_chat_history:
+            raise
+
+        logger.exception("Document metadata filter failed; falling back to manual filtering.")
+        fallback_results = collection.query(
+            query_embeddings=[query_embedding],
+            n_results=max(n_results * 4, n_results),
+            include=["documents", "metadatas"],
+        )
+        fallback_docs = fallback_results.get("documents", [])
+        fallback_metas = fallback_results.get("metadatas", [])
+        if not fallback_docs:
+            return [], []
+        return _filter_document_results(
+            fallback_docs[0],
+            fallback_metas[0] if fallback_metas else [],
+            n_results,
+        )
 
     documents = results.get("documents", [])
     metadatas = results.get("metadatas", [])
@@ -239,18 +290,25 @@ def _retrieve_from_chroma(query, top_k=None):
 
     retrieved_docs = documents[0]
     retrieved_metas = metadatas[0] if metadatas else []
+    if not include_chat_history:
+        return _filter_document_results(retrieved_docs, retrieved_metas, n_results)
+
     return _rerank_chat_history_candidates(retrieved_docs, retrieved_metas)
 
 
-def retrieve_with_cache_info(query, top_k=None):
+def retrieve_with_cache_info(query, top_k=None, include_chat_history=False):
     n_results = top_k if top_k is not None else TOP_K
 
     if not RAG_RETRIEVAL_CACHE_ENABLED:
         logger.debug("Retrieval cache disabled.")
-        docs, metas = _retrieve_from_chroma(query, top_k=n_results)
+        docs, metas = _retrieve_from_chroma(
+            query,
+            top_k=n_results,
+            include_chat_history=include_chat_history,
+        )
         return docs, metas, {"cache_hit": False, "cache_type": None}
 
-    cache_key = _build_retrieval_cache_key(query, n_results)
+    cache_key = _build_retrieval_cache_key(query, n_results, include_chat_history)
     cached_result = retrieval_cache.get(cache_key)
     if cached_result is not None:
         logger.info("Retrieval cache hit. top_k=%d index_version=%s", n_results, RAG_INDEX_VERSION)
@@ -261,7 +319,11 @@ def retrieve_with_cache_info(query, top_k=None):
         )
 
     logger.info("Retrieval cache miss. top_k=%d index_version=%s", n_results, RAG_INDEX_VERSION)
-    docs, metas = _retrieve_from_chroma(query, top_k=n_results)
+    docs, metas = _retrieve_from_chroma(
+        query,
+        top_k=n_results,
+        include_chat_history=include_chat_history,
+    )
     retrieval_cache.set(
         cache_key,
         {
@@ -272,8 +334,12 @@ def retrieve_with_cache_info(query, top_k=None):
     return docs, metas, {"cache_hit": False, "cache_type": None}
 
 
-def retrieve(query, top_k=None):
-    docs, metas, _ = retrieve_with_cache_info(query, top_k=top_k)
+def retrieve(query, top_k=None, include_chat_history=False):
+    docs, metas, _ = retrieve_with_cache_info(
+        query,
+        top_k=top_k,
+        include_chat_history=include_chat_history,
+    )
     return docs, metas
 
 
@@ -450,6 +516,7 @@ def run_rag_query(
     model_options=None,
     top_k=None,
     prompt_builder: PromptBuilder | None = None,
+    include_chat_history=False,
 ):
     """
     Execute the full RAG flow and return benchmark-friendly metrics.
@@ -462,7 +529,11 @@ def run_rag_query(
     - optional "model" key (kept for backward compatibility)
     """
     retrieval_start = time.perf_counter()
-    docs, metas, cache_info = retrieve_with_cache_info(question, top_k=top_k)
+    docs, metas, cache_info = retrieve_with_cache_info(
+        question,
+        top_k=top_k,
+        include_chat_history=include_chat_history,
+    )
     retrieval_time_sec = time.perf_counter() - retrieval_start
 
     if not docs:

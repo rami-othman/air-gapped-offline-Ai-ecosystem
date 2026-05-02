@@ -75,10 +75,12 @@ GENERAL_GENERATION_MODEL = os.getenv("GENERAL_GENERATION_MODEL", "gemma3:12b")
 TECHNICAL_GENERATION_MODEL = os.getenv("TECHNICAL_GENERATION_MODEL", "qwen2.5-coder:14b")
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "nomic-embed-text")
 
-# Retrieval / ingestion defaults
+# Retrieval / ingestion defaults.
+# After changing chunk size, overlap, or chunking logic, re-ingest PDFs so
+# Chroma contains chunks built with the active configuration.
 TOP_K = _get_int("TOP_K", 5)
-CHUNK_SIZE = _get_int("CHUNK_SIZE", 500)
-CHUNK_OVERLAP = _get_int("CHUNK_OVERLAP", 100)
+CHUNK_SIZE = _get_int("CHUNK_SIZE", 900)
+CHUNK_OVERLAP = _get_int("CHUNK_OVERLAP", 180)
 DOCS_DIR = os.getenv("DOCS_DIR", "data/docs")
 
 # Performance / concurrency foundation. Enforcement is intentionally left to
