@@ -371,6 +371,7 @@ def retrieve(query, top_k=None, include_chat_history=False):
 # {question}
 # """
 
+# todo remember to clean one 
 def build_prompt(context, question):
     return f"""
 [ROLE / IDENTITY]
@@ -446,7 +447,44 @@ Context:
 User request:
 {question}
 """
+# todo: use one prompt
 
+# def build_prompt(context, question):
+#     return f"""
+# [ROLE]
+# You are a precise retrieval-augmented assistant.
+# Answer the user's question using ONLY the provided context.
+
+# [CRITICAL RULES]
+# - Answer in the SAME LANGUAGE as the user's question.
+# - Use the context as the only source of truth.
+# - Do not invent facts, examples, numbers, or explanations.
+# - If the answer is not supported by the context, say clearly:
+#   "I could not find enough information in the provided context."
+# - If the question is Arabic, answer in Arabic.
+# - If the question is English, answer in English.
+# - If the question asks for examples, you MUST provide examples from the context.
+# - If examples are not available in the retrieved context, say:
+#   "The retrieved context does not include examples."
+# - Be concise but complete.
+# - Do not repeat the question.
+# - Do not mention "provided context" unless information is missing.
+# - Do not output JSON.
+
+# [ANSWER STYLE]
+# - For simple questions: answer in 1 short paragraph.
+# - For comparison questions: use short bullet points.
+# - For step-based or category-based questions: use bullet points.
+# - Preserve important definitions and distinctions exactly.
+
+# [CONTEXT]
+# {context}
+
+# [QUESTION]
+# {question}
+
+# [FINAL ANSWER]
+# """
 
 def ask_llm(
     context,
