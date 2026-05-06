@@ -5,24 +5,24 @@ services:
     image: vllm/vllm-openai:latest
     container_name: vllm
     ports:
-      - "8002:8002"
+      - "8002:8000"
     ipc: host
     gpus: all
     volumes:
       - hf_cache:/root/.cache/huggingface
     environment:
-      HUGGING_FACE_HUB_TOKEN: ${hf_xxxxxxxxx}
+      HUGGING_FACE_HUB_TOKEN:  ${HF_TOKEN}
     command:
       - --model
       - google/gemma-3-12b-it
       - --host
       - 0.0.0.0
       - --port
-      - "8002"
+      - "8000"
       - --max-model-len
-      - "4096"
+      - "2048"
       - --gpu-memory-utilization
-      - "0.90"
+      - "0.85"
       - --api-key
       - EMPTY
   
