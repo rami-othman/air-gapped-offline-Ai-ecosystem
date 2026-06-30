@@ -1,0 +1,14 @@
+[
+  {
+    "timestamp": "20260429_172926",
+    "backend": "vllm",
+    "request_index": 1,
+    "question": "What are breach notification obligations under GDPR?",
+    "success": false,
+    "model_name": "",
+    "generation_time_sec": "",
+    "client_elapsed_time_sec": 0.0,
+    "answer_length": 0,
+    "error": "VLLM_MODEL is required when using the vLLM backend."
+  }
+]

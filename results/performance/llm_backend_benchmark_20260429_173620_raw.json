@@ -1,0 +1,14 @@
+[
+  {
+    "timestamp": "20260429_173620",
+    "backend": "ollama",
+    "request_index": 1,
+    "question": "What are breach notification obligations under GDPR?",
+    "success": true,
+    "model_name": "gemma3:12b",
+    "generation_time_sec": 181.5154,
+    "client_elapsed_time_sec": 181.5157,
+    "answer_length": 2276,
+    "error": ""
+  }
+]

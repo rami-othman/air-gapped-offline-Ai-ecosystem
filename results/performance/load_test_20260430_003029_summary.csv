@@ -1,0 +1,6 @@
+timestamp,concurrency_level,total_requests,success_count,failed_count,success_rate,server_busy_count,queue_timeout_count,other_error_count,avg_client_elapsed_time_sec,max_client_elapsed_time_sec,avg_api_total_time_sec,avg_retrieval_time_sec,avg_generation_time_sec,avg_queue_wait_time_sec,max_queue_wait_time_sec,cache_hit_count,cache_hit_rate,response_cache_hit_count,retrieval_cache_hit_count,avg_answer_length,avg_sources_count
+20260430_003029,1,5,5,0,1.0,0,0,0,3.4489,7.3028,3.4332,0.0269,3.4063,0.0,0.0,0,0.0,0,0,653.4,1.4
+20260430_003029,2,5,5,0,1.0,0,0,0,4.4375,6.6615,4.4181,0.0349,4.3832,0.0,0.0,0,0.0,0,0,664.6,1.4
+20260430_003029,5,5,5,0,1.0,0,0,0,7.4884,11.7129,4.4891,0.0446,4.4445,2.9878,8.866,0,0.0,0,0,657.4,1.4
+20260430_003029,10,5,5,0,1.0,0,0,0,8.6737,11.5949,4.3481,0.0343,4.3138,4.3165,9.1923,0,0.0,0,0,662.4,1.4
+20260430_003029,12,5,5,0,1.0,0,0,0,5.7568,11.6049,3.6223,0.0375,3.5847,2.1247,5.4948,0,0.0,0,0,667.4,1.4

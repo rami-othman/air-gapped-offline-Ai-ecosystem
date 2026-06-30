@@ -1,0 +1,87 @@
+services:
+  vllm:
+    profiles:
+      - vllm
+    image: vllm/vllm-openai:latest
+    container_name: vllm
+    ports:
+      - "8002:8000"
+    ipc: host
+    gpus: all
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    volumes:
+      - hf_cache:/root/.cache/huggingface
+    environment:
+      HUGGING_FACE_HUB_TOKEN:  ${HF_TOKEN}
+    command:
+      - --model
+      - google/gemma-3-12b-it
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      - --max-model-len
+      - "2048"
+      - --dtype 
+      - auto
+      - --gpu-memory-utilization
+      - "0.75"
+      - --api-key
+      - EMPTY
+  
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: chromadb
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    environment:
+      - IS_PERSISTENT=TRUE
+      - PERSIST_DIRECTORY=/chroma/chroma
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rag-api
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    # volumes:
+    # - .:/app
+    environment:
+      # Temporary integration mode:
+      # Keep ollama/chromadb manually managed outside compose and
+      # connect from the API container through the Docker host.
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      CHROMA_HOST: host.docker.internal
+      CHROMA_PORT: 8000
+      API_HOST: 0.0.0.0
+      API_PORT: 8001
+      API_DEV_MODE: "false"
+      # "false"
+      API_RELOAD: "true"
+    ports:
+      - "8001:8001"
+
+volumes:
+  chroma_data:
+  ollama_data:
+  hf_cache:

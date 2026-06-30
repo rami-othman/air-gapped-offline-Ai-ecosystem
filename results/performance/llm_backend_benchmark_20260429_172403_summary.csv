@@ -1,0 +1,2 @@
+timestamp,backend,total_requests,success_count,failed_count,success_rate,avg_generation_time_sec,max_generation_time_sec,min_generation_time_sec,avg_answer_length,errors_by_type
+20260429_172403,ollama,1,0,1,0.0,,,,,"{""unavailable"": 1}"

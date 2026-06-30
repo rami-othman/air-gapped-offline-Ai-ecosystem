@@ -1,0 +1,29 @@
+{"id":"employee_01","query":"What does the handbook say about paid time off and vacation planning?","expected_document":"Sample Employee Handbook - National Council of Nonprofits.pdf","expected_section_topic":"leave and time off"}
+{"id":"employee_02","query":"Where are employee conduct and professional behavior expectations defined?","expected_document":"Sample Employee Handbook - National Council of Nonprofits.pdf","expected_section_topic":"code of conduct"}
+{"id":"employee_03","query":"What does the handbook mention about workplace harassment and reporting concerns?","expected_document":"Sample Employee Handbook - National Council of Nonprofits.pdf","expected_section_topic":"harassment and reporting"}
+{"id":"employee_04","query":"Which section explains benefits eligibility for employees?","expected_document":"Sample Employee Handbook - National Council of Nonprofits.pdf","expected_section_topic":"benefits eligibility"}
+{"id":"employee_05","query":"What are the attendance and punctuality expectations for staff?","expected_document":"Sample Employee Handbook - National Council of Nonprofits.pdf","expected_section_topic":"attendance policy"}
+
+{"id":"cyber_01","query":"What are the required password practices in the cyber security policy?","expected_document":"Cyber-Security-Policy-Template-2021.docx.pdf","expected_section_topic":"password policy"}
+{"id":"cyber_02","query":"How does the policy define user access control and least privilege?","expected_document":"Cyber-Security-Policy-Template-2021.docx.pdf","expected_section_topic":"access control"}
+{"id":"cyber_03","query":"What does the policy say about acceptable use of company systems?","expected_document":"Cyber-Security-Policy-Template-2021.docx.pdf","expected_section_topic":"acceptable use"}
+{"id":"cyber_04","query":"Where are endpoint security and anti-malware requirements described?","expected_document":"Cyber-Security-Policy-Template-2021.docx.pdf","expected_section_topic":"endpoint protection"}
+{"id":"cyber_05","query":"What are employee responsibilities for reporting security incidents?","expected_document":"Cyber-Security-Policy-Template-2021.docx.pdf","expected_section_topic":"incident reporting"}
+
+{"id":"incident_01","query":"What are the main phases of the incident response process?","expected_document":"Incident-Response-Plan-Basics_508c.pdf","expected_section_topic":"incident response lifecycle"}
+{"id":"incident_02","query":"What does the plan say about incident identification and triage?","expected_document":"Incident-Response-Plan-Basics_508c.pdf","expected_section_topic":"identification and triage"}
+{"id":"incident_03","query":"How should teams perform containment during a security incident?","expected_document":"Incident-Response-Plan-Basics_508c.pdf","expected_section_topic":"containment"}
+{"id":"incident_04","query":"What recovery actions are expected after eradication steps?","expected_document":"Incident-Response-Plan-Basics_508c.pdf","expected_section_topic":"recovery"}
+{"id":"incident_05","query":"Does the plan require lessons learned or post-incident review?","expected_document":"Incident-Response-Plan-Basics_508c.pdf","expected_section_topic":"lessons learned"}
+
+{"id":"gdpr_01","query":"What rights do data subjects have under GDPR?","expected_document":"GDPR_FINAL_EPSU.pdf","expected_section_topic":"data subject rights"}
+{"id":"gdpr_02","query":"Which lawful bases for processing personal data are described?","expected_document":"GDPR_FINAL_EPSU.pdf","expected_section_topic":"lawful basis"}
+{"id":"gdpr_03","query":"What does GDPR require for consent to be valid?","expected_document":"GDPR_FINAL_EPSU.pdf","expected_section_topic":"consent requirements"}
+{"id":"gdpr_04","query":"When is a data protection impact assessment required?","expected_document":"GDPR_FINAL_EPSU.pdf","expected_section_topic":"dpia"}
+{"id":"gdpr_05","query":"What are breach notification timelines and obligations under GDPR?","expected_document":"GDPR_FINAL_EPSU.pdf","expected_section_topic":"breach notification"}
+
+{"id":"nist_01","query":"What are the core NIST CSF functions explained in this framework?","expected_document":"NIST.CSWP.29.pdf","expected_section_topic":"core functions"}
+{"id":"nist_02","query":"How does NIST CSF describe the Identify function and risk context?","expected_document":"NIST.CSWP.29.pdf","expected_section_topic":"identify"}
+{"id":"nist_03","query":"What guidance is provided for detection capabilities in the framework?","expected_document":"NIST.CSWP.29.pdf","expected_section_topic":"detect"}
+{"id":"nist_04","query":"How does the framework treat response and recovery planning?","expected_document":"NIST.CSWP.29.pdf","expected_section_topic":"respond and recover"}
+{"id":"nist_05","query":"What does NIST CSF say about governance and cybersecurity risk management?","expected_document":"NIST.CSWP.29.pdf","expected_section_topic":"governance and risk management"}

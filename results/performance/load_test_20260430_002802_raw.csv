@@ -1,0 +1,26 @@
+timestamp,concurrency_level,request_index,question,status_code,success,error,message,client_elapsed_time_sec,api_total_time_sec,retrieval_time_sec,generation_time_sec,queue_wait_time_sec,active_llm_requests,waiting_rag_requests,cache_hit,cache_type,model_name,top_k,prompt_version,index_version,answer_length,sources_count,session_id
+2026-04-30T00:28:02,1,1,What are breach notification obligations under GDPR?,200,True,,,7.1264,7.0965,0.0253,7.0713,0.0,1,0,False,,gemma3:12b,5,v1,dev,542,1,load-test-20260430_002802-c1-r1
+2026-04-30T00:28:10,1,2,What is the incident response process?,200,True,,,1.996,1.9785,0.028,1.9505,0.0,1,0,False,,gemma3:12b,5,v1,dev,425,2,load-test-20260430_002802-c1-r2
+2026-04-30T00:28:12,1,3,What does the cyber security policy say about passwords?,200,True,,,1.1532,1.1453,0.0303,1.115,0.0,1,0,False,,gemma3:12b,5,v1,dev,171,1,load-test-20260430_002802-c1-r3
+2026-04-30T00:28:13,1,4,What are employee handbook rules about leave?,200,True,,,5.2892,5.2615,0.0256,5.2358,0.0,1,0,False,,gemma3:12b,5,v1,dev,1851,1,load-test-20260430_002802-c1-r4
+2026-04-30T00:28:18,1,5,What does the NIST framework say about security controls?,200,True,,,1.6001,1.5772,0.0331,1.5441,0.0,1,0,False,,gemma3:12b,5,v1,dev,339,2,load-test-20260430_002802-c1-r5
+2026-04-30T00:28:20,2,1,What are breach notification obligations under GDPR?,200,True,,,2.2988,2.2908,0.0279,2.2629,0.0,1,0,False,,gemma3:12b,5,v1,dev,542,1,load-test-20260430_002802-c2-r1
+2026-04-30T00:28:20,2,2,What is the incident response process?,200,True,,,4.0989,4.0738,0.0285,4.0453,0.0002,2,0,False,,gemma3:12b,5,v1,dev,413,2,load-test-20260430_002802-c2-r2
+2026-04-30T00:28:22,2,3,What does the cyber security policy say about passwords?,200,True,,,2.7198,2.7113,0.0431,2.6683,0.0,2,0,False,,gemma3:12b,5,v1,dev,171,1,load-test-20260430_002802-c2-r3
+2026-04-30T00:28:24,2,4,What are employee handbook rules about leave?,200,True,,,6.117,6.0952,0.0405,6.0547,0.0,2,0,False,,gemma3:12b,5,v1,dev,1887,1,load-test-20260430_002802-c2-r4
+2026-04-30T00:28:25,2,5,What does the NIST framework say about security controls?,200,True,,,6.5377,6.5119,0.0262,6.4857,0.0,2,0,False,,gemma3:12b,5,v1,dev,339,2,load-test-20260430_002802-c2-r5
+2026-04-30T00:28:31,5,1,What are breach notification obligations under GDPR?,200,True,,,3.2422,3.231,0.0333,3.1977,0.0,2,0,False,,gemma3:12b,5,v1,dev,542,1,load-test-20260430_002802-c5-r1
+2026-04-30T00:28:31,5,2,What is the incident response process?,200,True,,,4.9848,3.7868,0.0348,3.752,1.1861,2,2,False,,gemma3:12b,5,v1,dev,413,2,load-test-20260430_002802-c5-r2
+2026-04-30T00:28:31,5,3,What does the cyber security policy say about passwords?,200,True,,,1.1964,1.1868,0.0269,1.1599,0.0,1,0,False,,gemma3:12b,5,v1,dev,171,1,load-test-20260430_002802-c5-r3
+2026-04-30T00:28:31,5,4,What are employee handbook rules about leave?,200,True,,,10.0013,6.7596,0.0526,6.707,3.2303,2,1,False,,gemma3:12b,5,v1,dev,1836,1,load-test-20260430_002802-c5-r4
+2026-04-30T00:28:31,5,5,What does the NIST framework say about security controls?,200,True,,,11.3675,6.384,0.047,6.337,4.9718,2,0,False,,gemma3:12b,5,v1,dev,339,2,load-test-20260430_002802-c5-r5
+2026-04-30T00:28:43,10,1,What are breach notification obligations under GDPR?,200,True,,,5.5268,3.5547,0.0608,3.4939,1.9615,2,2,False,,gemma3:12b,5,v1,dev,542,1,load-test-20260430_002802-c10-r1
+2026-04-30T00:28:43,10,2,What is the incident response process?,200,True,,,1.9707,1.961,0.0251,1.9359,0.0,1,0,False,,gemma3:12b,5,v1,dev,413,2,load-test-20260430_002802-c10-r2
+2026-04-30T00:28:43,10,3,What does the cyber security policy say about passwords?,200,True,,,6.4565,3.0892,0.045,3.0442,3.3602,2,1,False,,gemma3:12b,5,v1,dev,171,1,load-test-20260430_002802-c10-r3
+2026-04-30T00:28:43,10,4,What are employee handbook rules about leave?,200,True,,,11.469,5.944,0.0514,5.8926,5.5152,2,0,False,,gemma3:12b,5,v1,dev,1822,1,load-test-20260430_002802-c10-r4
+2026-04-30T00:28:43,10,5,What does the NIST framework say about security controls?,200,True,,,3.37,3.3591,0.0304,3.3287,0.0,2,0,False,,gemma3:12b,5,v1,dev,339,2,load-test-20260430_002802-c10-r5
+2026-04-30T00:28:54,12,1,What are breach notification obligations under GDPR?,200,True,,,9.3167,7.3801,0.0265,7.3536,1.9263,2,2,False,,gemma3:12b,5,v1,dev,542,1,load-test-20260430_002802-c12-r1
+2026-04-30T00:28:54,12,2,What is the incident response process?,200,True,,,1.9361,1.9257,0.0282,1.8974,0.0,1,0,False,,gemma3:12b,5,v1,dev,413,2,load-test-20260430_002802-c12-r2
+2026-04-30T00:28:54,12,3,What does the cyber security policy say about passwords?,200,True,,,10.2882,3.2226,0.0258,3.1968,7.0565,2,1,False,,gemma3:12b,5,v1,dev,171,1,load-test-20260430_002802-c12-r3
+2026-04-30T00:28:54,12,4,What are employee handbook rules about leave?,200,True,,,7.0659,7.0555,0.0321,7.0234,0.0,2,0,False,,gemma3:12b,5,v1,dev,1836,1,load-test-20260430_002802-c12-r4
+2026-04-30T00:28:54,12,5,What does the NIST framework say about security controls?,200,True,,,11.6596,2.344,0.0476,2.2964,9.3066,2,0,False,,gemma3:12b,5,v1,dev,339,2,load-test-20260430_002802-c12-r5

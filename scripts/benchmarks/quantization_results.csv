@@ -1,0 +1,9 @@
+model,question,total_response_time_sec,retrieval_time_sec,generation_time_sec,response_length,tokens_per_sec,vram_before_mb,vram_after_mb,vram_delta_mb,retrieved_sources,status,error_message
+gemma3:12b,Explain GDPR breach notification obligations,12.285,2.0253,10.2597,1393,113.3902,1971,11673,9702,Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,success,
+gemma3:12b,Summarize the NIST cybersecurity framework,5.3518,0.0615,5.2903,1817,339.5099,11672,11676,4,NIST.CSWP.29.pdf,success,
+gemma3:12b-q4,Explain GDPR breach notification obligations,0.0761,,,0,0.0,11676,11676,0,,fail,'response'
+gemma3:12b-q4,Summarize the NIST cybersecurity framework,0.0752,,,0,0.0,11675,11675,0,,fail,'response'
+gemma3:12b-q5,Explain GDPR breach notification obligations,0.0748,,,0,0.0,11675,11675,0,,fail,'response'
+gemma3:12b-q5,Summarize the NIST cybersecurity framework,0.0789,,,0,0.0,11670,11670,0,,fail,'response'
+gemma3:12b-q8,Explain GDPR breach notification obligations,0.0717,,,0,0.0,11662,11662,0,,fail,'response'
+gemma3:12b-q8,Summarize the NIST cybersecurity framework,0.0689,,,0,0.0,11658,11658,0,,fail,'response'

@@ -1,0 +1,164 @@
+[
+  {
+    "id": "Q1",
+    "question": "Who does the cyber security policy apply to?",
+    "expected_answer": "It applies to all employees, contractors, volunteers, whether remote or onsite, and anyone with permanent or temporary access to the company systems and hardware.",
+    "source_file": "Cyber-Security-Policy-Template-2021.docx.pdf",
+    "must_include": [
+      "employees",
+      "contractors",
+      "volunteers",
+      "remote or onsite",
+      "permanent or temporary access"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "Q2",
+    "question": "According to the cyber security policy, what are employees told to do to protect personal and company devices?",
+    "expected_answer": "They should use strong passwords, avoid suspicious attachments and clickbait links, keep antivirus updated, not leave devices unattended, avoid sharing personal information, install updates, and log into company systems only through secure private networks.",
+    "source_file": "Cyber-Security-Policy-Template-2021.docx.pdf",
+    "must_include": [
+      "strong passwords",
+      "avoid suspicious attachments or links",
+      "antivirus",
+      "install updates",
+      "secure private networks"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "Q3",
+    "question": "Under the cyber security policy, what should employees do when they notice scams, suspicious emails, or phishing attempts?",
+    "expected_answer": "They must report seeming attacks, suspicious emails, or phishing attempts as soon as possible to the company specialists, who should investigate promptly, resolve the issue, and send a companywide alert when necessary.",
+    "source_file": "Cyber-Security-Policy-Template-2021.docx.pdf",
+    "must_include": [
+      "report as soon as possible",
+      "specialists",
+      "investigate promptly",
+      "companywide alert when necessary"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "Q4",
+    "question": "What are breach notification obligations under the GDPR briefing?",
+    "expected_answer": "When a breach is detected, the employee, data subject, processors, and DPO should immediately inform the controller. The controller then assesses the severity and may need to notify the supervisory authority and affected data subjects within 72 hours, or justify any delay.",
+    "source_file": "GDPR_FINAL_EPSU.pdf",
+    "must_include": [
+      "within 72 hours",
+      "inform the controller",
+      "supervisory authority",
+      "affected data subjects",
+      "justify delay if late"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "Q5",
+    "question": "According to the GDPR briefing, in what cases must a Data Protection Officer be appointed?",
+    "expected_answer": "A DPO must be appointed when processing is carried out by a public authority, when core activities involve large-scale regular and systematic monitoring of data subjects, or when core activities involve large-scale processing of special categories of data or criminal-conviction-related data.",
+    "source_file": "GDPR_FINAL_EPSU.pdf",
+    "must_include": [
+      "public authority",
+      "regular and systematic monitoring on a large scale",
+      "special categories of data on a large scale"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "Q6",
+    "question": "What are the seven guiding principles of data protection listed in the GDPR briefing?",
+    "expected_answer": "The seven principles are lawfulness, fairness and transparency; purpose limitation; data minimisation; accuracy; storage limitation; integrity and confidentiality; and accountability.",
+    "source_file": "GDPR_FINAL_EPSU.pdf",
+    "must_include": [
+      "lawfulness fairness and transparency",
+      "purpose limitation",
+      "data minimisation",
+      "accuracy",
+      "storage limitation",
+      "integrity and confidentiality",
+      "accountability"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "Q7",
+    "question": "What is the purpose of an Incident Response Plan according to the CISA document?",
+    "expected_answer": "An Incident Response Plan is a written document, formally approved by senior leadership, that helps the organization before, during, and after a confirmed or suspected security incident by clarifying roles, responsibilities, and guidance on key activities.",
+    "source_file": "Incident-Response-Plan-Basics_508c.pdf",
+    "must_include": [
+      "before during and after",
+      "confirmed or suspected security incident",
+      "clarifies roles and responsibilities",
+      "approved by senior leadership"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "Q8",
+    "question": "According to the CISA incident response basics sheet, what key roles should be assigned during a cybersecurity incident?",
+    "expected_answer": "The plan should assign an Incident Manager, a Tech Manager, and a Communications Manager.",
+    "source_file": "Incident-Response-Plan-Basics_508c.pdf",
+    "must_include": [
+      "Incident Manager",
+      "Tech Manager",
+      "Communications Manager"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "Q9",
+    "question": "What are the six NIST CSF 2.0 core functions?",
+    "expected_answer": "The six core functions are Govern, Identify, Protect, Detect, Respond, and Recover.",
+    "source_file": "NIST.CSWP.29.pdf",
+    "must_include": [
+      "Govern",
+      "Identify",
+      "Protect",
+      "Detect",
+      "Respond",
+      "Recover"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "Q10",
+    "question": "According to NIST CSF 2.0, what is the purpose of the GOVERN function?",
+    "expected_answer": "The GOVERN function establishes, communicates, and monitors the organization’s cybersecurity risk management strategy, expectations, and policy, and informs how the other five functions are prioritized and implemented.",
+    "source_file": "NIST.CSWP.29.pdf",
+    "must_include": [
+      "strategy expectations and policy",
+      "established communicated and monitored",
+      "informs the other five functions"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": "Q11",
+    "question": "What does the employee handbook say about at-will employment?",
+    "expected_answer": "Unless there is a written employment agreement stating otherwise, employment is at-will, meaning the employee may resign at any time with or without cause and the organization may terminate employment at any time with or without cause.",
+    "source_file": "Sample Employee Handbook - National Council of Nonprofits.pdf",
+    "must_include": [
+      "written employment agreement unless otherwise",
+      "at-will",
+      "with or without cause",
+      "employee may resign",
+      "organization may terminate"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "Q12",
+    "question": "According to the employee handbook, what kinds of information are considered confidential?",
+    "expected_answer": "Any non-public information an employee learns about the organization, its members, or donors through work is confidential, and employees may not disclose it to outsiders or coworkers who do not need to know it.",
+    "source_file": "Sample Employee Handbook - National Council of Nonprofits.pdf",
+    "must_include": [
+      "non-public information",
+      "organization members or donors",
+      "may not disclose",
+      "need to know"
+    ],
+    "difficulty": "medium"
+  }
+]

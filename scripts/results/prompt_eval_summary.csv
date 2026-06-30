@@ -1,0 +1,4 @@
+prompt_name,questions_evaluated,average_retrieval_time_sec,average_generation_time_sec,average_total_time_sec,average_must_include_score,source_accuracy_rate
+baseline,12,0.0483,1.6353,1.6837,0.3292,0.8333
+quality_focused,12,0.0423,1.2029,1.2452,0.3125,0.8333
+short_optimized,12,0.0431,1.2788,1.3219,0.2708,0.8333

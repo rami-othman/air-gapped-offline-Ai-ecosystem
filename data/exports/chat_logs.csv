@@ -1,0 +1,444 @@
+id,timestamp,question,answer,retrieved_sources,helpful
+chat_legacy_0fb94b839768edb61d52,2026-03-26T19:28:55,Explain GDPR breach notification obligations,"Answer:
+When a data breach happens, the employee, data subject, data processors and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority and the data subjects whose data have been compromised. If the responsible authorities are not notified within 72 hours, the data controller needs to provide a reasonable justification for the delay.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_8e427a5464bb7760bfcb,2026-03-26T19:29:40,What are the key steps in incident response?,"Answer:
+Here are the key steps in incident response:
+* Incident reports are triaged and validated.
+* Incidents are categorized and prioritized.
+* Incidents are escalated or elevated as needed.
+* The criteria for initiating incident recovery are applied.
+* Restoration activities are performed to ensure operational availability of systems and services.
+* Recovery actions are selected, scoped, prioritized, and performed.
+
+Sources:
+- NIST.CSWP.29.pdf
+- Incident-Response-Plan-Basics_508c.pdf",NIST.CSWP.29.pdf; Incident-Response-Plan-Basics_508c.pdf,null
+chat_legacy_563ffbd715bfaabd42d0,2026-03-26T19:34:49,Explain GDPR breach notification obligations,"Answer:
+When a data breach happens, the employee, data subject, data processors and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority and the data subjects whose data have been compromised. If the responsible authorities are not notified within 72 hours, the data controller needs to provide a reasonable justification for the delay.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",chat_history; Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_be31af8f00f9392cc7d8,2026-03-27T17:32:15,what is gdpr?,"Answer:
+The General Data Protection Regulation (GDPR) is a regulation. You can find more information here: https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1465452422595&uri=CELEX:32016R0679.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",GDPR_FINAL_EPSU.pdf,null
+chat_legacy_d41d5f8db379174d242c,2026-04-07T12:15:02,what is gdbr,"Answer:
+The General Data Protection Regulation (GDPR) is a regulation. You can find more information at https://eur-lex.europa.eu/legal-content/EN/ TXT/?qid=1465452422595&uri=CELEX:32016R0679.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",GDPR_FINAL_EPSU.pdf; NIST.CSWP.29.pdf,null
+chat_legacy_c63ed3b55f26c3b4e683,2026-04-07T12:19:26,what is gdbr,"Answer:
+The General Data Protection Regulation (GDPR) is a regulation. Further information and reading about it can be found at: https://eur-lex.europa.eu/legal-content/EN/ TXT/?qid=1465452422595&uri=CELEX:32016R0679.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",GDPR_FINAL_EPSU.pdf; NIST.CSWP.29.pdf,null
+chat_legacy_35e1cdccd734dca695ec,2026-04-07T12:27:28,give me every think you know about the gdbr,"Answer:
+EPSU is the European Federation of Public Service Unions, the largest federation of the ETUC, comprising 8 million public service workers from over 260 trade unions across Europe. You can write to gdpr@epsu.org if you have questions or are looking for guidance in dealing with the GDPR.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",GDPR_FINAL_EPSU.pdf,null
+chat_legacy_01246cc8e42815543c0b,2026-04-07T12:39:53,Explain GDPR breach notification obligations,"Answer:
+When a data breach happens, the employee, data subject, data processors and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority and the data subjects whose data have been compromised. If the responsible authorities are not notified within 72 hours, the data controller needs to provide a reasonable justification (e.g. disruption to regular business operations etc.) for the delay.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_cd44d1e67a84ea75d05d,2026-04-07T12:43:56,gdbr,"Answer:
+EPSU is the European Federation of Public Service Unions. You can write to gdpr@epsu.org if you have questions about the GDPR.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",GDPR_FINAL_EPSU.pdf,null
+chat_legacy_2fa55537ea922dc5b942,2026-04-07T12:51:17,What are breach notification obligations under GDPR?,"Answer:
+When a data breach happens, the employee, data subject, data processors and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_1b0271d42738ee2fff49,2026-04-07T13:17:01,What are breach notification obligations under GDPR?,"Answer:
+When a data breach happens, the employee, data subject, data processors and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_89b2527e903aacf44b1f,2026-04-07T13:20:05,What are breach notification obligations under GDPR?,"Answer:
+When a data breach happens, the employee, data subject, data processors and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority. The notification should include which data have been accessed, how many people are concerned by the breach, the name of the data protection officer, what the possible consequences could be, and what will be done to mitigate the breach.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_e5323cc15251453ba458,2026-04-07T14:41:44,string,"Answer:
+This question cannot be answered as the provided context is incomplete.
+
+Sources:
+- Sample Employee Handbook - National Council of Nonprofits.pdf",Sample Employee Handbook - National Council of Nonprofits.pdf,null
+chat_legacy_598e27de52a395f16cc9,2026-04-09T14:32:34,gdbr,"Answer:
+EPSU is the European Federation of Public Service Unions. If you have questions or are looking for guidance in dealing with the GDPR, you can write to gdpr@epsu.org.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",GDPR_FINAL_EPSU.pdf,null
+chat_legacy_b919e2ca3160e10c91d2,2026-04-12T16:53:19,what is GDBR?,"Answer:
+GDPR is a useful introduction to the issues raised by it. The information in this publication is for general information purposes only.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",Sample Employee Handbook - National Council of Nonprofits.pdf; NIST.CSWP.29.pdf; Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_7cbb85c559fada8f7730,2026-04-12T16:54:11,what is GDBR by details\ ?,"Answer:
+This document provides a useful introduction to the issues raised by GDPR. EPSU assumes no responsibility for errors or omissions in the contents of the publication.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",Sample Employee Handbook - National Council of Nonprofits.pdf; Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_24be83d5acf87cc0fea3,2026-04-12T16:58:14,what is gdbr by details?,"Answer:
+The provided text does not detail what GDPR is, but it refers to it as the General Data Protection Regulation. It mentions that Member States may require controllers to consult with the data protection authority if they want to be authorized to use public interest as a lawful basis.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",GDPR_FINAL_EPSU.pdf,null
+chat_legacy_7c71bd22a4e048288e26,2026-04-12T17:22:27,what is gdbr by details?,"Answer:
+The context does not contain the answer.",GDPR_FINAL_EPSU.pdf,null
+chat_legacy_1178e1cc8467a317acb4,2026-04-12T17:23:08,what is gdbr by details?,"I am sorry, but the provided context does not contain information about what ""gdbr"" is. It mentions GDPR, which stands for the General Data Protection Regulation.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",GDPR_FINAL_EPSU.pdf,null
+chat_legacy_7eecdf46d449dfeaad5f,2026-04-12T19:21:27,What are breach notification obligations under GDPR?,"Answer:
+When a data breach happens, the employee, data subject, data processors and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_6a9f7899a941c63e423d,2026-04-12T19:46:12,What are breach notification obligations under GDPR?,"Notification “obligation apply during such incidents according [Source files containing explicit info omitted intentionally so please submit that files during request]"" According this [Missing Resource file or segment].
+
+
+
+Additionally information below related and applies also while under considerations around a violation response due from employer if an information breaches/events happened (see first  source segment concerning actions) due under these breaches notification mandates with reference the article relating specifically when applicable relating breaches assessment according incident magnitude
+
+Note related context surrounding liabilities (such employer liabilities under laws): this [additional sources relating related criminal accountability employee violations relating incident caused breaches per relevant regulations - details details from employee sources, see secondary documents not provided which clarifies employee possible potential issues under potential cause of incident relating employment contracts under specific regulations from employer perspective- further specific employee legal responsibility information beyond employers.",Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_7570a53d3551ff3fae83,2026-04-14T13:55:38,hi,"Answer:
+I am an AI assistant answering questions using only the provided context.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",GDPR_FINAL_EPSU.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf,null
+chat_legacy_b7a250fbaf613272b241,2026-04-16T23:47:43,What are breach notification obligations under GDBR?,"Answer:
+When a data breach happens, the employee, data subject, data processors and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority and the data subjects whose data have been compromised. If the responsible authorities are not notified within 72 hours, the data controller needs to provide a reasonable justification for the delay.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",chat_history; Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_4250dd317a8566c918f5,2026-04-16T23:48:28,What are breach notification obligations under GDBR?,"For GHDR, When you happen the personnel controller needed or if somebody the accident about who and the person/ people may must not happen
+
+[In the scenario presented after the given scenario] within controller inform supervisors responsible be will person controllers severity assessment reasonable
+Need the 
+
+- GDR _ITAL EPSOU p
+  There some, it difficult-impact
+ 
+
+
+
+
+   _Cyber Cyber SeC Policy docxF _26th-dgd f_ final - pd  Cyber sCy DocF cyber _cy docs pd
+
+
+
+       
+
+
+
+        
+
+
+
+
+
+   s to be if still a-data . is an is and to data breach. Article the the Data may an action cases 
+
+
+
+
+
+
+
+
+
+
+
+Answer is, It required the Data within assess and who it happens responsible the
+
+
+
+ources documents does not directly define-to, answer .I cant
+   gdpa gd pa   dgd bgbh brp
+
+
+
+There are information  msses that should determine as part with such situations is beyond documents scope to produce data ,such in questions -or impact, the
+
+***
+
+
+ **",chat_history; Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_ac78a81c9a5f7e5519b7,2026-04-16T23:48:51,What are breach notification obligations under GDBR?,"Answer:
+When a data breach happens, the employee, data subject, data processors and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority and the data subjects whose data have been compromised. If the responsible authorities are not notified within 72 hours, the data controller needs to provide a reasonable justification for the delay.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",chat_history; Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_7e92290b8c6c6191241b,2026-04-16T23:49:07,What are breach notification obligations under GDBR?,"Answer:
+When a data breach happens, the employee, data subject, data processors and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority and the data subjects whose data have been compromised. If the responsible authorities are not notified within 72 hours, the data controller needs to provide a reasonable justification for the delay.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",chat_history; Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_a245a7ec6fe88b4a0f38,2026-04-16T23:49:47,What are breach notification obligations under GDBR?,"During instances when “there had bennA)
+ - There involves ""destruction,...
+ The answer to ‘security breecham to dismiss” or ither of seriousn data or loss (egthee must examir. iommission.” The law says those authorities who do, hef"" regulation.* “Data br 80 a situation r each.”
+
+If possible 4a;f0_dta irt is required ept tntation ien"" or ather s an aral legal h of that t8. nstg f6s*0 f_r_5"" data, he
+
+o an examination r e each imfcty_ of,or aecsa3i e of the regitration an”_ _9 the l5""
+
+In these cir* to give onn be hard"" the c
+
+s0 r6 f s
+
+- and
+ * is tns8o "" rts i:1b o *m c“thec l ige is ot f re s o th ""the s th_7 of * “ the i:c9 o p_ f a0*o l4 i is ichect * * "" "" ction l1 b
+
+:4 ""l * f-2 _ s *"" "" i d ct. In0r l*7 a i
+hecct *""0 h d. c: s1t. -d ical h ree c .e nion s - the.c , an ct.* a504:2, i o-5 n l_a, h b re_ct8 t0 ,_5 t
+ion re f y2 l to6d; e d “ * e “h
+ 6 ick;h* n _ i he r p
+
+Answer.i2 ""n0 d h0; ighr r73d
+
+ion “high n r
+
+1 f the in rct2 nion .3;3 s tation 0 h6 . "" he is _03 ct on r""e3 ""on l of is1h* re8ct *"" ._s""2_ "" h . is0i-2 re a.
+1""nion e t. d6s “ irl2l b _ ction i3 b
+
+rts. In"" th6 s“ ession the lof th. is;h2- n th"" t4
+
+ - if a he ct b y- . he: e of an3:6 re of_ o 42
+
+t r - h nctt the re ct6 icle t - n""f s e is re*t or y_ ible ""
+Sources:<rd t * o _o th b.4, r1
+
+n i on:h1 f an "" ""r rth h ; n3_ rre - o2t an an ,i. on o on ""0 ""a a re5l ctt2 s c o s ot b- f789 re *t 0 b ,e o ._0
+o6 an. on e _ *e3: n f6 is ,4 h n a re :h n2 t t d ""ct c"" on the6"" s -5 ,i,4i d.e
+* on he of5
+an a9t- _c or5 d."" t0, of c th:i _ , n r* d b0 b _9o f a th6 h3s yl th_6 ""o thec952 ctio. th of rctd "" icit ""2 ct .l h c to of h1 of3n y th"" to c r he-7h orr h he. c4 n: he f h on anhe the8 d an f: th re e b the "" to - th79 , th e i d to c2l610*6, th of y or irted he s aion l n3 d; a b or: _r o70 of
+GDQ _05e th ofs14 d ""i .1, otb
+2, *d2 cct* t1 the8_ c ""a inr4h f of ot i"" *he
+
+"" ication and mightt-r on 1f.
+
+6:
+
+a3 o- and l re to of5
+
+7h i9 of re0 a _re or yb:s1* ct re83. ""0 o
+
+tion thatt racter or7
+When : to00. l ct h i"" ction ""l he an he e to1 e s f he yre l""2 b rix c1 e- an*n0 icht;e f of. of d34 ""9
+
+The information, data are "" _on in a5i “2 re 6e b ction5; i n:i to andt a4 a: the *to
+
+the anct an7 to"" r9he .d of i on *c ot5f ""l8*o to h- ighti th3 thon* e;c"" b94d8 * a o on re e th2on r_b in t8n e ional* s c d l s o5b f6* d3*
+
+92t -he o c o an, s3 h7; to ot3 b bion orc.c he-sct d-o5 s ,t s c l: a
+to *91;on of"" "" a7tct r s :i y l2""n : . i e7 e; ""ohe *6 th d- ct_ c*on6b an of reon71 of cto4:l *h a re an h0he* he a . b an*d a and- and3 an a to "" *of * o
+
+ot n s d -8 o in f
+
+nct- of
+ the09 , a: t83 ichei o24l re ct7 -
+
+ the1he . h to e "" s.f -l an- or .
+
+and - - i on6-s n3 e , _to e :d fto e y s _ s4 s h6 o
+in,i0 to9b5i
+
+ * 96 ione;n e th ct a c re
+
+i- re8 -3s in b y _d6e1ct f1"" c n a2 o n a : the d r a he r o in l ,n;4 o the he3 s86 and1ct4b;0;e c2 th7 _on an_ h r2 * and ""he- h1 of
+in :n on o to"" .c5s o he e c : ional_ i ct dhe *on f: in on .tth1 ct"" or th .re1 ct e*3 ""s o c he e; h3*re;e _ re o the i r ""2 th8 to the on, 0. the :4oan :re ot "" to63 re t and
+o :an d"" - s- .t the7s .f,6
+
+ ightt . c1 h he i hf h1 th : c to ""
+ the5o o to c .2c irl_ . b anr4o2c y r_3b3 e he. th d; hec *00to o7 an a2he.l n r
+ the _d * _ th he an a t;on ot r* re"" e d _ r9 s; o, or1 of ct"" s *05. l - a s f1 ot he
+
+of ""on on ;d b the or on th ct d _- o ct in
+When
+o a Dataa
+ rce9 h b d,s an or i r to of1,e re to _t h0 _ h c ,
+
+4 h. he f8b b5c5 a
+d re c4l ,1 ""4o the5l c6 re th .n:2n on1 to s u s, _ t ;o5-s9 "" - .9,n to e f ution:e-n re n-a"" n re ot ,e b:ctn ct h1 e4 re o1on ot6to ct f ""9 "" erto _ n: c a s , n91 - ct:to l th d1 a. -n an f "" s * ct and1a_ d
+
+5 re93 f an r8""ct o of c a t93c
+
+r;a th i*h a
+5 an b ct i r f3o6 the; r6ct ct0s -t""h0 an; the and _ . o is an "" e. e an i on5 t5. re4 th6 c n or3* ortei o "" ree , re i i-1 a e c the "" f l* an a c ct i an he ct : of-s d d re and ""
+
+Sources
+
+[GDOR FIN A I ER * PS
+
+e he35; n ""
+
+59 _s - and
+ the th .s3 th onhe;i of
+b - e :l d8 he on h r t; and0, o t:i he:d ior ""r 
+
+22 he thea , n _ ,
+* re; a;5e erto ,t ,he ,1 irect ot to t95 he s h a5 re1t :d c d9 t *o.l.he: thd0
+23o; n2 andn. ot l l
+
+ ,_ iao b l. _ ot l y""
+ thed ando6 he - e h6.
+.5o3l , n ""d i n b6he -a ot23- tothe h ct r8n f7 ertoct t and to s to .ot t, a6d2 *n hhe_7l; ""d s9re *th3s . to d;i , "" o4t_ ot r he b .ct_ ,2 the on c ofo to r on he,o or he ot the9"" andhe th * h d on otct
+9 *on on2on f an c. he ,.s he e
+9 o of the.n533 and n-r3,re e or the an otb- ot
+
+7 of 9
+
+o he,d4 the the*n: _5d2-b t i043 o l ; o7e n ot ; a ot on i er to4 to n,d : of-2 c0he_l o *he * erno the of and05, "" -re4 s9i e an :re e33h r otb th hect he * 
+
+
+
+s*4t he.e to on he2 a ional or t5 7- . tothe: -6 ot f ""b i ct ; otc3on2 ct r t l an f1",chat_history; Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_e9cc634179a414248889,2026-04-16T23:51:57,What are breach notification obligations under GDBR?,"Answer:
+When a data breach happens, the employee, data subject, data processors and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority and the data subjects whose data have been compromised. If the responsible authorities are not notified within 72 hours, the data controller needs to provide a reasonable justification for the delay. A data breach is any unlawful destruction, loss, alteration, unauthorised disclosure of, or access to, personal data.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",chat_history; Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_6ed4e8935fb99828920a,2026-04-16T23:52:07,What are breach notification obligations under GDBR?,"Answer:
+When a data breach happens, the employee, data subject, data processors and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority and the data subjects whose data have been compromised. If the responsible authorities are not notified within 72 hours, the data controller needs to provide a reasonable justification for the delay. A data breach is any unlawful destruction, loss, alteration, unauthorised disclosure of, or access to, personal data.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",chat_history; Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_dfb145d309a4484f214d,2026-04-16T23:52:24,What are breach notification obligations under GDBR?,"Answer:
+When a data breach happens, the employee, data subject, data processors and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority and the data subjects whose data have been compromised. If the responsible authorities are not notified within 72 hours, the data controller needs to provide a reasonable justification for the delay. A data breach is any unlawful destruction, loss, alteration, unauthorised disclosure of, or access to, personal data.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",chat_history; Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_f3b1e1c9a47bb2466557,2026-04-16T23:52:30,What are breach notification obligations under GDBR?,"Answer:
+When a data breach happens, the employee, data subject, data processors and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority and the data subjects whose data have been compromised. If the responsible authorities are not notified within 72 hours, the data controller needs to provide a reasonable justification for the delay. A data breach is any unlawful destruction, loss, alteration, unauthorised disclosure of, or access to, personal data.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",chat_history; Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_2faf70f83c91b7e6c6e3,2026-04-16T23:53:51,What are breach notification obligations under GDBR?,"Answer:
+When a data breach happens, the employee, data subject, data processors and data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority and the data subjects whose data have been compromised. If the responsible authorities are not notified within 72 hours, the data controller needs to provide a reasonable justification for the delay. A data breach is any unlawful destruction, loss, alteration, unauthorised disclosure of, or access to, personal data.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",chat_history; Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_cc0024ec095e77b41e32,2026-04-17T00:07:29,"According to the cyber security policy, what are employees told to do to protect personal and company devices?","Answer:
+Employees should only access company’s emails and systems on company issued devices. Employees also should not use company’s devices and equipment to access personal emails, or accounts.
+
+Sources:
+- Cyber-Security-Policy-Template-2021.docx.pdf",Cyber-Security-Policy-Template-2021.docx.pdf,null
+chat_legacy_1f508534dc0858281f98,2026-04-17T00:08:31,"Under the cyber security policy, what should employees do when they notice scams, suspicious emails, or phishing attempts?","Answer:
+Employees must report seeming attacks, suspicious emails, or phishing attempts as soon as possible to specialists. Specialists must investigate promptly, resolve the issue, and send a companywide alert when necessary.
+
+Sources:
+- Cyber-Security-Policy-Template-2021.docx.pdf",Cyber-Security-Policy-Template-2021.docx.pdf,null
+chat_legacy_0b29611f4454912a1610,2026-04-19T01:17:54,Who does the cyber security policy apply to?,"This policy applies to all employees, contractors, volunteers remote or onsite, and anyone who has permanent or temporary access to our systems and hardware. [Cyber-Security-Policy-Template-2021.docx.pdf]",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf,null
+chat_legacy_79f08dbbafb07b2f0a01,2026-04-19T01:18:51,Who does the cyber security policy apply to?,"This policy applies to all employees, contractors, volunteers remote or onsite, and anyone who has permanent or temporary access to our systems and hardware. [Cyber-Security-Policy-Template-2021.docx.pdf]",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf,null
+chat_legacy_00a73ce410dec01ea954,2026-04-19T01:19:11,Who does the cyber security policy apply to? and why?,"The policy applies to all employees, contractors, volunteers remote or onsite, and anyone who has permanent or temporary access to our systems and hardware. This is because the more we rely on technology to collect, store, and manage information, the more vulnerable we become to severe security breaches (Cyber-Security-Policy-Template-2021.docx.pdf).",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf,null
+chat_legacy_935f98bdeec62408add9,2026-04-18T22:19:58,Who does the cyber security policy apply to?,"This policy applies to all employees, contractors, volunteers remote or onsite, and anyone who has permanent or temporary access to our systems and hardware. [Cyber-Security-Policy-Template-2021.docx.pdf]",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf,null
+chat_legacy_2d2432d861324844db2f,2026-04-18T22:20:18,Who does the cyber security policy apply to?,"Here's a breakdown of who the cybersecurity policies apply to, based on the provided documents:
+
+*   **Cyber Security Policy Template (Caribbean Society for Human Resource Professionals):** Applies to all employees.
+*   **Sample Employee Handbook (National Council of Nonprofits):** Applies to employees and ""other individuals who have a relationship with [the organization]"" (e.g., contractors, volunteers, etc.).
+*   **NIST Cybersecurity Framework (CSF):** While not a policy itself, it's intended for use by a broad audience including executives, managers, and practitioners, regardless of their cybersecurity expertise.
+
+
+
+Essentially, the policies aim to cover anyone associated with the organization, not just direct employees.",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf,null
+chat_legacy_d92b42eeda9f946d3079,2026-04-18T22:24:43,Who does the cyber security policy apply to?,"This policy applies to all employees, contractors, volunteers remote or onsite, and anyone who has permanent or temporary access to our systems and hardware. [Cyber-Security-Policy-Template-2021.docx.pdf]",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf,null
+chat_legacy_d6639327a2ada1896b3d,2026-04-19T01:28:33,Who does the cyber security policy apply to?,"The cyber security policy applies to all employees, contractors, volunteers remote or onsite, and anyone who has permanent or temporary access to our systems and hardware.",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf,null
+chat_legacy_0238082bb7f4608fa58e,2026-04-18T22:29:00,Who does the cyber security policy apply to?,The cyber security policy outlines guidelines and provisions for preserving the security of our data and technology infrastructure.,Cyber-Security-Policy-Template-2021.docx.pdf,null
+chat_legacy_e3858d95458386485096,2026-04-18T22:29:17,Who does the cyber security policy apply to?,"The cyber security policy applies to all employees, contractors, volunteers remote or onsite, and anyone who has permanent or temporary access to our systems and hardware.",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf,null
+chat_legacy_b6c80720c5a4d712b930,2026-04-19T01:32:18,Who does the cyber security policy apply to?,"The cyber security policy applies to all employees, contractors, volunteers remote or onsite, and anyone who has permanent or temporary access to our systems and hardware.",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf,null
+chat_legacy_adab0861e004f970aa4f,2026-04-19T01:32:25,Who does the cyber security policy apply to?,"The cyber security policy applies to all employees, contractors, volunteers remote or onsite, and anyone who has permanent or temporary access to our systems and hardware.",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf,null
+chat_legacy_9ccd1189bf727f384c4d,2026-04-18T22:32:47,"According to the cyber security policy, what are employees told to do to protect personal and company devices?",Employees should only access company emails and systems on company-issued devices and should not use company devices to access personal emails or accounts. This is vital because ignoring these protocols can introduce security risks to both company and personal data.,Cyber-Security-Policy-Template-2021.docx.pdf,null
+chat_legacy_a49dc129a6d5dec051bc,2026-04-18T22:33:56,"According to the cyber security policy, what are employees told to do to protect personal and company devices?",Employees should only access company emails and systems on company-issued devices and should not use company devices to access personal emails or accounts. This is vital because ignoring these protocols can introduce security risks to both company and personal data.,Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_b4391300c5f2b2ca5f6a,2026-04-18T22:34:06,"According to the cyber security policy, what are employees told to do to protect personal and company devices?",Employees should only access company emails and systems on company-issued devices and should not use company devices to access personal emails or accounts. This is vital because ignoring these protocols can introduce security risks to both company and personal data.,Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_1b657290a7bf762a60c3,2026-04-18T22:34:15,"According to the cyber security policy, what are employees told to do to protect personal and company devices????",Employees should only access company emails and systems on company-issued devices and should not use company devices to access personal emails or accounts. This is vital because ignoring these protocols can introduce security risks to both company and personal data.,Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_119f6f19ae3b58a55b78,2026-04-18T22:34:40,"According to the cyber security policy, what are employees told to do to protect personal and company devices????","According to the provided cyber security policy documents, here's what employees are told to do to protect personal and company devices:
+
+*   **Lock screens and devices** when leaving desks.
+*   **Report stolen or damaged equipment** as soon as possible to HR.
+*   **Change all account passwords** when a device is stolen or compromised.
+*   **Report perceived scams, privacy breaches, and hacking attempts** promptly.
+*   **Encrypt data** by manager or IT specialist.
+*   **Only share confidential data** over the company network/system, not on public Wi-Fi.
+*   **Ensure recipients of data are properly authorized** and have adequate security policies.
+*   **Store data in a shared drive** that only authorized persons can access.
+*   **Install security updates** of browsers and systems monthly or as soon as updates are available.
+*   **Log into company accounts and systems** through secure and private networks only.
+
+
+
+These measures are intended to mitigate the possibility of security breaches.",Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf; NIST.CSWP.29.pdf; Incident-Response-Plan-Basics_508c.pdf,null
+chat_legacy_3c792d6507bb613d76b3,2026-04-19T01:41:15,"Under the cyber security policy, what should employees do when they notice scams, suspicious emails, or phishing attempts?","Employees must report seeming attacks, suspicious emails, or phishing attempts as soon as possible to specialists. Specialists must investigate promptly, resolve the issue, and send a companywide alert when necessary.",Cyber-Security-Policy-Template-2021.docx.pdf,null
+chat_legacy_78e8d87ba34b09b990a2,2026-04-19T01:44:58,"Under the cyber security policy, what should employees do when they notice scams, suspicious emails, or phishing attempts?","Employees must report seeming attacks, suspicious emails, or phishing attempts as soon as possible to specialists. Specialists must investigate promptly, resolve the issue, and send a companywide alert when necessary.",Cyber-Security-Policy-Template-2021.docx.pdf,null
+chat_legacy_0fb135b0d7d9b57beef0,2026-04-19T01:45:27,"Under the cyber security policy, what should employees do when they notice scams, suspicious emails, or phishing attempts?","Employees must report seeming attacks, suspicious emails, or phishing attempts as soon as possible to specialists. Specialists must investigate promptly, resolve the issue, and send a companywide alert when necessary.",Cyber-Security-Policy-Template-2021.docx.pdf,null
+chat_legacy_e549f00d06015959f0fa,2026-04-19T01:46:03,"""What are breach notification obligations under GDBR?""","When a data breach occurs, employees, data subjects, data processors, and the data protection officer must immediately (within 72 hours) inform the controller as soon as the breach is detected. The controller must then assess the severity of the breach and may need to inform the supervisory authority and the data subjects whose data has been compromised. If the responsible authorities are not notified within 72 hours, the data controller needs to provide a reasonable justification for the delay. A data breach is any unlawful destruction, loss, alteration, unauthorized disclosure of, or access to, personal data.
+
+Sources:
+- GDPR_FINAL_EPSU.pdf",chat_history; Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_894efd4e9e63b5a79b69,2026-04-19T01:49:13,What is the purpose of an Incident Response Plan according to the CISA document?,"The provided context does not contain information about an Incident Response Plan or a CISA document. Therefore, I cannot answer your question.",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_e8f779c871caccaae8d5,2026-04-19T01:49:59,"based on ""Incident-Response-Plan-Basics_508c.pdf"" What is the purpose of an Incident Response Plan according to the CISA document?","The provided context does not contain information from ""Incident-Response-Plan-Basics_508c.pdf"" or mention the CISA document. Therefore, I cannot answer your question.
+
+Cyber-Security-Policy-Template-2021.docx.pdf
+GDPR_FINAL_EPSU.pdf
+NIST.CSWP.29.pdf",Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf; NIST.CSWP.29.pdf,null
+chat_legacy_1f752cef828c9d945bc4,2026-04-19T01:50:41,"based on Incident-Response-Plan-Basics_508c, What is the purpose of an Incident Response Plan according to the CISA document?","The provided context does not contain information about the purpose of an Incident Response Plan according to a CISA document.
+
+
+
+Source documents:
+Cyber-Security-Policy-Template-2021.docx.pdf
+GDPR_FINAL_EPSU.pdf
+Sample Employee Handbook - National Council of Nonprofits.pdf
+NIST.CSWP.29.pdf",Cyber-Security-Policy-Template-2021.docx.pdf; GDPR_FINAL_EPSU.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf; NIST.CSWP.29.pdf,null
+chat_legacy_5830cd6f04273d566316,2026-04-18T22:51:16,What is the purpose of an Incident Response Plan according to the CISA document?,"The provided context does not contain information about an Incident Response Plan or a CISA document. Therefore, I cannot answer your question.",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_971b02ffe8657fcda6c7,2026-04-18T22:51:27,What is the purpose of an Incident Response Plan according to the CISA document?,"According to the CISA document ""Incident Response Plan Basics,"" the purpose of an Incident Response Plan (IRP) is to **provide a structured approach to effectively detect, contain, eradicate, and recover from cybersecurity incidents.**
+
+Here's a breakdown of what that means, according to the document:
+
+*   **Structured Approach:** It's a pre-defined set of procedures to follow when an incident occurs, rather than reacting haphazardly.
+*   **Detect, Contain, Eradicate, and Recover:** These are the core phases the plan guides organizations through.
+*   **Effectively:** The plan aims to minimize damage, disruption, and recovery time.
+
+
+
+Essentially, it's about being prepared so you can respond quickly and efficiently when something goes wrong.",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf; GDPR_FINAL_EPSU.pdf; Incident-Response-Plan-Basics_508c.pdf,null
+chat_legacy_af21d7ff3bd34a4dd8ab,2026-04-18T22:51:49,What is the purpose of an Incident Response Plan according to the CISA document?,The provided documents do not contain information about the purpose of an Incident Response Plan according to the CISA.,Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_fb906519e9157c9250b6,2026-04-18T22:52:00,What is the purpose of an Incident Response Plan according to the CISA document?,The provided documents do not contain information about the purpose of an Incident Response Plan according to the CISA document.,Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_9116951b294f823a71c6,2026-04-18T22:52:09,What is the purpose of an Incident Response Plan according to the CISA document?,"The provided documents do not contain information about an Incident Response Plan or CISA. Therefore, I cannot answer your question using the provided context.",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_ba24e23485947e638713,2026-04-18T22:52:20,What is the purpose of an Incident Response Plan according to the CISA document?,The provided context does not contain information about the purpose of an Incident Response Plan according to the CISA document.,Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_d498fa152949fa8bf5e3,2026-04-18T22:52:32,What is the purpose of an Incident Response Plan according to the CISA document?,"The provided documents do not contain information about an Incident Response Plan or a CISA document. Therefore, I am unable to answer your question.",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf; GDPR_FINAL_EPSU.pdf,null
+chat_legacy_d594d385cae720e3cf0a,2026-04-18T22:52:42,What is the purpose of an Incident Response Plan according to the CISA document?,"According to the CISA document ""Incident Response Plan Basics,"" the purpose of an Incident Response Plan is to **provide a structured approach to effectively identify, contain, eradicate, and recover from cybersecurity incidents.**
+
+Essentially, it's a roadmap for how an organization should react when a security incident occurs, minimizing damage and ensuring a swift return to normal operations.",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf; GDPR_FINAL_EPSU.pdf; Incident-Response-Plan-Basics_508c.pdf,null
+chat_legacy_23a4163da3c8cc5a72be,2026-04-19T01:53:23,"According to the CISA incident response basics sheet, what key roles should be assigned during a cybersecurity incident?","The provided context does not specify key roles that should be assigned during a cybersecurity incident. It outlines steps in incident response, including triaging and validating incident reports, categorizing and prioritizing incidents, escalating incidents as needed, applying criteria for incident recovery, performing restoration activities, selecting and performing recovery actions, integrating threat intelligence into analysis, and declaring incidents when defined criteria are met.",NIST.CSWP.29.pdf; chat_history,null
+chat_legacy_6b286d714d8276e74516,2026-04-19T10:26:56,What is the purpose of an Incident Response Plan according to the CISA document?,"The provided context does not contain information about an Incident Response Plan or a CISA document. Therefore, I cannot answer your question.",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf; GDPR_FINAL_EPSU.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf,null
+chat_legacy_612401164e25d1d716d5,2026-04-19T10:29:45,What is the purpose of an Incident Response Plan according to the CISA document?,"The provided context does not contain information about an Incident Response Plan or a CISA document. Therefore, I cannot answer your question.",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf; GDPR_FINAL_EPSU.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf,null
+chat_legacy_649a9c176fff052628a8,2026-04-19T10:40:31,What is the purpose of an Incident Response Plan according to the CISA document?,"The provided context does not contain information about an Incident Response Plan or a CISA document. Therefore, I cannot answer your question.",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf; GDPR_FINAL_EPSU.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf,null
+chat_legacy_31dfe043133c6bcafefd,2026-04-19T10:42:30,What is the purpose of an Incident Response Plan according to the CISA document?,"According to the CISA document ""Incident Response Plan Basics,"" the purpose of an Incident Response Plan (IRP) is to **provide a structured approach to effectively detect, contain, eradicate, and recover from cybersecurity incidents.**
+
+Here's a breakdown of what that means, according to the document:
+
+*   **Structured Approach:** It's a pre-defined set of procedures to follow when an incident occurs, ensuring a coordinated and efficient response.
+*   **Detect, Contain, Eradicate, and Recover:** These are the core phases the plan guides organizations through to handle incidents.
+*   **Effectively:** The plan aims to minimize damage, disruption, and recovery time.
+
+
+
+Essentially, it's about being prepared so you can react quickly and minimize the impact of a cyberattack.",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf; GDPR_FINAL_EPSU.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf; Incident-Response-Plan-Basics_508c.pdf,null
+chat_479181ac1af64130976e6fd6faeb3a5f,2026-04-19T12:29:49,What is the purpose of an Incident Response Plan according to the CISA document?,"The provided context does not contain information about an Incident Response Plan or a CISA document. Therefore, I cannot answer your question.",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf; GDPR_FINAL_EPSU.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf,false
+chat_28878f320e3a413aa177808c000a578a,2026-04-19T12:34:27,What is the purpose of an Incident Response Plan according to the CISA document?,"The provided context does not contain information about an Incident Response Plan or a CISA document.
+
+
+
+Source documents:
+Cyber-Security-Policy-Template-2021.docx.pdf
+NIST.CSWP.29.pdf
+GDPR_FINAL_EPSU.pdf
+Sample Employee Handbook - National Council of Nonprofits.pdf",Cyber-Security-Policy-Template-2021.docx.pdf; NIST.CSWP.29.pdf; GDPR_FINAL_EPSU.pdf; Sample Employee Handbook - National Council of Nonprofits.pdf,null

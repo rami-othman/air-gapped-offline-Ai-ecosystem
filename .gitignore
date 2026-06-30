@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+venv/
+env/
+.env
+
+# Vector DB
+chroma/
+chroma-data/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large models
+*.gguf
+
+# Runtime/generated data
+data/exports/
+scripts/results/finetune/
+scripts/results/migrations/
+scripts/results/validation/

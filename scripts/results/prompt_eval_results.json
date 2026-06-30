@@ -1,0 +1,1161 @@
+{
+  "generated_at": "2026-04-18T22:43:20+00:00",
+  "dataset_path": "C:\\Users\\omarch\\Desktop\\Rami\\projects\\air-gapped-ai\\air-gapped-offline-Ai-ecosystem\\scripts\\eval_dataset.json",
+  "model": "gemma3:12b",
+  "runtime_options": {
+    "num_ctx": 4096,
+    "num_batch": 64,
+    "num_thread": 16,
+    "temperature": 0.2
+  },
+  "top_k": 5,
+  "prompt_variants": [
+    {
+      "name": "baseline",
+      "description": "Current production prompt from app/full_rag.py"
+    },
+    {
+      "name": "quality_focused",
+      "description": "Longer prompt that emphasizes completeness, synthesis, and grounded detail."
+    },
+    {
+      "name": "short_optimized",
+      "description": "Shorter prompt that keeps the same grounding rules with fewer instruction tokens."
+    }
+  ],
+  "results": [
+    {
+      "prompt_name": "baseline",
+      "question_id": "Q1",
+      "question": "Who does the cyber security policy apply to?",
+      "answer": "The cyber security policy applies to all employees, contractors, volunteers remote or onsite, and anyone who has permanent or temporary access to our systems and hardware.",
+      "retrieved_sources": [
+        "Cyber-Security-Policy-Template-2021.docx.pdf",
+        "NIST.CSWP.29.pdf"
+      ],
+      "expected_source": "Cyber-Security-Policy-Template-2021.docx.pdf",
+      "correct_source": 1,
+      "must_include_total": 5,
+      "must_include_matched": 5,
+      "must_include_score": 1.0,
+      "retrieval_time_sec": 0.0576,
+      "generation_time_sec": 1.2404,
+      "total_time_sec": 1.298,
+      "difficulty": "easy",
+      "expected_answer": "It applies to all employees, contractors, volunteers, whether remote or onsite, and anyone with permanent or temporary access to the company systems and hardware.",
+      "matched_must_include": [
+        "employees",
+        "contractors",
+        "volunteers",
+        "remote or onsite",
+        "permanent or temporary access"
+      ],
+      "missing_must_include": [],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "quality_focused",
+      "question_id": "Q1",
+      "question": "Who does the cyber security policy apply to?",
+      "answer": "The cyber security policy applies to all employees, contractors, volunteers (remote or onsite), and anyone who has permanent or temporary access to our systems and hardware.",
+      "retrieved_sources": [
+        "Cyber-Security-Policy-Template-2021.docx.pdf",
+        "NIST.CSWP.29.pdf"
+      ],
+      "expected_source": "Cyber-Security-Policy-Template-2021.docx.pdf",
+      "correct_source": 1,
+      "must_include_total": 5,
+      "must_include_matched": 5,
+      "must_include_score": 1.0,
+      "retrieval_time_sec": 0.0397,
+      "generation_time_sec": 0.9664,
+      "total_time_sec": 1.0061,
+      "difficulty": "easy",
+      "expected_answer": "It applies to all employees, contractors, volunteers, whether remote or onsite, and anyone with permanent or temporary access to the company systems and hardware.",
+      "matched_must_include": [
+        "employees",
+        "contractors",
+        "volunteers",
+        "remote or onsite",
+        "permanent or temporary access"
+      ],
+      "missing_must_include": [],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "short_optimized",
+      "question_id": "Q1",
+      "question": "Who does the cyber security policy apply to?",
+      "answer": "Answer:\nThis policy applies to all employees, contractors, volunteers remote or onsite, and anyone who has permanent or temporary access to our systems and hardware.\n\nSources:\n- Cyber-Security-Policy-Template-2021.docx.pdf",
+      "retrieved_sources": [
+        "Cyber-Security-Policy-Template-2021.docx.pdf",
+        "NIST.CSWP.29.pdf"
+      ],
+      "expected_source": "Cyber-Security-Policy-Template-2021.docx.pdf",
+      "correct_source": 1,
+      "must_include_total": 5,
+      "must_include_matched": 5,
+      "must_include_score": 1.0,
+      "retrieval_time_sec": 0.0401,
+      "generation_time_sec": 1.2962,
+      "total_time_sec": 1.3364,
+      "difficulty": "easy",
+      "expected_answer": "It applies to all employees, contractors, volunteers, whether remote or onsite, and anyone with permanent or temporary access to the company systems and hardware.",
+      "matched_must_include": [
+        "employees",
+        "contractors",
+        "volunteers",
+        "remote or onsite",
+        "permanent or temporary access"
+      ],
+      "missing_must_include": [],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "baseline",
+      "question_id": "Q2",
+      "question": "According to the cyber security policy, what are employees told to do to protect personal and company devices?",
+      "answer": "Employees should only access company emails and systems on company-issued devices and should not use company devices to access personal emails or accounts. This is vital because ignoring these protocols can introduce security risks to company and personal data.",
+      "retrieved_sources": [
+        "Cyber-Security-Policy-Template-2021.docx.pdf"
+      ],
+      "expected_source": "Cyber-Security-Policy-Template-2021.docx.pdf",
+      "correct_source": 1,
+      "must_include_total": 5,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0537,
+      "generation_time_sec": 1.4769,
+      "total_time_sec": 1.5306,
+      "difficulty": "medium",
+      "expected_answer": "They should use strong passwords, avoid suspicious attachments and clickbait links, keep antivirus updated, not leave devices unattended, avoid sharing personal information, install updates, and log into company systems only through secure private networks.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "strong passwords",
+        "avoid suspicious attachments or links",
+        "antivirus",
+        "install updates",
+        "secure private networks"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "quality_focused",
+      "question_id": "Q2",
+      "question": "According to the cyber security policy, what are employees told to do to protect personal and company devices?",
+      "answer": "According to the cyber security policy, employees should only access company emails and systems on company-issued devices and should not use company devices to access personal emails or accounts.",
+      "retrieved_sources": [
+        "Cyber-Security-Policy-Template-2021.docx.pdf"
+      ],
+      "expected_source": "Cyber-Security-Policy-Template-2021.docx.pdf",
+      "correct_source": 1,
+      "must_include_total": 5,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0513,
+      "generation_time_sec": 1.0214,
+      "total_time_sec": 1.0727,
+      "difficulty": "medium",
+      "expected_answer": "They should use strong passwords, avoid suspicious attachments and clickbait links, keep antivirus updated, not leave devices unattended, avoid sharing personal information, install updates, and log into company systems only through secure private networks.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "strong passwords",
+        "avoid suspicious attachments or links",
+        "antivirus",
+        "install updates",
+        "secure private networks"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "short_optimized",
+      "question_id": "Q2",
+      "question": "According to the cyber security policy, what are employees told to do to protect personal and company devices?",
+      "answer": "Answer:\nEmployees should only access company’s emails and systems on company issued devices and should not use company’s devices and equipment to access personal emails or accounts.\n\nSources:\n- Cyber-Security-Policy-Template-2021.docx.pdf",
+      "retrieved_sources": [
+        "Cyber-Security-Policy-Template-2021.docx.pdf"
+      ],
+      "expected_source": "Cyber-Security-Policy-Template-2021.docx.pdf",
+      "correct_source": 1,
+      "must_include_total": 5,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.053,
+      "generation_time_sec": 1.1958,
+      "total_time_sec": 1.2489,
+      "difficulty": "medium",
+      "expected_answer": "They should use strong passwords, avoid suspicious attachments and clickbait links, keep antivirus updated, not leave devices unattended, avoid sharing personal information, install updates, and log into company systems only through secure private networks.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "strong passwords",
+        "avoid suspicious attachments or links",
+        "antivirus",
+        "install updates",
+        "secure private networks"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "baseline",
+      "question_id": "Q3",
+      "question": "Under the cyber security policy, what should employees do when they notice scams, suspicious emails, or phishing attempts?",
+      "answer": "Employees must report seeming attacks, suspicious emails, or phishing attempts as soon as possible to specialists. Specialists must investigate promptly, resolve the issue, and send a companywide alert when necessary.",
+      "retrieved_sources": [
+        "Cyber-Security-Policy-Template-2021.docx.pdf"
+      ],
+      "expected_source": "Cyber-Security-Policy-Template-2021.docx.pdf",
+      "correct_source": 1,
+      "must_include_total": 4,
+      "must_include_matched": 3,
+      "must_include_score": 0.75,
+      "retrieval_time_sec": 0.0334,
+      "generation_time_sec": 1.3815,
+      "total_time_sec": 1.4149,
+      "difficulty": "easy",
+      "expected_answer": "They must report seeming attacks, suspicious emails, or phishing attempts as soon as possible to the company specialists, who should investigate promptly, resolve the issue, and send a companywide alert when necessary.",
+      "matched_must_include": [
+        "specialists",
+        "investigate promptly",
+        "companywide alert when necessary"
+      ],
+      "missing_must_include": [
+        "report as soon as possible"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "quality_focused",
+      "question_id": "Q3",
+      "question": "Under the cyber security policy, what should employees do when they notice scams, suspicious emails, or phishing attempts?",
+      "answer": "Employees must report seeming attacks, suspicious emails, or phishing attempts as soon as possible to specialists. Specialists must investigate promptly, resolve the issue, and send a companywide alert when necessary.",
+      "retrieved_sources": [
+        "Cyber-Security-Policy-Template-2021.docx.pdf"
+      ],
+      "expected_source": "Cyber-Security-Policy-Template-2021.docx.pdf",
+      "correct_source": 1,
+      "must_include_total": 4,
+      "must_include_matched": 3,
+      "must_include_score": 0.75,
+      "retrieval_time_sec": 0.036,
+      "generation_time_sec": 1.0736,
+      "total_time_sec": 1.1096,
+      "difficulty": "easy",
+      "expected_answer": "They must report seeming attacks, suspicious emails, or phishing attempts as soon as possible to the company specialists, who should investigate promptly, resolve the issue, and send a companywide alert when necessary.",
+      "matched_must_include": [
+        "specialists",
+        "investigate promptly",
+        "companywide alert when necessary"
+      ],
+      "missing_must_include": [
+        "report as soon as possible"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "short_optimized",
+      "question_id": "Q3",
+      "question": "Under the cyber security policy, what should employees do when they notice scams, suspicious emails, or phishing attempts?",
+      "answer": "Answer:\nEmployees must report seeming attacks, suspicious emails, or phishing attempts as soon as possible to our specialists.\n\nSources:\nCyber-Security-Policy-Template-2021.docx.pdf",
+      "retrieved_sources": [
+        "Cyber-Security-Policy-Template-2021.docx.pdf"
+      ],
+      "expected_source": "Cyber-Security-Policy-Template-2021.docx.pdf",
+      "correct_source": 1,
+      "must_include_total": 4,
+      "must_include_matched": 1,
+      "must_include_score": 0.25,
+      "retrieval_time_sec": 0.0388,
+      "generation_time_sec": 1.068,
+      "total_time_sec": 1.1068,
+      "difficulty": "easy",
+      "expected_answer": "They must report seeming attacks, suspicious emails, or phishing attempts as soon as possible to the company specialists, who should investigate promptly, resolve the issue, and send a companywide alert when necessary.",
+      "matched_must_include": [
+        "specialists"
+      ],
+      "missing_must_include": [
+        "report as soon as possible",
+        "investigate promptly",
+        "companywide alert when necessary"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "baseline",
+      "question_id": "Q4",
+      "question": "What are breach notification obligations under the GDPR briefing?",
+      "answer": "When a data breach happens, employees, data subjects, data processors, and the data protection officer need to immediately (within 72 hours) inform the controller as soon as they detect the breach. The controller must then assess the severity of the breach and might need to inform the supervisory authority and the data subjects whose data have been compromised. If the responsible authorities are not notified within 72 hours, the data controller needs to provide a reasonable justification for the delay. The notification to the supervisory authorities and affected data subjects should include which data have been accessed, how many people are concerned by the breach, the name of the data protection officer, what the possible consequences could be, and what will be done to mitigate the breach. Controllers and processors need to develop a security breach response plan and implement policy accordingly.",
+      "retrieved_sources": [
+        "chat_history",
+        "Cyber-Security-Policy-Template-2021.docx.pdf",
+        "GDPR_FINAL_EPSU.pdf"
+      ],
+      "expected_source": "GDPR_FINAL_EPSU.pdf",
+      "correct_source": 1,
+      "must_include_total": 5,
+      "must_include_matched": 4,
+      "must_include_score": 0.8,
+      "retrieval_time_sec": 0.0532,
+      "generation_time_sec": 2.9694,
+      "total_time_sec": 3.0226,
+      "difficulty": "medium",
+      "expected_answer": "When a breach is detected, the employee, data subject, processors, and DPO should immediately inform the controller. The controller then assesses the severity and may need to notify the supervisory authority and affected data subjects within 72 hours, or justify any delay.",
+      "matched_must_include": [
+        "within 72 hours",
+        "inform the controller",
+        "supervisory authority",
+        "affected data subjects"
+      ],
+      "missing_must_include": [
+        "justify delay if late"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "quality_focused",
+      "question_id": "Q4",
+      "question": "What are breach notification obligations under the GDPR briefing?",
+      "answer": "Under the GDPR, when a data breach occurs, the following notification obligations apply:\n\n*   **Immediate Notification:** Employees, data subjects, data processors, and the data protection officer must immediately (within 72 hours) inform the controller.\n*   **Controller Assessment:** The controller must assess the severity of the breach.\n*   **Potential Notifications:** The controller might need to inform the supervisory authority and data subjects whose data has been compromised.\n*   **Justification for Delays:** If authorities are not notified within 72 hours, a reasonable justification for the delay is required.",
+      "retrieved_sources": [
+        "chat_history",
+        "Cyber-Security-Policy-Template-2021.docx.pdf",
+        "GDPR_FINAL_EPSU.pdf"
+      ],
+      "expected_source": "GDPR_FINAL_EPSU.pdf",
+      "correct_source": 1,
+      "must_include_total": 5,
+      "must_include_matched": 3,
+      "must_include_score": 0.6,
+      "retrieval_time_sec": 0.0369,
+      "generation_time_sec": 2.1374,
+      "total_time_sec": 2.1742,
+      "difficulty": "medium",
+      "expected_answer": "When a breach is detected, the employee, data subject, processors, and DPO should immediately inform the controller. The controller then assesses the severity and may need to notify the supervisory authority and affected data subjects within 72 hours, or justify any delay.",
+      "matched_must_include": [
+        "within 72 hours",
+        "inform the controller",
+        "supervisory authority"
+      ],
+      "missing_must_include": [
+        "affected data subjects",
+        "justify delay if late"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "short_optimized",
+      "question_id": "Q4",
+      "question": "What are breach notification obligations under the GDPR briefing?",
+      "answer": "Answer:\nWhen a data breach happens, the employee, data subject, data processors and data protection officer need to immediately (within 72 hours) inform the controller. The controller must then assess the severity of the breach and might need to inform the supervisory authority and the data subjects whose data have been compromised. If the responsible authorities are not notified within 72 hours, the data controller needs to provide a reasonable justification for the delay.\n\nSources:\n- GDPR_FINAL_EPSU.pdf",
+      "retrieved_sources": [
+        "chat_history",
+        "Cyber-Security-Policy-Template-2021.docx.pdf",
+        "GDPR_FINAL_EPSU.pdf"
+      ],
+      "expected_source": "GDPR_FINAL_EPSU.pdf",
+      "correct_source": 1,
+      "must_include_total": 5,
+      "must_include_matched": 3,
+      "must_include_score": 0.6,
+      "retrieval_time_sec": 0.0521,
+      "generation_time_sec": 1.7824,
+      "total_time_sec": 1.8345,
+      "difficulty": "medium",
+      "expected_answer": "When a breach is detected, the employee, data subject, processors, and DPO should immediately inform the controller. The controller then assesses the severity and may need to notify the supervisory authority and affected data subjects within 72 hours, or justify any delay.",
+      "matched_must_include": [
+        "within 72 hours",
+        "inform the controller",
+        "supervisory authority"
+      ],
+      "missing_must_include": [
+        "affected data subjects",
+        "justify delay if late"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "baseline",
+      "question_id": "Q5",
+      "question": "According to the GDPR briefing, in what cases must a Data Protection Officer be appointed?",
+      "answer": "National legislation might specify further cases where a Data Protection Officer (DPO) must be appointed. For instance, in Germany, every organization needs to appoint a DPO if there are more than 10 people constantly involved with automatic processing of data. It is strongly advised to appoint a DPO even if it is not an obligation. Only courts acting in their judicial capacity are exempted from appointing a DPO.",
+      "retrieved_sources": [
+        "GDPR_FINAL_EPSU.pdf",
+        "Sample Employee Handbook - National Council of Nonprofits.pdf"
+      ],
+      "expected_source": "GDPR_FINAL_EPSU.pdf",
+      "correct_source": 1,
+      "must_include_total": 3,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0452,
+      "generation_time_sec": 1.9617,
+      "total_time_sec": 2.0068,
+      "difficulty": "medium",
+      "expected_answer": "A DPO must be appointed when processing is carried out by a public authority, when core activities involve large-scale regular and systematic monitoring of data subjects, or when core activities involve large-scale processing of special categories of data or criminal-conviction-related data.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "public authority",
+        "regular and systematic monitoring on a large scale",
+        "special categories of data on a large scale"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "quality_focused",
+      "question_id": "Q5",
+      "question": "According to the GDPR briefing, in what cases must a Data Protection Officer be appointed?",
+      "answer": "According to the GDPR briefing, national legislation might specify further cases where a Data Protection Officer (DPO) must be appointed. For instance, in Germany, every organization needs to appoint a DPO if there are more than 10 people constantly involved with automatic processing of data. It is also strongly advised to appoint a DPO even if it is not an obligation.",
+      "retrieved_sources": [
+        "GDPR_FINAL_EPSU.pdf",
+        "Sample Employee Handbook - National Council of Nonprofits.pdf"
+      ],
+      "expected_source": "GDPR_FINAL_EPSU.pdf",
+      "correct_source": 1,
+      "must_include_total": 3,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0464,
+      "generation_time_sec": 1.6174,
+      "total_time_sec": 1.6638,
+      "difficulty": "medium",
+      "expected_answer": "A DPO must be appointed when processing is carried out by a public authority, when core activities involve large-scale regular and systematic monitoring of data subjects, or when core activities involve large-scale processing of special categories of data or criminal-conviction-related data.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "public authority",
+        "regular and systematic monitoring on a large scale",
+        "special categories of data on a large scale"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "short_optimized",
+      "question_id": "Q5",
+      "question": "According to the GDPR briefing, in what cases must a Data Protection Officer be appointed?",
+      "answer": "Answer:\nNational legislation might specify further cases where there is an obligation to appoint a DPO. In Germany, every organization needs to appoint a DPO if there are more than 10 people constantly involved with automatic processing of data. Only courts acting in their judicial capacity are exempted from appointing a DPO.\n\nSources:\nGDPR_FINAL_EPSU.pdf",
+      "retrieved_sources": [
+        "GDPR_FINAL_EPSU.pdf",
+        "Sample Employee Handbook - National Council of Nonprofits.pdf"
+      ],
+      "expected_source": "GDPR_FINAL_EPSU.pdf",
+      "correct_source": 1,
+      "must_include_total": 3,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0477,
+      "generation_time_sec": 1.5025,
+      "total_time_sec": 1.5503,
+      "difficulty": "medium",
+      "expected_answer": "A DPO must be appointed when processing is carried out by a public authority, when core activities involve large-scale regular and systematic monitoring of data subjects, or when core activities involve large-scale processing of special categories of data or criminal-conviction-related data.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "public authority",
+        "regular and systematic monitoring on a large scale",
+        "special categories of data on a large scale"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "baseline",
+      "question_id": "Q6",
+      "question": "What are the seven guiding principles of data protection listed in the GDPR briefing?",
+      "answer": "The seven data-protection principles should provide guidance on which data can be collected. The GDPR briefing also mentions that personal data should be kept secure, and appropriate measures need to be taken to ensure the security of the data, including protection against unauthorized or unlawful processing, and against accidental loss, destruction, or damage.",
+      "retrieved_sources": [
+        "GDPR_FINAL_EPSU.pdf",
+        "NIST.CSWP.29.pdf"
+      ],
+      "expected_source": "GDPR_FINAL_EPSU.pdf",
+      "correct_source": 1,
+      "must_include_total": 7,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0395,
+      "generation_time_sec": 1.7354,
+      "total_time_sec": 1.7749,
+      "difficulty": "easy",
+      "expected_answer": "The seven principles are lawfulness, fairness and transparency; purpose limitation; data minimisation; accuracy; storage limitation; integrity and confidentiality; and accountability.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "lawfulness fairness and transparency",
+        "purpose limitation",
+        "data minimisation",
+        "accuracy",
+        "storage limitation",
+        "integrity and confidentiality",
+        "accountability"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "quality_focused",
+      "question_id": "Q6",
+      "question": "What are the seven guiding principles of data protection listed in the GDPR briefing?",
+      "answer": "The GDPR briefing mentions seven data-protection principles that should provide guidance on which data can be collected. However, the specific principles are not listed.",
+      "retrieved_sources": [
+        "GDPR_FINAL_EPSU.pdf",
+        "NIST.CSWP.29.pdf"
+      ],
+      "expected_source": "GDPR_FINAL_EPSU.pdf",
+      "correct_source": 1,
+      "must_include_total": 7,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0366,
+      "generation_time_sec": 0.9616,
+      "total_time_sec": 0.9982,
+      "difficulty": "easy",
+      "expected_answer": "The seven principles are lawfulness, fairness and transparency; purpose limitation; data minimisation; accuracy; storage limitation; integrity and confidentiality; and accountability.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "lawfulness fairness and transparency",
+        "purpose limitation",
+        "data minimisation",
+        "accuracy",
+        "storage limitation",
+        "integrity and confidentiality",
+        "accountability"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "short_optimized",
+      "question_id": "Q6",
+      "question": "What are the seven guiding principles of data protection listed in the GDPR briefing?",
+      "answer": "Answer:\nThe seven data-protection principles should provide guidance on which data can be collected.\n\nSources:\n- GDPR_FINAL_EPSU.pdf",
+      "retrieved_sources": [
+        "GDPR_FINAL_EPSU.pdf",
+        "NIST.CSWP.29.pdf"
+      ],
+      "expected_source": "GDPR_FINAL_EPSU.pdf",
+      "correct_source": 1,
+      "must_include_total": 7,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0379,
+      "generation_time_sec": 0.9149,
+      "total_time_sec": 0.9527,
+      "difficulty": "easy",
+      "expected_answer": "The seven principles are lawfulness, fairness and transparency; purpose limitation; data minimisation; accuracy; storage limitation; integrity and confidentiality; and accountability.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "lawfulness fairness and transparency",
+        "purpose limitation",
+        "data minimisation",
+        "accuracy",
+        "storage limitation",
+        "integrity and confidentiality",
+        "accountability"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "baseline",
+      "question_id": "Q7",
+      "question": "What is the purpose of an Incident Response Plan according to the CISA document?",
+      "answer": "The provided context does not contain information about an Incident Response Plan or a CISA document. Therefore, I cannot answer your question.",
+      "retrieved_sources": [
+        "Cyber-Security-Policy-Template-2021.docx.pdf",
+        "NIST.CSWP.29.pdf",
+        "Sample Employee Handbook - National Council of Nonprofits.pdf",
+        "GDPR_FINAL_EPSU.pdf"
+      ],
+      "expected_source": "Incident-Response-Plan-Basics_508c.pdf",
+      "correct_source": 0,
+      "must_include_total": 4,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0483,
+      "generation_time_sec": 1.1183,
+      "total_time_sec": 1.1666,
+      "difficulty": "easy",
+      "expected_answer": "An Incident Response Plan is a written document, formally approved by senior leadership, that helps the organization before, during, and after a confirmed or suspected security incident by clarifying roles, responsibilities, and guidance on key activities.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "before during and after",
+        "confirmed or suspected security incident",
+        "clarifies roles and responsibilities",
+        "approved by senior leadership"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "quality_focused",
+      "question_id": "Q7",
+      "question": "What is the purpose of an Incident Response Plan according to the CISA document?",
+      "answer": "I am sorry, the provided documents do not contain information about the purpose of an Incident Response Plan according to the CISA document.",
+      "retrieved_sources": [
+        "Cyber-Security-Policy-Template-2021.docx.pdf",
+        "NIST.CSWP.29.pdf",
+        "Sample Employee Handbook - National Council of Nonprofits.pdf",
+        "GDPR_FINAL_EPSU.pdf"
+      ],
+      "expected_source": "Incident-Response-Plan-Basics_508c.pdf",
+      "correct_source": 0,
+      "must_include_total": 4,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0428,
+      "generation_time_sec": 0.9045,
+      "total_time_sec": 0.9473,
+      "difficulty": "easy",
+      "expected_answer": "An Incident Response Plan is a written document, formally approved by senior leadership, that helps the organization before, during, and after a confirmed or suspected security incident by clarifying roles, responsibilities, and guidance on key activities.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "before during and after",
+        "confirmed or suspected security incident",
+        "clarifies roles and responsibilities",
+        "approved by senior leadership"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "short_optimized",
+      "question_id": "Q7",
+      "question": "What is the purpose of an Incident Response Plan according to the CISA document?",
+      "answer": "Answer:\nThe provided context does not mention an Incident Response Plan or a CISA document.\n\nSources:\n- Cyber-Security-Policy-Template-2021.docx.pdf\n- NIST.CSWP.29.pdf\n- Sample Employee Handbook - National Council of Nonprofits.pdf\n- GDPR_FINAL_EPSU.pdf",
+      "retrieved_sources": [
+        "Cyber-Security-Policy-Template-2021.docx.pdf",
+        "NIST.CSWP.29.pdf",
+        "Sample Employee Handbook - National Council of Nonprofits.pdf",
+        "GDPR_FINAL_EPSU.pdf"
+      ],
+      "expected_source": "Incident-Response-Plan-Basics_508c.pdf",
+      "correct_source": 0,
+      "must_include_total": 4,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0424,
+      "generation_time_sec": 1.4292,
+      "total_time_sec": 1.4716,
+      "difficulty": "easy",
+      "expected_answer": "An Incident Response Plan is a written document, formally approved by senior leadership, that helps the organization before, during, and after a confirmed or suspected security incident by clarifying roles, responsibilities, and guidance on key activities.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "before during and after",
+        "confirmed or suspected security incident",
+        "clarifies roles and responsibilities",
+        "approved by senior leadership"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "baseline",
+      "question_id": "Q8",
+      "question": "According to the CISA incident response basics sheet, what key roles should be assigned during a cybersecurity incident?",
+      "answer": "The provided context does not specify key roles that should be assigned during a cybersecurity incident. It describes steps in incident response, including triaging and validating incident reports, categorizing and prioritizing incidents, escalating incidents as needed, applying criteria for incident recovery, and performing restoration activities.",
+      "retrieved_sources": [
+        "NIST.CSWP.29.pdf",
+        "chat_history"
+      ],
+      "expected_source": "Incident-Response-Plan-Basics_508c.pdf",
+      "correct_source": 0,
+      "must_include_total": 3,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0379,
+      "generation_time_sec": 1.5261,
+      "total_time_sec": 1.564,
+      "difficulty": "easy",
+      "expected_answer": "The plan should assign an Incident Manager, a Tech Manager, and a Communications Manager.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "Incident Manager",
+        "Tech Manager",
+        "Communications Manager"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "quality_focused",
+      "question_id": "Q8",
+      "question": "According to the CISA incident response basics sheet, what key roles should be assigned during a cybersecurity incident?",
+      "answer": "The provided context does not mention roles assigned during a cybersecurity incident. It describes steps in incident response and the functions of the NIST Cybersecurity Framework, but does not detail specific roles.",
+      "retrieved_sources": [
+        "NIST.CSWP.29.pdf",
+        "chat_history"
+      ],
+      "expected_source": "Incident-Response-Plan-Basics_508c.pdf",
+      "correct_source": 0,
+      "must_include_total": 3,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0325,
+      "generation_time_sec": 1.0289,
+      "total_time_sec": 1.0614,
+      "difficulty": "easy",
+      "expected_answer": "The plan should assign an Incident Manager, a Tech Manager, and a Communications Manager.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "Incident Manager",
+        "Tech Manager",
+        "Communications Manager"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "short_optimized",
+      "question_id": "Q8",
+      "question": "According to the CISA incident response basics sheet, what key roles should be assigned during a cybersecurity incident?",
+      "answer": "Answer:\nThe provided text does not mention key roles assigned during a cybersecurity incident. It states that responses are managed and that incident reports are triaged and validated, incidents are categorized and prioritized, incidents are escalated or elevated as needed, and the criteria for initiating incident recovery are applied.\n\nSources:\n- NIST.CSWP.29.pdf\n",
+      "retrieved_sources": [
+        "NIST.CSWP.29.pdf",
+        "chat_history"
+      ],
+      "expected_source": "Incident-Response-Plan-Basics_508c.pdf",
+      "correct_source": 0,
+      "must_include_total": 3,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0488,
+      "generation_time_sec": 1.4343,
+      "total_time_sec": 1.4831,
+      "difficulty": "easy",
+      "expected_answer": "The plan should assign an Incident Manager, a Tech Manager, and a Communications Manager.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "Incident Manager",
+        "Tech Manager",
+        "Communications Manager"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "baseline",
+      "question_id": "Q9",
+      "question": "What are the six NIST CSF 2.0 core functions?",
+      "answer": "The NIST Cybersecurity Framework (CSF) 2.0 core functions are GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND, and RECOVER. These functions should be addressed concurrently, with actions supporting GOVERN, IDENTIFY, PROTECT, and DETECT occurring continuously, and actions supporting RESPOND and RECOVER being ready at all times. All functions have vital roles related to cybersecurity incidents.",
+      "retrieved_sources": [
+        "NIST.CSWP.29.pdf"
+      ],
+      "expected_source": "NIST.CSWP.29.pdf",
+      "correct_source": 1,
+      "must_include_total": 6,
+      "must_include_matched": 6,
+      "must_include_score": 1.0,
+      "retrieval_time_sec": 0.0612,
+      "generation_time_sec": 1.8674,
+      "total_time_sec": 1.9286,
+      "difficulty": "easy",
+      "expected_answer": "The six core functions are Govern, Identify, Protect, Detect, Respond, and Recover.",
+      "matched_must_include": [
+        "Govern",
+        "Identify",
+        "Protect",
+        "Detect",
+        "Respond",
+        "Recover"
+      ],
+      "missing_must_include": [],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "quality_focused",
+      "question_id": "Q9",
+      "question": "What are the six NIST CSF 2.0 core functions?",
+      "answer": "The six NIST CSF 2.0 core functions are: GOVERN, IDENTIFY, PROTECT, DETECT, RESPOND, and RECOVER. These functions should be addressed concurrently and all have vital roles related to cybersecurity incidents.",
+      "retrieved_sources": [
+        "NIST.CSWP.29.pdf"
+      ],
+      "expected_source": "NIST.CSWP.29.pdf",
+      "correct_source": 1,
+      "must_include_total": 6,
+      "must_include_matched": 6,
+      "must_include_score": 1.0,
+      "retrieval_time_sec": 0.0493,
+      "generation_time_sec": 1.1678,
+      "total_time_sec": 1.2171,
+      "difficulty": "easy",
+      "expected_answer": "The six core functions are Govern, Identify, Protect, Detect, Respond, and Recover.",
+      "matched_must_include": [
+        "Govern",
+        "Identify",
+        "Protect",
+        "Detect",
+        "Respond",
+        "Recover"
+      ],
+      "missing_must_include": [],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "short_optimized",
+      "question_id": "Q9",
+      "question": "What are the six NIST CSF 2.0 core functions?",
+      "answer": "Answer:\nGOVERN, IDENTIFY, PROTECT, DETECT, RESPOND, and RECOVER.\n\nSources:\n- NIST.CSWP.29.pdf",
+      "retrieved_sources": [
+        "NIST.CSWP.29.pdf"
+      ],
+      "expected_source": "NIST.CSWP.29.pdf",
+      "correct_source": 1,
+      "must_include_total": 6,
+      "must_include_matched": 6,
+      "must_include_score": 1.0,
+      "retrieval_time_sec": 0.0346,
+      "generation_time_sec": 1.0069,
+      "total_time_sec": 1.0415,
+      "difficulty": "easy",
+      "expected_answer": "The six core functions are Govern, Identify, Protect, Detect, Respond, and Recover.",
+      "matched_must_include": [
+        "Govern",
+        "Identify",
+        "Protect",
+        "Detect",
+        "Respond",
+        "Recover"
+      ],
+      "missing_must_include": [],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "baseline",
+      "question_id": "Q10",
+      "question": "According to NIST CSF 2.0, what is the purpose of the GOVERN function?",
+      "answer": "CSF 2.0 contains new features that highlight the importance of governance and supply chains.",
+      "retrieved_sources": [
+        "NIST.CSWP.29.pdf",
+        "Sample Employee Handbook - National Council of Nonprofits.pdf",
+        "GDPR_FINAL_EPSU.pdf"
+      ],
+      "expected_source": "NIST.CSWP.29.pdf",
+      "correct_source": 1,
+      "must_include_total": 3,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0499,
+      "generation_time_sec": 1.0088,
+      "total_time_sec": 1.0587,
+      "difficulty": "medium",
+      "expected_answer": "The GOVERN function establishes, communicates, and monitors the organization’s cybersecurity risk management strategy, expectations, and policy, and informs how the other five functions are prioritized and implemented.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "strategy expectations and policy",
+        "established communicated and monitored",
+        "informs the other five functions"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "quality_focused",
+      "question_id": "Q10",
+      "question": "According to NIST CSF 2.0, what is the purpose of the GOVERN function?",
+      "answer": "According to the provided text, CSF 2.0 contains new features that highlight the importance of governance and supply chains.",
+      "retrieved_sources": [
+        "NIST.CSWP.29.pdf",
+        "Sample Employee Handbook - National Council of Nonprofits.pdf",
+        "GDPR_FINAL_EPSU.pdf"
+      ],
+      "expected_source": "NIST.CSWP.29.pdf",
+      "correct_source": 1,
+      "must_include_total": 3,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0451,
+      "generation_time_sec": 0.9072,
+      "total_time_sec": 0.9523,
+      "difficulty": "medium",
+      "expected_answer": "The GOVERN function establishes, communicates, and monitors the organization’s cybersecurity risk management strategy, expectations, and policy, and informs how the other five functions are prioritized and implemented.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "strategy expectations and policy",
+        "established communicated and monitored",
+        "informs the other five functions"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "short_optimized",
+      "question_id": "Q10",
+      "question": "According to NIST CSF 2.0, what is the purpose of the GOVERN function?",
+      "answer": "Answer:\nCSF 2.0 contains new features that highlight the importance of governance and supply chains.\n\nSources:\n- NIST.CSWP.29.pdf",
+      "retrieved_sources": [
+        "NIST.CSWP.29.pdf",
+        "Sample Employee Handbook - National Council of Nonprofits.pdf",
+        "GDPR_FINAL_EPSU.pdf"
+      ],
+      "expected_source": "NIST.CSWP.29.pdf",
+      "correct_source": 1,
+      "must_include_total": 3,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0462,
+      "generation_time_sec": 1.0302,
+      "total_time_sec": 1.0764,
+      "difficulty": "medium",
+      "expected_answer": "The GOVERN function establishes, communicates, and monitors the organization’s cybersecurity risk management strategy, expectations, and policy, and informs how the other five functions are prioritized and implemented.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "strategy expectations and policy",
+        "established communicated and monitored",
+        "informs the other five functions"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "baseline",
+      "question_id": "Q11",
+      "question": "What does the employee handbook say about at-will employment?",
+      "answer": "The employee handbook states that unless an employee has a written employment agreement, all employment at {ORGANIZATION NAME} is \"at-will.\" This means that employees may be terminated from employment with or without cause, and employees are free to leave the employment of {ORGANIZATION NAME}. Additionally, the handbook clarifies that none of the policies are intended to create contractual rights or obligations or guarantee employment for a specific period of time.",
+      "retrieved_sources": [
+        "Sample Employee Handbook - National Council of Nonprofits.pdf"
+      ],
+      "expected_source": "Sample Employee Handbook - National Council of Nonprofits.pdf",
+      "correct_source": 1,
+      "must_include_total": 5,
+      "must_include_matched": 2,
+      "must_include_score": 0.4,
+      "retrieval_time_sec": 0.0452,
+      "generation_time_sec": 1.8592,
+      "total_time_sec": 1.9044,
+      "difficulty": "easy",
+      "expected_answer": "Unless there is a written employment agreement stating otherwise, employment is at-will, meaning the employee may resign at any time with or without cause and the organization may terminate employment at any time with or without cause.",
+      "matched_must_include": [
+        "at-will",
+        "with or without cause"
+      ],
+      "missing_must_include": [
+        "written employment agreement unless otherwise",
+        "employee may resign",
+        "organization may terminate"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "quality_focused",
+      "question_id": "Q11",
+      "question": "What does the employee handbook say about at-will employment?",
+      "answer": "According to the employee handbook, all employment at {ORGANIZATION NAME} is “at-will” unless an employee has a written employment agreement stating otherwise. This means employees may be terminated with or without cause, and employees are free to leave. Additionally, the handbook clarifies that these guidelines do not create contractual rights or guarantee employment.",
+      "retrieved_sources": [
+        "Sample Employee Handbook - National Council of Nonprofits.pdf"
+      ],
+      "expected_source": "Sample Employee Handbook - National Council of Nonprofits.pdf",
+      "correct_source": 1,
+      "must_include_total": 5,
+      "must_include_matched": 2,
+      "must_include_score": 0.4,
+      "retrieval_time_sec": 0.0459,
+      "generation_time_sec": 1.4916,
+      "total_time_sec": 1.5376,
+      "difficulty": "easy",
+      "expected_answer": "Unless there is a written employment agreement stating otherwise, employment is at-will, meaning the employee may resign at any time with or without cause and the organization may terminate employment at any time with or without cause.",
+      "matched_must_include": [
+        "at-will",
+        "with or without cause"
+      ],
+      "missing_must_include": [
+        "written employment agreement unless otherwise",
+        "employee may resign",
+        "organization may terminate"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "short_optimized",
+      "question_id": "Q11",
+      "question": "What does the employee handbook say about at-will employment?",
+      "answer": "Answer:\nUnless an employee has a written employment agreement, all employment at {ORGANIZATION NAME} is “at-will.” That means that employees may be terminated from employment with {ORGANIZATION NAME} with or without cause, and employees are free to leave the employment of {ORGANIZATION NAME}.\n\nSources:\n- Sample Employee Handbook - National Council of Nonprofits.pdf\n",
+      "retrieved_sources": [
+        "Sample Employee Handbook - National Council of Nonprofits.pdf"
+      ],
+      "expected_source": "Sample Employee Handbook - National Council of Nonprofits.pdf",
+      "correct_source": 1,
+      "must_include_total": 5,
+      "must_include_matched": 2,
+      "must_include_score": 0.4,
+      "retrieval_time_sec": 0.0332,
+      "generation_time_sec": 1.4812,
+      "total_time_sec": 1.5145,
+      "difficulty": "easy",
+      "expected_answer": "Unless there is a written employment agreement stating otherwise, employment is at-will, meaning the employee may resign at any time with or without cause and the organization may terminate employment at any time with or without cause.",
+      "matched_must_include": [
+        "at-will",
+        "with or without cause"
+      ],
+      "missing_must_include": [
+        "written employment agreement unless otherwise",
+        "employee may resign",
+        "organization may terminate"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "baseline",
+      "question_id": "Q12",
+      "question": "According to the employee handbook, what kinds of information are considered confidential?",
+      "answer": "Confidential information includes data that is not otherwise publicly available. Examples of confidential information include compensation data, program and financial information, and information related to donors, pending projects, and proposals. Employees are required to sign a non-disclosure agreement as a condition of employment.",
+      "retrieved_sources": [
+        "Sample Employee Handbook - National Council of Nonprofits.pdf"
+      ],
+      "expected_source": "Sample Employee Handbook - National Council of Nonprofits.pdf",
+      "correct_source": 1,
+      "must_include_total": 4,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.055,
+      "generation_time_sec": 1.4788,
+      "total_time_sec": 1.5338,
+      "difficulty": "medium",
+      "expected_answer": "Any non-public information an employee learns about the organization, its members, or donors through work is confidential, and employees may not disclose it to outsiders or coworkers who do not need to know it.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "non-public information",
+        "organization members or donors",
+        "may not disclose",
+        "need to know"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "quality_focused",
+      "question_id": "Q12",
+      "question": "According to the employee handbook, what kinds of information are considered confidential?",
+      "answer": "Confidential information includes compensation data, program and financial information, and information related to donors, pending projects, and proposals. Any information about the organization, its members, or donors that is not publicly available is also considered confidential.",
+      "retrieved_sources": [
+        "Sample Employee Handbook - National Council of Nonprofits.pdf"
+      ],
+      "expected_source": "Sample Employee Handbook - National Council of Nonprofits.pdf",
+      "correct_source": 1,
+      "must_include_total": 4,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0447,
+      "generation_time_sec": 1.1573,
+      "total_time_sec": 1.2021,
+      "difficulty": "medium",
+      "expected_answer": "Any non-public information an employee learns about the organization, its members, or donors through work is confidential, and employees may not disclose it to outsiders or coworkers who do not need to know it.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "non-public information",
+        "organization members or donors",
+        "may not disclose",
+        "need to know"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    },
+    {
+      "prompt_name": "short_optimized",
+      "question_id": "Q12",
+      "question": "According to the employee handbook, what kinds of information are considered confidential?",
+      "answer": "Answer:\nCompensation data, program and financial information, information related to donors, pending projects and proposals, and any information about the organization, its members, or donors that is not otherwise publicly available.\n\nSources:\n- Sample Employee Handbook - National Council of Nonprofits.pdf",
+      "retrieved_sources": [
+        "Sample Employee Handbook - National Council of Nonprofits.pdf"
+      ],
+      "expected_source": "Sample Employee Handbook - National Council of Nonprofits.pdf",
+      "correct_source": 1,
+      "must_include_total": 4,
+      "must_include_matched": 0,
+      "must_include_score": 0.0,
+      "retrieval_time_sec": 0.0428,
+      "generation_time_sec": 1.2036,
+      "total_time_sec": 1.2464,
+      "difficulty": "medium",
+      "expected_answer": "Any non-public information an employee learns about the organization, its members, or donors through work is confidential, and employees may not disclose it to outsiders or coworkers who do not need to know it.",
+      "matched_must_include": [],
+      "missing_must_include": [
+        "non-public information",
+        "organization members or donors",
+        "may not disclose",
+        "need to know"
+      ],
+      "manual_notes": "",
+      "status": "success",
+      "error_message": ""
+    }
+  ],
+  "summary": [
+    {
+      "prompt_name": "baseline",
+      "questions_evaluated": 12,
+      "average_retrieval_time_sec": 0.0483,
+      "average_generation_time_sec": 1.6353,
+      "average_total_time_sec": 1.6837,
+      "average_must_include_score": 0.3292,
+      "source_accuracy_rate": 0.8333
+    },
+    {
+      "prompt_name": "quality_focused",
+      "questions_evaluated": 12,
+      "average_retrieval_time_sec": 0.0423,
+      "average_generation_time_sec": 1.2029,
+      "average_total_time_sec": 1.2452,
+      "average_must_include_score": 0.3125,
+      "source_accuracy_rate": 0.8333
+    },
+    {
+      "prompt_name": "short_optimized",
+      "questions_evaluated": 12,
+      "average_retrieval_time_sec": 0.0431,
+      "average_generation_time_sec": 1.2788,
+      "average_total_time_sec": 1.3219,
+      "average_must_include_score": 0.2708,
+      "source_accuracy_rate": 0.8333
+    }
+  ]
+}
